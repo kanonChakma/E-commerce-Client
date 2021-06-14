@@ -5,18 +5,9 @@ import { Button} from 'antd';
 import {MailOutlined,GoogleOutlined} from '@ant-design/icons';
 import {useDispatch, useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { createOrUpdate } from '../../common/createOrUpdate';
 
-const createOrUpdate= async(authToken)=>{
-    return await axios.post(
-       ` ${process.env.REACT_APP_API}/create-or-update-user`,
-        {},
-        {
-        headers:{
-            authToken
-         }
-    })
-}
+
 
 const Login = ({history}) => {
     const dispatch=useDispatch();
@@ -36,13 +27,19 @@ const Login = ({history}) => {
              const {user} = result;
              console.log(user)
              const idTokenResult= await user.getIdTokenResult();
-             dispatch({
-                type: 'USER_LOGGED_IN',
-                payload: {
-                    email:user.email,
-                    token: idTokenResult.token
-                }
+             createOrUpdate(idTokenResult.token)
+             .then((res)=>{
+                 dispatch({
+                     type: 'USER_LOGGED_IN',
+                     payload: {
+                         name:res.data.name,
+                         email:res.data.email,
+                         role:res.data.role,
+                         token: idTokenResult.token
+                      }
+                  })
              })
+             .catch((err)=>console.log(err))
              history.push("/");
            })
            .catch((error)=>{
@@ -58,16 +55,19 @@ const Login = ({history}) => {
         const idTokenResult=await user.getIdTokenResult();
        
         createOrUpdate(idTokenResult.token)
-        .then((res)=>console.log("create or update",res))
+        .then((res)=>{
+            dispatch({
+                type: 'USER_LOGGED_IN',
+                payload: {
+                    name:res.data.name,
+                    email:res.data.email,
+                    role:res.data.role,
+                    token: idTokenResult.token
+                }
+             })
+        })
         .catch((err)=>console.log(err))
         
-        dispatch({
-           type: 'USER_LOGGED_IN',
-           payload: {
-               email:email,
-               token: idTokenResult.token
-           }
-        })
         history.push("/");
        }catch(e){
            setLoading(false);

@@ -5,9 +5,7 @@ import { Button} from 'antd';
 import {MailOutlined,GoogleOutlined} from '@ant-design/icons';
 import {useDispatch, useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
-import { createOrUpdate } from '../../common/createOrUpdate';
-
-
+import { createOrUpdate } from '../../common/authData';
 
 const Login = ({history}) => {
     const dispatch=useDispatch();
@@ -28,18 +26,19 @@ const Login = ({history}) => {
              console.log(user)
              const idTokenResult= await user.getIdTokenResult();
              createOrUpdate(idTokenResult.token)
-             .then((res)=>{
-                 dispatch({
-                     type: 'USER_LOGGED_IN',
-                     payload: {
-                         name:res.data.name,
-                         email:res.data.email,
-                         role:res.data.role,
-                         token: idTokenResult.token
-                      }
-                  })
-             })
-             .catch((err)=>console.log(err))
+            .then((res)=>{
+                dispatch({
+                    type: 'USER_LOGGED_IN',
+                    payload: {
+                        name:res.data.name,
+                        email:res.data.email,
+                        role:res.data.role,
+                        token: idTokenResult.token,
+                        _id:res.data._id
+                    }
+                })
+            })
+            .catch((err)=>console.log(err))
              history.push("/");
            })
            .catch((error)=>{
@@ -53,7 +52,6 @@ const Login = ({history}) => {
         const result=await auth.signInWithEmailAndPassword(email, password);
         const {user} = result;
         const idTokenResult=await user.getIdTokenResult();
-       
         createOrUpdate(idTokenResult.token)
         .then((res)=>{
             dispatch({
@@ -62,16 +60,15 @@ const Login = ({history}) => {
                     name:res.data.name,
                     email:res.data.email,
                     role:res.data.role,
-                    token: idTokenResult.token
-                }
-             })
-        })
-        .catch((err)=>console.log(err))
-        
+                    token: idTokenResult.token,
+                    _id:res.data._id
+                 }
+              })
+          })
+        .catch((err)=>console.log(err))  
         history.push("/");
        }catch(e){
            setLoading(false);
-           console.log(e);
            toast.error(e.message);
        }
     }

@@ -19,6 +19,13 @@ const Login = ({history}) => {
     //   if(user && user.token) history.push("/");
     // },[user])
 
+    const authorization= (res) => {
+        if(res.data.role === 'admin'){
+          history.push("/admin/dashboard");    
+         }else{
+             history.push("/user/history");
+         }
+      }
     const googleLogIn=()=>{
            auth.signInWithPopup(googleAuthProvider)
            .then(async (result)=>{
@@ -37,9 +44,9 @@ const Login = ({history}) => {
                         _id:res.data._id
                     }
                 })
+                authorization(res);
             })
             .catch((err)=>console.log(err))
-             history.push("/");
            })
            .catch((error)=>{
                toast.error(error.message);
@@ -64,9 +71,9 @@ const Login = ({history}) => {
                     _id:res.data._id
                  }
               })
+              authorization(res);
           })
         .catch((err)=>console.log(err))  
-        history.push("/");
        }catch(e){
            setLoading(false);
            toast.error(e.message);

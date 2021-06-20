@@ -12,4 +12,5 @@ const PrivateRoute = ({ children, ...rest }) => {
          <CountDown/>
       )
 };
+
 export default PrivateRoute;

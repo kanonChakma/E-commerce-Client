@@ -13,9 +13,11 @@ import { auth } from './firebase';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import { currentUser } from './common/authData';
 import History from './Component/User/History';
-import PrivateRoute from './Component/PrivateRoute/PrivateRoute';
 import Password from './Component/User/Password';
 import WishList from './Component/User/WishList';
+import UserRoute from './Component/PrivateRoute/UserRoute';
+import AdminRoute from './Component/PrivateRoute/AdminRoute';
+import AdminDashboard from './Component/Admin/AdminDashboard';
 
 const App=()=> {
    const dispatch=useDispatch();
@@ -53,9 +55,10 @@ const App=()=> {
      <Route exact path="/register" component={Register} />
      <Route exact path="/register/complete" component={CompleteRegistration}/>
      <Route exact path="/forgot/password" component={ForgotPassword}/>
-     <PrivateRoute exact path="/user/history" component={History}/>
-     <PrivateRoute exact path="/user/password" component={Password}/>
-     <PrivateRoute exact path="/user/wishlist" component={WishList}/>
+     <UserRoute exact path="/user/history" component={History}/>
+     <UserRoute exact path="/user/password" component={Password}/>
+     <UserRoute exact path="/user/wishlist" component={WishList}/>
+     <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
    </Switch>
   </>
   );

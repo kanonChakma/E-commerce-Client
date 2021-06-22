@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Route } from 'react-router-dom';
 import CountDown from './CountDown';
 
-const PrivateRoute = ({ children, ...rest }) => {
+const UserRoute = ({ children, ...rest }) => {
     const {user}=useSelector((state) =>({...state}));    
    
     return user && user.token?(
@@ -13,4 +13,4 @@ const PrivateRoute = ({ children, ...rest }) => {
       )
 };
 
-export default PrivateRoute;
+export default UserRoute;

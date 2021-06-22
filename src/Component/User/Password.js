@@ -49,7 +49,7 @@ const Password=() => {
         </div>
         <div className="col">
            <div className="w-50">
-                {loading?<h4>Loading...</h4>:<h4>Update Password</h4>}
+                {loading?<h4 className="text-danger">Loading...</h4>:<h4 className="text-secondary text-center">Update Password</h4>}
                 {updatePassword()}
            </div>
         </div>

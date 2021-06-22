@@ -15,7 +15,7 @@ const UserRoute = ({ children, ...rest }) => {
             setOk(true);
          })
         .catch((error) => {
-            console.error(error);
+            console.error(error.message);
             setOk(false);
         })
        }

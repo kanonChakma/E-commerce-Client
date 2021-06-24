@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { LoginOutlined, UserOutlined,HomeOutlined } from '@ant-design/icons';
+import { LoginOutlined, UserOutlined,HomeOutlined,DashboardOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
-const { SubMenu,Item } = Menu;
+const  { SubMenu,Item } = Menu;
 
 const Header = () => {
     const [currentState,setCurrentState]=useState('home');
@@ -27,20 +27,20 @@ const Header = () => {
           <Link to="/">Home</Link>
         </Item>
 
-       {!user && <Item key="register" icon={<HomeOutlined />}  className="float-right">
+        {!user && <Item key="register" icon={<HomeOutlined />}  className="float-right">
             <Link to="/register">Register</Link>
         </Item>}
 
         {!user && <Item key="login" icon={<HomeOutlined />} className="float-right">
              <Link to="/login">Login</Link>
-        </Item>}
+         </Item>}
 
-       {user && <SubMenu key="username" icon={<UserOutlined />} title={user && user.email.split('@')[0]} className="float-right">
-            <Item key="setting:1">Option 1</Item>
-            <Item key="setting:2">Option 2</Item>
-            <Item icon={<LoginOutlined />} onClick={logout}>Log Out</Item>
-        </SubMenu>}
-
+        {user && <SubMenu key="username" icon={<UserOutlined />} title={user && user.email.split('@')[0]} className="float-right">
+        {user && user.role==='subscriber' &&  <Item icon={<DashboardOutlined />}><Link to="/user/history">Dahboard</Link></Item>}
+        {user && user.role==='admin' &&   <Item icon={<DashboardOutlined />}><Link to="/admin/dashboard">Dashboard</Link></Item>}
+        <Item icon={<LoginOutlined />} onClick={logout}>Log Out</Item>
+         
+         </SubMenu>}
       </Menu>
     );
 };

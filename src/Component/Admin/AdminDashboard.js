@@ -1,9 +1,17 @@
 import React from 'react'
+import AdminNav from '../Nav/AdminNav';
 
 const AdminDashboard= () =>{
     return (
-        <div>
-            <h1>hello thsi is dashboard brother</h1>
+        <div className="container-fluid">
+            <div className="row">
+               <div className="col-md-2">
+                  <AdminNav/>
+               </div>
+               <div className="col-md">
+                 <h1>Admin Dashboard</h1>
+               </div>
+            </div>
         </div>
     )
 }

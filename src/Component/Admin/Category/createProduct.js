@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { createCategory } from '../../../common/category';
 import AdminNav from '../../Nav/AdminNav';
 
-const createProduct=() =>{
+const CreateProduct=() =>{
     
     const {user}=useSelector((state) =>({...state}))
     
@@ -17,16 +17,18 @@ const createProduct=() =>{
 
       createCategory({name},user.token)
      .then((res) =>{
+         console.log(res);
         setLoading(false);
         setName("");
         toast.success(`${res.data.name} are created`);
       })
       .catch((error) =>{
+          console.error(error.message);
           setLoading(false);
-          if(error.response.status===400) toast.error(`${error.response.data}`)
+          toast.error(error.message);
+          if(error.status===400) toast.error(`${error.message}`)
       })
-    }
-
+   }
     const createProductForm=() =>(
         <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -37,8 +39,9 @@ const createProduct=() =>{
                 placeholder="Enter the product name"
                 value={name}
                 autoFocus
-                required
+                required             
                 />
+                <button  className="btn btn-outline-secondary">submit</button>
             </div>
         </form>
     )
@@ -54,6 +57,7 @@ const createProduct=() =>{
            </div>
         </div>
     </div>
-  )
+   )
 }
-export default createProduct;
+
+export default CreateProduct;

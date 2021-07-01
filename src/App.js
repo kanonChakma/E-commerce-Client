@@ -18,7 +18,8 @@ import WishList from './Component/User/WishList';
 import UserRoute from './Component/PrivateRoute/UserRoute';
 import AdminRoute from './Component/PrivateRoute/AdminRoute';
 import AdminDashboard from './Component/Admin/AdminDashboard';
-import CreateProduct from './Component/Admin/Category/createProduct';
+import CreateProduct from './Component/Admin/Category/CreateProduct';
+import UpdateProduct from './Component/Admin/Category/UpdateProduct'
 
 const App=()=> {
    const dispatch=useDispatch();
@@ -61,6 +62,7 @@ const App=()=> {
      <UserRoute exact path="/user/wishlist" component={WishList}/>
      <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
      <AdminRoute exact path="/admin/category" component={CreateProduct}/>
+     <AdminRoute exact path="/admin/category/:slug" component={UpdateProduct}/>
     </Switch>
   </>
   );

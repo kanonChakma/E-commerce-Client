@@ -5,6 +5,8 @@ import { toast } from 'react-toastify';
 import { createCategory,getCategories,deleteCategory } from '../../../common/category';
 import AdminNav from '../../nav/AdminNav';
 import {EditOutlined,DeleteOutlined} from '@ant-design/icons';
+import CreateProductForm from '../../Form/CreateProductForm';
+import SearchProductForm from '../../Form/SearchProductForm';
 
 const CreateProduct=() =>{
     const {user}=useSelector((state) =>({...state}))
@@ -12,8 +14,9 @@ const CreateProduct=() =>{
     const [loading,setLoading]=useState(false);
     const [name,setName]=useState("");
     const [Category,setCategory]=useState([])
- 
-    //load all products
+    const[keyword,setKeyword]=useState("");
+
+ //load all products
     useEffect(() => {
        loadCategories();
     },[])
@@ -23,6 +26,7 @@ const CreateProduct=() =>{
          .catch(error =>console.log(error.message));
      }
 //---------------------------
+//remove products
      const handleRemove=(slug)=>{
         if(window.confirm("confirm delete")){
             deleteCategory(slug,user.token)
@@ -30,13 +34,15 @@ const CreateProduct=() =>{
                 console.log(res);
                 loadCategories();
                 toast.success(`${res.data.name} deleted`)
-            })
-            .catch((err)=>console.log(err.message)) 
-        }
+              })
+          .catch((err)=>console.log(err.message)) 
+         }
      }
  //------------------------------
+const searched=(keyword)=>(c)=>c.name.toLowerCase().includes(keyword);
 
-    const handleSubmit =(e) => {
+//-----------------------------
+  const handleSubmit =(e) => {
       e.preventDefault();
       setLoading(true)
 
@@ -55,22 +61,6 @@ const CreateProduct=() =>{
           if(error.status===400) toast.error(`${error.message}`)
       })
    }
-    const createProductForm=() =>(
-        <form onSubmit={handleSubmit}>
-            <div className="form-group">
-                <input 
-                type="text"
-                onChange={(e) => setName(e.target.value)} 
-                className="form-control"
-                placeholder="Enter the product name"
-                value={name}
-                autoFocus
-                required             
-                />
-                <button  className="btn btn-outline-secondary">submit</button>
-            </div>
-        </form>
-    )
     return (
         <div className="container-fluid">
             <div className="row">
@@ -79,9 +69,17 @@ const CreateProduct=() =>{
                 </div>
                 <div className="col-md">
                     {loading?<h4 className="text-danger">Loading...</h4>:<h4 className="text-secondary">Create Product</h4>}
-                    {createProductForm()}
+                    
+                    <CreateProductForm 
+                    handleSubmit={handleSubmit} 
+                    name={name} 
+                    setName={setName}/>
+
+                   {/*----------step-2-----------*/}
+                    <SearchProductForm keyword={keyword} setKeyword={setKeyword}/>
+
                     <h2>All categories length is ${Category.length}</h2>
-                    {Category.map((product) => (
+                    {Category.filter(searched(keyword)).map((product) => (
                         <div className="alert alert-secondary" key={product._id}>
                             {product.name}
                             <Link to={`/admin/category/${product.slug}`}>
@@ -95,12 +93,11 @@ const CreateProduct=() =>{
                                 <DeleteOutlined />
                            </span>
                         </div>
-                      )
+                       )
                    )}
                 </div>
-            </div>
+          </div>
       </div>
    )
 }
-
 export default CreateProduct;

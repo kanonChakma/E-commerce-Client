@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createCategory,getCategories,deleteCategory } from '../../../common/category';
-import AdminNav from '../../Nav/AdminNav';
+import AdminNav from '../../nav/AdminNav';
 import {EditOutlined,DeleteOutlined} from '@ant-design/icons';
 
 const CreateProduct=() =>{
@@ -12,12 +12,13 @@ const CreateProduct=() =>{
     const [loading,setLoading]=useState(false);
     const [name,setName]=useState("");
     const [Category,setCategory]=useState([])
- //load all products
+ 
+    //load all products
     useEffect(() => {
        loadCategories();
     },[])
      const loadCategories=()=>{
-         getCategories()
+          getCategories()
          .then((res)=>setCategory(res.data))
          .catch(error =>console.log(error.message));
      }
@@ -41,6 +42,7 @@ const CreateProduct=() =>{
 
       createCategory({name},user.token)
      .then((res) =>{
+         console.log(res);
         loadCategories();
         setLoading(false);
         setName("");
@@ -97,7 +99,7 @@ const CreateProduct=() =>{
                    )}
                 </div>
             </div>
-    </div>
+      </div>
    )
 }
 

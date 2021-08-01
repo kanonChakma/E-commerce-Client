@@ -1,5 +1,5 @@
 import React from 'react';
-import UserNav from '../Nav/UserNav';
+import UserNav from '../nav/UserNav';
 
 const WishList=() => {
   return(
@@ -12,7 +12,8 @@ const WishList=() => {
             <h1>Hello This is WishList page!</h1>
         </div>
     </div>
-  </div> 
+   </div> 
   )
 }
+
 export default WishList;

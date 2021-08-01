@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import {Switch,Router, Route} from 'react-router-dom';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Header from './Component/Nav/Header';
+import Header from './Component/nav/Header';
 import CompleteRegistration from './pages/auth/CompleteRegistration';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';

@@ -8,7 +8,7 @@ export const createOrUpdate= async(authtoken)=>{
         headers:{
             authtoken
          }
-     }
+      }
    )
 }
 
@@ -31,7 +31,7 @@ export const currentAdmin= async(authtoken)=>{
         {
            headers:{
                authtoken
-           } 
+            } 
          }
      )
 }

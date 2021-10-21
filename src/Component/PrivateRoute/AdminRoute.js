@@ -17,12 +17,12 @@ const UserRoute = ({ children, ...rest }) => {
         .catch((error) => {
             console.error(error.message);
             setOk(false);
-        })
+         })
        }
     },[user])
 
     return ok?(
-       <Route {...rest} render={()=>children} />
+       <Route {...rest} render={()=>children}/>
       ):(
          <CountDown/>
       )

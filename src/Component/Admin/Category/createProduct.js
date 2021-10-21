@@ -8,7 +8,7 @@ import {EditOutlined,DeleteOutlined} from '@ant-design/icons';
 import CreateProductForm from '../../Form/CreateProductForm';
 import SearchProductForm from '../../Form/SearchProductForm';
 
-const CreateProduct=() =>{
+const CreateProduct=()=>{
     const {user}=useSelector((state) =>({...state}))
     
     const [loading,setLoading]=useState(false);
@@ -25,6 +25,7 @@ const CreateProduct=() =>{
          .then((res)=>setCategory(res.data))
          .catch(error =>console.log(error.message));
      }
+     
 //---------------------------
 //remove products
      const handleRemove=(slug)=>{

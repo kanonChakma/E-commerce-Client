@@ -13,7 +13,7 @@ const SearchProductForm=({keyword,setKeyword}) =>{
              className="form-control mb-4"
               onChange={handleSearchChange}
               placeholder="Filter"
-                   />  
+              />  
         </div>
     )
 }

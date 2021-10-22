@@ -19,10 +19,11 @@ return await axios.post(
     {
     	headers:{
     		authtoken
-    	   }
+    	    }
        }
   	)
 }
+
 export const updateSubCategory= async(slug,sub,authtoken)=>{
 	return await axios.put(
    `${process.env.REACT_APP_API}/sub/${slug}`,
@@ -30,16 +31,17 @@ export const updateSubCategory= async(slug,sub,authtoken)=>{
       {
       	headers:{
       		authtoken
-        	}
+         	}
        }
   	)
 }
+
 export const deleteSubCatgory= async(slug,authtoken)=>{
    return await axios.delete(
    `${process.env.REACT_APP_API}/sub/${slug}`,{
       headers:{
       	authtoken
-      }
+       }
    })
 }
 

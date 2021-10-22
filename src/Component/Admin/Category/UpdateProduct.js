@@ -56,5 +56,4 @@ const UpdateProduct=({history,match}) =>{
       </div>
    )
 }
-
 export default UpdateProduct;

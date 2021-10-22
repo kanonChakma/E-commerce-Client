@@ -95,7 +95,7 @@ const searched=(keyword)=>(c)=>c.name.toLowerCase().includes(keyword);
                            </span>
                         </div>
                        )
-                   )}
+                     )}
                 </div>
           </div>
       </div>

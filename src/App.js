@@ -22,6 +22,8 @@ import CreateProduct from './Component/Admin/Category/createProduct';
 import UpdateProduct from './Component/Admin/Category/UpdateProduct'
 import SubCreate from  './Component/Admin/subCategory/SubCreate'
 import SubUpdate from './Component/Admin/subCategory/SubUpdate';
+import ProductCreate from './Component/Admin/Product/ProductCreate';
+
 const App=()=> {
    const dispatch=useDispatch();
 
@@ -62,10 +64,14 @@ const App=()=> {
      <UserRoute exact path="/user/password" component={Password}/>
      <UserRoute exact path="/user/wishlist" component={WishList}/>
      <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
+     
      <AdminRoute exact path="/admin/category" component={CreateProduct}/>
      <AdminRoute exact path="/admin/category/:slug" component={UpdateProduct}/>
+     
      <AdminRoute exact path="/admin/sub" component={SubCreate}/>
      <AdminRoute exact path="/admin/sub/:slug" component={SubUpdate}/>
+
+     <AdminRoute exact path="/admin/product" component={ProductCreate}/>
     </Switch>
   </>
   );

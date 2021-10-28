@@ -73,7 +73,7 @@ const App=()=> {
 
      <AdminRoute exact path="/admin/product" component={ProductCreate}/>
     </Switch>
-  </>
+   </>
   );
 }
 

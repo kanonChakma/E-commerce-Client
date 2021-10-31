@@ -5,7 +5,7 @@ const { Option } = Select;
 const ProductForm = ({values,handleChange,handleSubmit,hadleCategoryChange,subOption,showSub,setValues}) => {
     const {title,description,price,categories,category,subs,quantity,images,shipping,colors,brands,color,brand}=values;
     return (
-        <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                        <div className="form-group">
                             <label>Title</label>   
                             <input 
@@ -16,6 +16,7 @@ const ProductForm = ({values,handleChange,handleSubmit,hadleCategoryChange,subOp
                             onChange={handleChange}
                             />
                        </div>
+
                        <div className="form-group">
                             <label>Description</label>   
                             <input 
@@ -26,6 +27,7 @@ const ProductForm = ({values,handleChange,handleSubmit,hadleCategoryChange,subOp
                             onChange={handleChange}
                             />
                        </div>
+
                        <div className="form-group">
                             <label>Price</label>   
                             <input 
@@ -36,6 +38,7 @@ const ProductForm = ({values,handleChange,handleSubmit,hadleCategoryChange,subOp
                             onChange={handleChange}
                             />
                        </div>
+
                        <div className="form-group">
                             <label>Shipping</label>   
                             <select 
@@ -47,6 +50,7 @@ const ProductForm = ({values,handleChange,handleSubmit,hadleCategoryChange,subOp
                             <option value="Yes">Yes</option>
                          </select>   
                        </div>
+
                        <div className="form-group">
                             <label>Quantity</label>   
                             <input 
@@ -57,6 +61,7 @@ const ProductForm = ({values,handleChange,handleSubmit,hadleCategoryChange,subOp
                             onChange={handleChange}
                             />
                        </div>
+
                        <div className="form-group">
                             <label>Colors</label>   
                             <select 
@@ -68,6 +73,7 @@ const ProductForm = ({values,handleChange,handleSubmit,hadleCategoryChange,subOp
                             {colors.map((c)=><option key={c} value={c}>{c}</option>)}
                          </select>   
                        </div>
+
                        <div className="form-group">
                             <label>Brands</label>   
                             <select 
@@ -79,6 +85,7 @@ const ProductForm = ({values,handleChange,handleSubmit,hadleCategoryChange,subOp
                             {brands.map((c)=><option key={c} value={c}>{c}</option>)}
                          </select>   
                        </div>
+                       
                        <div className="form-group">
                             <label>Category</label>   
                             <select 

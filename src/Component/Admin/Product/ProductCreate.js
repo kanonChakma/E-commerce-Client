@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { getCategories, getCategorieSubs } from '../../../common/category';
 import { CreateProduct } from '../../../common/product';
+import FileUpload from '../../Form/FileUpload';
 import ProductForm from '../../Form/ProductForm';
 import AdminNav from '../../nav/AdminNav';
-
 
 const initialState={
   title:"",
@@ -26,7 +26,7 @@ const ProductCreate = () => {
     const[values,setValues]=useState(initialState);
     const[subOption,setSubOption]=useState("");
     const[showSub,setShowSub]=useState(false);
-
+    const[loading,setLoading]=useState(false);
     useEffect(() => {
             loadCategories();
         },[])
@@ -68,9 +68,18 @@ const ProductCreate = () => {
                <div className="col-md-2">
                  <AdminNav/>
                </div>
-               <div className="col-md-10">
-                    <h4 className="text-center">Product create</h4>
-                    {JSON.stringify(values.subs)}
+
+                  <div className="col-md-10">   
+                      <h4>Product Create</h4>
+                    <hr/>
+                    <div className="p-3">
+                      <FileUpload 
+                      values={values} 
+                      setValues={setValues}
+                      setLoading={setLoading}
+                      />
+                    </div>
+
                    <ProductForm
                      handleSubmit={handleSubmit}
                      handleChange={handleChange}

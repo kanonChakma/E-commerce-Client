@@ -1,16 +1,17 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React from 'react';
 import Resizer from "react-image-file-resizer";
 import { useSelector } from 'react-redux';
 import { Avatar, Badge } from 'antd';
-import {LoadingOutlined} from '@ant-design/icons';
 
-const FileUpload = ({values,setValues}) => {
-       const[loading,setLoading]=useState(false);
+
+const FileUpload = ({values,setValues,setLoading}) => {
+
        const {user}=useSelector((state)=>({...state}))
        let allUploadedFile=values.images;
 
     const fileUploadAndResize=(e)=>{
+        setLoading(true);
         let file=e.target.files;
         if(file){
             for(let i=0;i<file.length;i++){
@@ -25,11 +26,10 @@ const FileUpload = ({values,setValues}) => {
                                 }
                            })
                           .then((res)=>{
-                              console.log(res);
                             setLoading(false)
                             allUploadedFile.push(res.data);
                             setValues({...values,images:allUploadedFile})
-                          })
+                           })
                           .catch((err)=>{
                             setLoading(false)    
                           }) 
@@ -63,7 +63,7 @@ const FileUpload = ({values,setValues}) => {
          }
     return (
        <>
-          {loading?<LoadingOutlined className="text-danger h1"/>:<div className="row">
+             <div className="row">
              {
                 values.images.map((img)=>(
                    <Badge 
@@ -74,14 +74,13 @@ const FileUpload = ({values,setValues}) => {
                         <Avatar 
                             shape="square"
                             src={img.url} 
-                            size={150}
+                            size={100}
                             className="ml-3"
                         />
                     </Badge>
                    ))
                }
-          </div>
-        }
+             </div>
           <div className="row">
              <label className="btn btn-primary">
              Choose file

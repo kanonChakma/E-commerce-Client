@@ -2,7 +2,7 @@ import React from 'react';
 import { Select } from 'antd';
 const { Option } = Select;
 
-const ProductForm = ({values,handleChange,handleSubmit,hadleCategoryChange,subOption,showSub,setValues}) => {
+const ProductUpdateForm = ({values,handleChange,handleSubmit,hadleCategoryChange,subOption,showSub,setValues}) => {
     const {title,description,price,categories,category,subs,quantity,images,shipping,colors,brands,color,brand}=values;
     return (
             <form onSubmit={handleSubmit}>
@@ -42,6 +42,7 @@ const ProductForm = ({values,handleChange,handleSubmit,hadleCategoryChange,subOp
                        <div className="form-group">
                             <label>Shipping</label>   
                             <select 
+                            value={shipping === "Yes"?"Yes":"No"}
                             name="shipping" 
                             className="form-control"
                             onChange={handleChange}
@@ -65,11 +66,11 @@ const ProductForm = ({values,handleChange,handleSubmit,hadleCategoryChange,subOp
                        <div className="form-group">
                             <label>Colors</label>   
                             <select 
-                            name="color" 
+                            name="color"
+                            value={color} 
                             className="form-control"
                             onChange={handleChange}
                             >
-                            <option>Please Select</option>
                             {colors.map((c)=><option key={c} value={c}>{c}</option>)}
                          </select>   
                        </div>
@@ -78,6 +79,7 @@ const ProductForm = ({values,handleChange,handleSubmit,hadleCategoryChange,subOp
                             <label>Brands</label>   
                             <select 
                             name="brand" 
+                            value={brand}
                             className="form-control"
                             onChange={handleChange}
                             >
@@ -119,4 +121,4 @@ const ProductForm = ({values,handleChange,handleSubmit,hadleCategoryChange,subOp
             </form>
       );
 };
-export default ProductForm;
+export default ProductUpdateForm;

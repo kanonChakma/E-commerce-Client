@@ -19,12 +19,12 @@ const FileUpload = ({values,setValues,setLoading}) => {
                     file[i], 720, 720,"JPEG",100,0,
                      (uri)=>{
                          axios.post(`${process.env.REACT_APP_API}/uploadimages`,
-                         {image:uri}, 
-                         {
+                          {image:uri}, 
+                          {
                             headers:{
                                   authtoken:user?user.token:"",
                                 }
-                           })
+                            })
                           .then((res)=>{
                             setLoading(false)
                             allUploadedFile.push(res.data);
@@ -32,7 +32,7 @@ const FileUpload = ({values,setValues,setLoading}) => {
                            })
                           .catch((err)=>{
                             setLoading(false)    
-                          }) 
+                         }) 
                        },
                     "base64",
                 );
@@ -81,8 +81,8 @@ const FileUpload = ({values,setValues,setLoading}) => {
                    ))
                }
              </div>
-          <div className="row">
-             <label className="btn btn-primary">
+        <div className="row">
+          <label className="btn btn-primary">
              Choose file
              <input 
              type="file" 
@@ -91,8 +91,8 @@ const FileUpload = ({values,setValues,setLoading}) => {
              accept="images/*" 
              onChange={fileUploadAndResize}
              />
-           </label>  
-        </div> 
+            </label>  
+          </div> 
        </>
     );
 };

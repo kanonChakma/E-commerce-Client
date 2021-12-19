@@ -23,6 +23,8 @@ import UpdateProduct from './Component/Admin/Category/UpdateProduct'
 import SubCreate from  './Component/Admin/subCategory/SubCreate'
 import SubUpdate from './Component/Admin/subCategory/SubUpdate';
 import ProductCreate from './Component/Admin/Product/ProductCreate';
+import AllProducts from './Component/Admin/Product/AllProducts';
+import ProductUpdate from './Component/Admin/Product/ProductUpdate';
 
 const App=()=> {
    const dispatch=useDispatch();
@@ -55,26 +57,28 @@ const App=()=> {
    <Header/>
    <ToastContainer/>
    <Switch>
-     <Route exact path="/" component={Home}/>
-     <Route exact path="/login" component={Login} />
-     <Route exact path="/register" component={Register} />
-     <Route exact path="/register/complete" component={CompleteRegistration}/>
-     <Route exact path="/forgot/password" component={ForgotPassword}/>
-     <UserRoute exact path="/user/history" component={History}/>
-     <UserRoute exact path="/user/password" component={Password}/>
-     <UserRoute exact path="/user/wishlist" component={WishList}/>
-     <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
+      <Route exact path="/" component={Home}/>
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/register" component={Register} />
+      <Route exact path="/register/complete" component={CompleteRegistration}/>
+      <Route exact path="/forgot/password" component={ForgotPassword}/>
+      <UserRoute exact path="/user/history" component={History}/>
+      <UserRoute exact path="/user/password" component={Password}/>
+      <UserRoute exact path="/user/wishlist" component={WishList}/>
+      <AdminRoute exact path="/admin/dashboard" component={AdminDashboard}/>
      
-     <AdminRoute exact path="/admin/category" component={CreateProduct}/>
-     <AdminRoute exact path="/admin/category/:slug" component={UpdateProduct}/>
+      <AdminRoute exact path="/admin/category" component={CreateProduct}/>
+      <AdminRoute exact path="/admin/category/:slug" component={UpdateProduct}/>
      
-     <AdminRoute exact path="/admin/sub" component={SubCreate}/>
-     <AdminRoute exact path="/admin/sub/:slug" component={SubUpdate}/>
+      <AdminRoute exact path="/admin/sub" component={SubCreate}/>
+      <AdminRoute exact path="/admin/sub/:slug" component={SubUpdate}/>
 
-     <AdminRoute exact path="/admin/product" component={ProductCreate}/>
-    </Switch>
+      <AdminRoute exact path="/admin/product"  component={ProductCreate}/>
+      <AdminRoute exact path="/admin/products" component={AllProducts}/>
+      <AdminRoute exact path="/admin/product/:slug" component={ProductUpdate}/>
+     </Switch>
    </>
   );
 }
-
 export default App;
+

@@ -16,11 +16,6 @@ const AdminNav=()=>{
                 <li className="nav-item">
                   <Link to="/admin/products" className="nav-link">Products</Link>
                 </li>
-
-                <li className="nav-item">
-                  <Link to="/admin/dashboard" className="nav-link">Dashboard</Link>
-                </li>
-                
                 <li className="nav-item">
                   <Link to="/admin/category" className="nav-link">Category</Link>
                 </li>

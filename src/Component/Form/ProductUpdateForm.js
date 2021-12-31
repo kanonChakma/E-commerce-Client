@@ -2,8 +2,21 @@ import React from 'react';
 import { Select } from 'antd';
 const { Option } = Select;
 
-const ProductUpdateForm = ({values,handleChange,handleSubmit,hadleCategoryChange,subOption,showSub,setValues}) => {
-    const {title,description,price,categories,category,subs,quantity,images,shipping,colors,brands,color,brand}=values;
+const ProductUpdateForm = ({values,categories,handleChange,handleSubmit,hadleCategoryChange,subOption,showSub,setValues}) => {
+    const {
+         title,
+         description,
+         price,
+         category,
+         subs,
+         quantity,
+         images,
+         shipping,
+         colors,
+         brands,
+         color,
+         brand}=values;
+
     return (
             <form onSubmit={handleSubmit}>
                        <div className="form-group">
@@ -91,7 +104,8 @@ const ProductUpdateForm = ({values,handleChange,handleSubmit,hadleCategoryChange
                        <div className="form-group">
                             <label>Category</label>   
                             <select 
-                            name="category" 
+                            name="category"
+                            value={category} 
                             className="form-control"
                             onChange={hadleCategoryChange}
                             >

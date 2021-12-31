@@ -14,7 +14,6 @@ const initialState={
    description:"",
    price:'',
    category:"",
-   categories:[],
    subs:[],
    quantity:"",
    images:[],
@@ -27,11 +26,18 @@ const initialState={
 const ProductUpdate = ({match}) => {
    const {slug}=match.params
    const [values,setValues]=useState(initialState);
+   const [subOption,setSubOption]=useState("");
+   const [categories,setCategories]=useState([]);
+   const[showSub,setShowSub]=useState(false);
+
+
    const {user}=useSelector((state)=>({...state}));
    useEffect(()=>{
-       loadProduct(slug);      
+       loadProduct(); 
+       loadCategories();     
    },[])
-   const loadProduct=(slug)=>{
+   
+   const loadProduct=()=>{
       getProduct(slug)
       .then((res)=>{
            setValues({...values, ...res.data});
@@ -40,7 +46,15 @@ const ProductUpdate = ({match}) => {
          
         })
      }
-const handleSubmit=(e)=>{
+     console.log(values);
+   const loadCategories=()=>{
+      getCategories()
+     .then((res)=>{
+       setCategories(res.data);
+     })
+     .catch(error =>console.log(error.message));
+     }
+  const handleSubmit=(e)=>{
       e.preventDefault();
       CreateProduct(values,user.token)
       .then((res)=>{
@@ -54,9 +68,17 @@ const handleSubmit=(e)=>{
           toast.error(`${err.response.data.err}`)
         })
      }
-const handleChange=(e)=>{
+    const handleChange=(e)=>{
          setValues({...values,[e.target.name]:e.target.value})
       }
+    const hadleCategoryChange=(e)=>{
+        e.preventDefault();
+        setValues({...values,subs:[],category:e.target.value});
+        getCategorieSubs(e.target.value)
+        .then((res)=>setSubOption(res.data))
+        .catch((err)=>console.log(err.message));
+        setShowSub(true);
+     }      
     return (
         <div className="container-fluid">
             <div className="row">
@@ -69,6 +91,9 @@ const handleChange=(e)=>{
                        handleChange={handleChange}
                        values={values}
                        setValues={setValues} 
+                       hadleCategoryChange={hadleCategoryChange}
+                       categories={categories}
+                       subOption={subOption}
                      /> 
                  </div>
             </div>

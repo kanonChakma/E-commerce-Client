@@ -91,6 +91,7 @@ const ProductForm = ({values,handleChange,handleSubmit,hadleCategoryChange,subOp
                             <select 
                             name="category" 
                             className="form-control"
+                            value={category}
                             onChange={hadleCategoryChange}
                             >
                             <option>Please Select</option>

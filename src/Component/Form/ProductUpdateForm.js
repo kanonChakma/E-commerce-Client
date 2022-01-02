@@ -2,7 +2,7 @@ import React from 'react';
 import { Select } from 'antd';
 const { Option } = Select;
 
-const ProductUpdateForm = ({values,categories,handleChange,handleSubmit,hadleCategoryChange,subOption,showSub,setValues}) => {
+const ProductUpdateForm = ({values,selectedCategory,arrayOfSubIds,setArrayOfSubIds,categories,handleChange,handleSubmit,hadleCategoryChange,subOption,showSub,setValues}) => {
     const {
          title,
          description,
@@ -103,34 +103,33 @@ const ProductUpdateForm = ({values,categories,handleChange,handleSubmit,hadleCat
                        
                        <div className="form-group">
                             <label>Category</label>   
-                            <select 
+                         <select 
                             name="category"
-                            value={category} 
+                            value={selectedCategory?selectedCategory:category._id}
                             className="form-control"
                             onChange={hadleCategoryChange}
                             >
-                            <option>Please Select</option>
                             {
                             categories.length>0 &&
                               categories.map((c)=><option key={c._id} value={c._id}>{c.name}</option>)
                             }
                          </select>   
                        </div>
-                       {showSub && <div>
-                            <label>Sub categories</label>
+                        <div>
+                             <label>Sub categories</label>
                              <Select
                                 mode="multiple"
                                 style={{ width: '100%' }}
                                 placeholder="Please select"
-                                value={subs}
-                                onChange={(value)=>setValues({...values,subs:value})}
+                                value={arrayOfSubIds}
+                                onChange={(value)=>setArrayOfSubIds(value)}
                                 >
                                  {
                                  subOption.length &&
                                     subOption.map((e)=>(<Option key={e._id} value={e._id}>{e.name}</Option>))
                                 }
                             </Select>   
-                        </div>}
+                           </div>
                     <button className="btn btn-outline-info">Save</button>
             </form>
       );

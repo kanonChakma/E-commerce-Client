@@ -42,7 +42,7 @@ export const deleteCategory = async(slug,authtoken)=>await axios.delete(
                authtoken
            }
       } 
-  )
+)
   
 export const getCategorieSubs = async(_id)=>{
   return await axios.get(

@@ -29,7 +29,8 @@ const ProductUpdate = ({match}) => {
    const [subOption,setSubOption]=useState("");
    const [categories,setCategories]=useState([]);
    const[showSub,setShowSub]=useState(false);
-
+   const[arrayOfSubIds,setArrayOfSubIds]=useState([]);
+   const[selectedCategory,setSelectedCategory]=useState("");
 
    const {user}=useSelector((state)=>({...state}));
    useEffect(()=>{
@@ -40,13 +41,27 @@ const ProductUpdate = ({match}) => {
    const loadProduct=()=>{
       getProduct(slug)
       .then((res)=>{
+         console.log(res.data);
+          // first load single product
            setValues({...values, ...res.data});
-      })
+          //load single products sub category
+          getCategorieSubs(res.data.category._id)
+          .then((r)=>{
+               setSubOption(r.data);   
+          })
+          const arr=[];
+          res.data.subs.map((s)=>{
+            arr.push(s._id);
+          })
+          setArrayOfSubIds((prev)=>arr);
+       })
       .catch((error)=>{
-         
+          console.log(error);
         })
      }
-     console.log(values);
+     //--------------
+    console.log(arrayOfSubIds);
+    //----------------
    const loadCategories=()=>{
       getCategories()
      .then((res)=>{
@@ -73,11 +88,20 @@ const ProductUpdate = ({match}) => {
       }
     const hadleCategoryChange=(e)=>{
         e.preventDefault();
-        setValues({...values,subs:[],category:e.target.value});
+        setValues({...values,subs:[]});
+        setSelectedCategory(e.target.value);
+
         getCategorieSubs(e.target.value)
-        .then((res)=>setSubOption(res.data))
+        .then((res)=>{
+          setSubOption(res.data)
+        })
         .catch((err)=>console.log(err.message));
         setShowSub(true);
+        ///--------------------
+        if(values.category._id===e.target.value){
+          loadProduct();
+        }
+        setArrayOfSubIds([]);
      }      
     return (
         <div className="container-fluid">
@@ -86,6 +110,7 @@ const ProductUpdate = ({match}) => {
                   <AdminNav/>
                </div>
                    <div className="col-md-10"> 
+                   <p>{JSON.stringify(values)}</p>
                      <ProductUpdateForm
                        handleSubmit={handleSubmit}
                        handleChange={handleChange}
@@ -94,6 +119,9 @@ const ProductUpdate = ({match}) => {
                        hadleCategoryChange={hadleCategoryChange}
                        categories={categories}
                        subOption={subOption}
+                       arrayOfSubIds={arrayOfSubIds}
+                       setArrayOfSubIds={setArrayOfSubIds}
+                       selectedCategory={selectedCategory}
                      /> 
                  </div>
             </div>

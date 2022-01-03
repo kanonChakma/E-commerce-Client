@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { getCategories, getCategorieSubs } from '../../../common/category';
-import { CreateProduct, getProduct } from '../../../common/product';
+import { CreateProduct, getProduct, updateProduct } from '../../../common/product';
 import FileUpload from '../../Form/FileUpload';
 import ProductForm from '../../Form/ProductForm';
 import AdminNav from '../../nav/AdminNav';
 import {LoadingOutlined} from '@ant-design/icons';
 import ProductUpdateForm from '../../Form/ProductUpdateForm';
+
 
 const initialState={
    title:"",
@@ -23,7 +24,7 @@ const initialState={
    color:"",
    brand:"",
  }
-const ProductUpdate = ({match}) => {
+const ProductUpdate = ({match,history}) => {
    const {slug}=match.params
    const [values,setValues]=useState(initialState);
    const [subOption,setSubOption]=useState("");
@@ -31,6 +32,7 @@ const ProductUpdate = ({match}) => {
    const[showSub,setShowSub]=useState(false);
    const[arrayOfSubIds,setArrayOfSubIds]=useState([]);
    const[selectedCategory,setSelectedCategory]=useState("");
+   const[loading,setLoading]=useState(false);
 
    const {user}=useSelector((state)=>({...state}));
    useEffect(()=>{
@@ -59,9 +61,6 @@ const ProductUpdate = ({match}) => {
           console.log(error);
         })
      }
-     //--------------
-    console.log(arrayOfSubIds);
-    //----------------
    const loadCategories=()=>{
       getCategories()
      .then((res)=>{
@@ -69,40 +68,45 @@ const ProductUpdate = ({match}) => {
      })
      .catch(error =>console.log(error.message));
      }
+
+     const handleChange=(e)=>{
+      setValues({...values,[e.target.name]:e.target.value})
+   }
+ const hadleCategoryChange=(e)=>{
+     e.preventDefault();
+     setValues({...values,subs:[]});
+     setSelectedCategory(e.target.value);
+
+     getCategorieSubs(e.target.value)
+     .then((res)=>{
+       setSubOption(res.data)
+     })
+     .catch((err)=>console.log(err.message));
+     setShowSub(true);
+     // For checking that change category match with existing category or not
+     if(values.category._id ===e.target.value){
+       loadProduct();
+     }
+     setArrayOfSubIds([]);
+  } 
+ //------------- 
   const handleSubmit=(e)=>{
       e.preventDefault();
-      CreateProduct(values,user.token)
+      setLoading(true);
+      
+      values.subs=arrayOfSubIds;
+      values.category=selectedCategory?selectedCategory:values.category;
+      
+      updateProduct(slug,values,user.token)
       .then((res)=>{
-          console.log(res);
-          toast.success(`${res.data.title} are created`);
-           //window.alert("product is created");
-          // window.location.reload();
+        setLoading(false);
+          toast.success(`${res.data.title} are updated`);
+          history.push("/admin/products");
         })
       .catch((err)=>{
-          console.log(err);
-          toast.error(`${err.response.data.err}`)
+         toast.error(err.response.data.err);
         })
-     }
-    const handleChange=(e)=>{
-         setValues({...values,[e.target.name]:e.target.value})
-      }
-    const hadleCategoryChange=(e)=>{
-        e.preventDefault();
-        setValues({...values,subs:[]});
-        setSelectedCategory(e.target.value);
-
-        getCategorieSubs(e.target.value)
-        .then((res)=>{
-          setSubOption(res.data)
-        })
-        .catch((err)=>console.log(err.message));
-        setShowSub(true);
-        ///--------------------
-        if(values.category._id===e.target.value){
-          loadProduct();
-        }
-        setArrayOfSubIds([]);
-     }      
+     }     
     return (
         <div className="container-fluid">
             <div className="row">
@@ -110,7 +114,21 @@ const ProductUpdate = ({match}) => {
                   <AdminNav/>
                </div>
                    <div className="col-md-10"> 
-                   <p>{JSON.stringify(values)}</p>
+                   {/* <p>{JSON.stringify(values)}</p> */}
+                    <h3>Product Update</h3>
+                    <hr/>
+                   <div className="p-3 flex-row">
+                      <FileUpload 
+                      values={values} 
+                      setValues={setValues}
+                      setLoading={setLoading}
+                      />
+                      <div>
+                        <h2>Hello this need to be fixed</h2>
+                           {loading?<LoadingOutlined className="text-danger h1"/> :<h4></h4>}
+                      </div>
+                    </div>
+                    <hr/>
                      <ProductUpdateForm
                        handleSubmit={handleSubmit}
                        handleChange={handleChange}
@@ -128,4 +146,5 @@ const ProductUpdate = ({match}) => {
         </div>
     );
 };
+
 export default ProductUpdate;

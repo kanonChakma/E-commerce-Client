@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AdminProductCard from '../../Cards/AdminProductCard';
 import AdminNav from '../../nav/AdminNav';
-import { getProducts, removeProduct } from '../../../common/product';
+import { getProductByCount, removeProduct } from '../../../common/product';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -16,7 +16,7 @@ const AllProducts = () => {
     },[])
     const getAllProducts=()=>{
         setLoading(true);
-        getProducts(100) 
+        getProductByCount(100) 
         .then((res)=>{
            setLoading(false);
            setProducts(res.data);

@@ -1,29 +1,8 @@
 import React, { useEffect } from 'react';
-import { useState } from 'react';
-import { getProducts } from '../common/product';
-import LoadingCard from '../Component/Cards/LoadingCard';
-import ProductCard from '../Component/Cards/ProductCard';
 import TypeEffect from '../Component/Cards/TypeEffect';
+import NewArrivals from '../Component/Home/NewArrivals';
 
 const Home = () => {
-    const[products,setProducts]=useState([]);
-    const[loading,setLoading]=useState(false);
-
-    useEffect(()=>{
-        loadProduct();
-    },[])
-    const loadProduct=()=>{
-        setLoading(true)
-        getProducts(2)
-        .then((res)=>{
-            setProducts(res.data)
-            setLoading(false);
-        })
-        .catch((err)=>{
-            console.log(err);
-        })
-    }
-    console.log(products);
     return (
         <div>
              <div className='jumbotron text-center h1 font-weight-bold'>
@@ -31,21 +10,8 @@ const Home = () => {
                  text={["Latest Product","New Arrivals","Best sellers"]}
                />
              </div>
-            <div className='container'>
-                {loading? <LoadingCard count={products.length}/>: 
-                <div className='row'>
-                   {
-                      products.map((product)=>(
-                          <div className='col-md-4' key={product._id}>
-                               <ProductCard
-                                product={product}
-                               />
-                          </div>
-                      ))  
-                   }
-                 </div>
-                }
-            </div>
+             <h1 className='text-center jumbotron mt-3 mb-3 p-3 display-3'>New Arrivals</h1>
+            <NewArrivals/>
         </div>
     );
 };

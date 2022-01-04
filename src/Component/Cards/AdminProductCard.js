@@ -25,7 +25,9 @@ const AdminProductCard = ({product,handleRemove}) => {
              <DeleteOutlined onClick={()=>handleRemove(slug)} className="text-danger"/>
           ]}
         >
-        <Meta title={title} description={`${description && description.substring(0,40)}...`} />
+        <Meta 
+         title={title}
+         description={`${description && description.substring(0,40)}...`} />
       </Card>
     );
 };

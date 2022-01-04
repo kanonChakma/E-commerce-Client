@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import AdminProductCard from '../../AdminProductCard/AdminProductCard';
+import AdminProductCard from '../../Cards/AdminProductCard';
 import AdminNav from '../../nav/AdminNav';
 import { getProducts, removeProduct } from '../../../common/product';
 import { useSelector } from 'react-redux';
@@ -44,9 +44,9 @@ const AllProducts = () => {
         <div className="container-fluid">
             <h1>HEloo this is</h1>
         <div className="row">
-           <div className="col-md-2">
-              <AdminNav/>
-           </div>
+              <div className="col-md-2">
+                  <AdminNav/>
+              </div>
               <div className="col-md">
                   {loading?<h4 className="text-danger text-center mb-3">Loading......</h4>:<h4 className="text-Primary text-center mb-3">All Products</h4>}
                  <div className="row">
@@ -59,11 +59,12 @@ const AllProducts = () => {
                               />
                             </div>   
                           )) 
-                        }
+                      }
                  </div> 
              </div>
         </div>
      </div>
     );
 };
+
 export default AllProducts;

@@ -15,7 +15,7 @@ const NewArrivals = () => {
 
     useEffect(()=>{
         loadProduct();
-    },[])
+    },[currentPage])
 
     useEffect(()=>{
         totalProduct()

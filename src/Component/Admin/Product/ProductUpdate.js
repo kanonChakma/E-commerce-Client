@@ -20,7 +20,7 @@ const initialState={
    images:[],
    shipping:"",
    colors:["Black","Brown","Silver","White","Blue"],
-   brands:["Apple","Samsung","Microsoft","Lenovo","Asus"],
+   brands:["Google","Apple","Samsung","Microsoft","Lenovo","Asus"],
    color:"",
    brand:"",
  }

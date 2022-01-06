@@ -6,8 +6,8 @@ import laptop from '../../image/laptop.jpg';
 import { Link } from 'react-router-dom';
 import { Card } from 'antd';
 import ProductListItems from './ProductListItems';
-const { Meta } = Card;
-
+import { Tabs } from 'antd';
+const { TabPane } = Tabs;
 
 const SingleProduct = ({product}) => {
     const{title,description,images}=product;
@@ -31,6 +31,16 @@ const SingleProduct = ({product}) => {
                  >
                  </Card>
                 }
+               <div>
+               <Tabs type="card">
+                  <TabPane tab="Description" key="1">
+                    {description && description}
+                  </TabPane>
+                  <TabPane tab="More" key="2">
+                     Please Contact With Us
+                  </TabPane>
+               </Tabs>
+               </div> 
             </div>
            <div className='col-md-5'>
               <h1 className='text-center bg-info p-3'>{title}</h1>

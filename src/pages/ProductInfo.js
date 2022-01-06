@@ -21,11 +21,11 @@ const ProductInfo = ({match}) => {
     }
     return (
          <div className='container-fluid'>
-             <div className='row'>
+             <div className='row pt-5'>
                <SingleProduct product={product}/>
              </div>
              <div className='row'>
-                <div>Related Product</div>
+                 <h1  className='text-center col mt-3 mb-3 p-3 bg-info'>Related Product</h1>
              </div>  
          </div>
     );

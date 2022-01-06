@@ -11,8 +11,8 @@ const Home = () => {
                  text={["Latest Product","New Arrivals","Best sellers"]}
                />
              </div>
-             <h4 className='text-center jumbotron mt-3 mb-3 p-3 display-3 font-weight-bold'>
-               New Arrivals
+              <h4 className='text-center jumbotron mt-3 mb-3 p-3 display-3 font-weight-bold'>
+                 New Arrivals
                </h4>
              <NewArrivals/>
              <h4 className='text-center jumbotron mt-3 mb-3 p-3 display-3 font-weight-bold'>

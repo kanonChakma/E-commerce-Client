@@ -22,7 +22,7 @@ const ProductCard = ({product}) => {
           </div>
         }
         actions={[
-            <Link to={`/products/${slug}`}>
+            <Link to={`/product/${slug}`}>
                  <EyeOutlined key="edit" /> <br/> View Product 
             </Link>,
             <Link>

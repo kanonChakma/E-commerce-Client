@@ -5,6 +5,7 @@ import { ShoppingCartOutlined, HeartOutlined, StarOutlined } from '@ant-design/i
 import laptop from '../../image/laptop.jpg';
 import { Link } from 'react-router-dom';
 import { Card } from 'antd';
+import ProductListItems from './ProductListItems';
 const { Meta } = Card;
 
 
@@ -28,11 +29,11 @@ const SingleProduct = ({product}) => {
                         />
                      }
                  >
-
                  </Card>
                 }
             </div>
            <div className='col-md-5'>
+              <h1 className='text-center bg-info p-3'>{title}</h1>
              <Card
                 hoverable
                 actions={[
@@ -54,12 +55,9 @@ const SingleProduct = ({product}) => {
                        Leave Rating
                     </Link>
                  </>
-                ]}
-               >
-              <Meta
-                title={title}
-                description={description}
-                />
+                 ]}
+                >
+                  <ProductListItems product={product}/>
                </Card>,
              </div>
         </>    

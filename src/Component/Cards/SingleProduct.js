@@ -3,14 +3,16 @@ import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { ShoppingCartOutlined, HeartOutlined, StarOutlined } from '@ant-design/icons';
 import laptop from '../../image/laptop.jpg';
+import StarRatings from 'react-star-ratings';
 import { Link } from 'react-router-dom';
 import { Card } from 'antd';
 import ProductListItems from './ProductListItems';
 import { Tabs } from 'antd';
+import RattingModal from '../Modal/RattingModal';
 const { TabPane } = Tabs;
 
 const SingleProduct = ({product}) => {
-    const{title,description,images}=product;
+    const{title,description,images,_id}=product;
     return (
         <>
            <div className='col-md-7'>
@@ -57,15 +59,21 @@ const SingleProduct = ({product}) => {
                    <HeartOutlined  className='text-info' /> <br/>
                    <Link>
                        Add To Whislist
-                    </Link>
+                   </Link>
                  </>,
                  <>
-                    <StarOutlined />
-                    <Link>
-                       Leave Rating
-                    </Link>
+                    <RattingModal>
+                     <StarRatings
+                        isSelectable={true}
+                        rating={2}
+                        starRatedColor="blue"
+                        changeRating={(newRating, name)=>console.log(newRating, name)}
+                        numberOfStars={5}
+                        name={_id}
+                     />
+                  </RattingModal>
                  </>
-                 ]}
+                  ]}
                 >
                   <ProductListItems product={product}/>
                </Card>,

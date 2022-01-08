@@ -14,23 +14,34 @@ const Login = ({history}) => {
     const [loading,setLoading] = useState(false);
     
     //will not working lession->25
-    // const {user}=useSelector((state)=>({...state}))
-    // useEffect(()=>{
-    //   if(user && user.token) history.push("/");
-    // },[user])
+    const {user}=useSelector((state)=>({...state}))
+    useEffect(()=>{
+        let exist=history.location.state;
+        if(exist){
+            return;
+        }else{
+            if(user && user.token) history.push("/");  
+        }
+    },[user, history])
 
     const authorization= (res) => {
-        if(res.data.role === 'admin'){
-          history.push("/admin/dashboard");    
+
+        let exist=history.location.state;
+        //console.log(exist);
+         if(exist){
+              history.push(exist.from);
          }else{
-             history.push("/user/history");
+            if(res.data.role === 'admin'){
+                history.push("/admin/dashboard");    
+               }else{
+                   history.push("/user/history");
+               }
          }
       }
     const googleLogIn=()=>{
            auth.signInWithPopup(googleAuthProvider)
            .then(async (result)=>{
              const {user} = result;
-             console.log(user)
              const idTokenResult= await user.getIdTokenResult();
              createOrUpdate(idTokenResult.token)
             .then((res)=>{

@@ -7,11 +7,12 @@ import StarRatings from 'react-star-ratings';
 import { Link } from 'react-router-dom';
 import { Card } from 'antd';
 import ProductListItems from './ProductListItems';
+import {avarageRatting} from '../../common/ratting'
 import { Tabs } from 'antd';
 import RattingModal from '../Modal/RattingModal';
 const { TabPane } = Tabs;
 
-const SingleProduct = ({product}) => {
+const SingleProduct = ({product,productRating,star}) => {
     const{title,description,images,_id}=product;
     return (
         <>
@@ -46,28 +47,31 @@ const SingleProduct = ({product}) => {
             </div>
            <div className='col-md-5'>
               <h1 className='text-center bg-info p-3'>{title}</h1>
+              {product && product.ratings&& product.ratings.length>0?
+                 avarageRatting(product): <div className='text-center'>No Rating Yet</div>
+              }
              <Card
                 hoverable
                 actions={[
                  <>
-                    <ShoppingCartOutlined  className='text-success'/><br/>
-                    <Link>
+                     <ShoppingCartOutlined  className='text-success'/><br/>
+                     <Link>
                          Add to Cart
                      </Link>
                  </>,
                  <>
-                   <HeartOutlined  className='text-info' /> <br/>
-                   <Link>
+                    <HeartOutlined  className='text-info' /> <br/>
+                    <Link>
                        Add To Whislist
-                   </Link>
+                    </Link>
                  </>,
                  <>
                     <RattingModal>
                      <StarRatings
                         isSelectable={true}
-                        rating={2}
+                        rating={star}
                         starRatedColor="blue"
-                        changeRating={(newRating, name)=>console.log(newRating, name)}
+                        changeRating={productRating}
                         numberOfStars={5}
                         name={_id}
                      />

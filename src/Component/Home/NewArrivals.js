@@ -31,7 +31,6 @@ const NewArrivals = () => {
         setLoading(true)
         getProducts('createdAt','desc',currentPage)
         .then((res)=>{
-            console.log(res.data)
             setProducts(res.data)
             setLoading(false);
         })

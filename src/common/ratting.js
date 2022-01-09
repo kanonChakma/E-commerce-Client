@@ -6,13 +6,12 @@ export const avarageRatting=(product)=>{
          let rattingArray=product && product.ratings;
          let total=[];
          let length=rattingArray.length;
+
         rattingArray.map((r)=>total.push(r.star));
         let sumRatting=total.reduce((p,n)=>p+n,0);
-        console.log("sumRatting",sumRatting)
         let highest=length*5;
-        console.log("highest",highest)
         let result=(sumRatting*5)/highest;
-        console.log("result",result)
+
     return(
         <div className="text-center pt-1 pb-3">
           <StarRatings
@@ -23,6 +22,6 @@ export const avarageRatting=(product)=>{
           rating={result}/>{" "}
           ({product.ratings.length})
         </div>
-    )
-  }
-}
+      )
+    }
+ }

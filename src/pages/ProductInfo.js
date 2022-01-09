@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getProduct, starProduct } from '../common/product';
+import { getProduct, getRelated, starProduct } from '../common/product';
+import ProductCard from '../Component/Cards/ProductCard';
 import SingleProduct from '../Component/Cards/SingleProduct';
 
 const ProductInfo = ({match}) => {
     const[product,setProduct]=useState({});
+    const[related,setRelated]=useState([]);
     const{slug}=match.params;
     const[star,setStar]=useState(0)
     const {user}=useSelector((state)=>({...state}))
@@ -18,7 +20,6 @@ const ProductInfo = ({match}) => {
           const matchRatting=product.ratings.find((r)=>(
                 r.postedBy.toString() === user._id.toString()
            ))  
-           console.log(matchRatting);
            matchRatting && setStar(matchRatting.star);
          }
     });
@@ -26,8 +27,9 @@ const ProductInfo = ({match}) => {
     const loadProduct=()=>{
         getProduct(slug)
         .then((res)=>{
-            console.log(res.data);
             setProduct(res.data)
+            //Get Related
+            getRelated(res.data._id).then((res)=>setRelated(res.data))
          })
     }
     //---------------
@@ -35,10 +37,11 @@ const ProductInfo = ({match}) => {
         setStar(newRating);
         starProduct(name,newRating,user.token)
         .then((res)=>{
-             console.log(res.data);
              loadProduct();
         });
     }
+    console.log(product);
+    console.log(related);
     return (
            <div className='container-fluid'>
                <div className='row pt-5'>
@@ -46,7 +49,16 @@ const ProductInfo = ({match}) => {
                </div>
                <div className='row'>
                  <h1  className='text-center col mt-3 mb-3 p-3 bg-info'>Related Product</h1>
-               </div>  
+               </div> 
+               <div className='row'>
+                 {
+                   related.length?related.map((r)=>(
+                        <div className='col-md-4'>
+                           <ProductCard key={r._id} product={r}/>
+                        </div>
+                      )):<div className='col text-center h4 font-wight-bold'>No Such Product </div>
+                 }
+               </div> 
           </div>
       );
  };

@@ -21,7 +21,7 @@ const ProductListItems = ({product}) => {
                 Sub Categiories
                {subs.map((sub)=>(
                      <Link 
-                     to={`sub/${sub.slug}`}
+                     to={`/sub/${sub.slug}`}
                      className="label label-default label-pill pull-xs-right">
                       {sub.name}      
                    </Link>

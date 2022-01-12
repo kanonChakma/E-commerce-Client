@@ -37,7 +37,7 @@ const ProductInfo = ({match}) => {
         setStar(newRating);
         starProduct(name,newRating,user.token)
         .then((res)=>{
-             loadProduct();
+             loadProduct()
         });
     }
     console.log(product);

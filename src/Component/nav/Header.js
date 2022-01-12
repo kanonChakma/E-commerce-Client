@@ -3,6 +3,7 @@ import { LoginOutlined, UserOutlined,HomeOutlined,DashboardOutlined } from '@ant
 import { Menu } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
+import Search from '../Form/Search';
 const  { SubMenu,Item } = Menu;
 
 const Header = () => {
@@ -23,9 +24,9 @@ const Header = () => {
     }
     return (
         <Menu onClick={handleClick} selectedKeys={[currentState]} mode="horizontal">
-        <Item key="home" icon={<HomeOutlined />}>
-          <Link to="/">Home</Link>
-        </Item>
+          <Item key="home" icon={<HomeOutlined />}>
+            <Link to="/">Home</Link>
+          </Item>
 
         {!user && <Item key="register" icon={<HomeOutlined />}  className="float-right">
             <Link to="/register">Register</Link>
@@ -35,12 +36,22 @@ const Header = () => {
              <Link to="/login">Login</Link>
          </Item>}
 
-        {user && <SubMenu key="username" icon={<UserOutlined />} title={user && user.email.split('@')[0]} className="float-right">
+        {user && (
+        <SubMenu 
+        key="username" 
+        icon={<UserOutlined />} 
+        title={user && user.email.split('@')[0]} 
+        className="float-right">
+          
         {user && user.role==='subscriber' &&  <Item icon={<DashboardOutlined />}><Link to="/user/history">Dahboard</Link></Item>}
         {user && user.role==='admin' &&   <Item icon={<DashboardOutlined />}><Link to="/admin/dashboard">Dashboard</Link></Item>}
         <Item icon={<LoginOutlined />} onClick={logout}>Log Out</Item>
          
-         </SubMenu>}
+         </SubMenu>
+         )}
+        <span className='float-right p-1'>
+            <Search/>
+        </span>
       </Menu>
     );
 };

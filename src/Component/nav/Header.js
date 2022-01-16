@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LoginOutlined, UserOutlined,HomeOutlined,DashboardOutlined } from '@ant-design/icons';
+import { LoginOutlined, ShopOutlined,UserOutlined,HomeOutlined,DashboardOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
@@ -26,6 +26,10 @@ const Header = () => {
         <Menu onClick={handleClick} selectedKeys={[currentState]} mode="horizontal">
           <Item key="home" icon={<HomeOutlined />}>
             <Link to="/">Home</Link>
+          </Item>
+
+          <Item key="shop" icon={<ShopOutlined />}>
+            <Link to="/shop">Shop</Link>
           </Item>
 
         {!user && <Item key="register" icon={<HomeOutlined />}  className="float-right">

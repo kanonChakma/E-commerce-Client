@@ -79,7 +79,7 @@ const searched=(keyword)=>(c)=>c.name.toLowerCase().includes(keyword);
                    {/*----------step-2-----------*/}
                     <SearchProductForm keyword={keyword} setKeyword={setKeyword}/>
 
-                    <h2>All categories length is ${Category.length}</h2>
+                    <h2>{Category.length} categories Exist</h2>
                     {Category.filter(searched(keyword)).map((product) => (
                         <div className="alert alert-secondary" key={product._id}>
                             {product.name}

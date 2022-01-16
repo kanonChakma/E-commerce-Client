@@ -28,6 +28,7 @@ import ProductUpdate from './Component/Admin/Product/ProductUpdate';
 import ProductInfo from './pages/ProductInfo';
 import AllCategory from './pages/category/AllCategory';
 import AllSubsCategory from './pages/subCategory/AllSubsCategory'
+import Shop from './pages/Shop';
 const App=()=> {
    const dispatch=useDispatch();
 
@@ -36,7 +37,6 @@ const App=()=> {
      const unsubscribe=auth.onAuthStateChanged( async (user)=>{
          if(user){
               const  idTokenResult=await user.getIdTokenResult();
-              console.log(idTokenResult.token)
               currentUser(idTokenResult.token)
               .then((res)=>{
                 dispatch({
@@ -83,6 +83,7 @@ const App=()=> {
       <Route exact path="/category/:slug" component={AllCategory}/>
 
       <Route exact path="/sub/:slug" component={AllSubsCategory}/>
+      <Route exact path="/shop" component={Shop}/>
      </Switch>
    </>
   );

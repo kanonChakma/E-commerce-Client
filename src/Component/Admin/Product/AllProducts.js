@@ -42,7 +42,6 @@ const AllProducts = () => {
     }  
     return(
         <div className="container-fluid">
-            <h1>HEloo this is</h1>
         <div className="row">
               <div className="col-md-2">
                   <AdminNav/>

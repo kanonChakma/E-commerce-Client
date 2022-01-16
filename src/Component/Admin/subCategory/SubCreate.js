@@ -92,7 +92,7 @@ const handleSubmit=(e)=>{
 
                   <SearchProductForm keyword={keyword} setKeyword={setKeyword}/> 
                  
-                  <h2>All subCategories length is {subCategory.length}</h2>
+                  <h2>{subCategory.length} subCategories Exist</h2>
                    {
                      subCategory.filter(Search(keyword)).map((subs)=>(
                        <div className="alert alert-secondary" key={subs._id}>

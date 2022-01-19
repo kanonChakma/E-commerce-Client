@@ -21,9 +21,10 @@ const Search = () => {
     }
     return (
        <form className='form-inline my-2 my-lg-0' 
-       onSubmit={handleSubmit}>
+         onSubmit={handleSubmit}>
              <input
              onChange={handleChange} 
+             value={text}
              type='search' 
              clasName='form-control mr-sm-2' 
              placeholder='Search'/>

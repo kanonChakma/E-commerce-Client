@@ -8,6 +8,7 @@ import Star from '../Component/Form/Star'
 import { Menu } from 'antd';
 import { Slider, Switch } from 'antd';
 import { DollarOutlined,DownSquareOutlined,StarOutlined} from '@ant-design/icons';
+import { getSubCategories } from '../common/subCategory';
 const { SubMenu } = Menu;
 
 const Shop = () => {
@@ -17,6 +18,8 @@ const Shop = () => {
     const[ok,setOk]=useState(false);
     const[category,setCategory]=useState([])
     const[categoryIds,setCategoryIds]=useState([])
+    const[subs,setSubs]=useState([])
+    const[sub,setSub]=useState('')
     const[star,setStar]=useState('')
     const{search}=useSelector((state)=>({...state}))
     const{text}=search;
@@ -28,6 +31,8 @@ const Shop = () => {
         loadAllProduct()
         getCategories()
         .then((res)=>setCategory(res.data))
+        getSubCategories()
+        .then((res)=>{setSubs(res.data)})
     },[])
     const loadAllProduct=()=>{
         setLoading(true)
@@ -39,7 +44,7 @@ const Shop = () => {
         });
     };
 
- //...load Product by search-bar
+ //...load Product by search-bar...
     useEffect(()=>{
       const delayed=setTimeout(()=>{
         setCategoryIds([])
@@ -54,7 +59,7 @@ const Shop = () => {
             setProduct(res.data)
         })
     }
- //...Load Product By Product Price.. 
+ //...Load Product By Product Price... 
     useEffect(()=>{
         fetchProducts({price})
     },[ok])  
@@ -124,14 +129,37 @@ const Shop = () => {
      <Star numberOfStars={2} starClick={handleStar}/>
      <Star numberOfStars={1} starClick={handleStar}/>
    </div>
-   
+ 
+ const handleSub=(sub)=>{
+    dispatch({
+        type: "SEARCH_QUERY",
+        payload:{text:""},
+     });
+     setCategoryIds([]);
+     setPrice([0,0]);
+     setStar('')
+     setSub(sub);
+
+     fetchProducts({sub})
+ }
+ const showSubs=()=>
+     subs.map((p)=>(
+         <div
+          key={p._id}
+          className='p-1 m-1 badge badge-primary'
+          onClick={()=>handleSub(p)}
+          style={{cursor:"pointer"}}
+         >
+          {p.name}
+         </div>
+     ))
     return (
         <div className='container-fluid'>
             <div className='row'>
               <div className='col-md-3'>
                 <h4 className=' pt-2 font-wight-bold'>Search/Filters</h4>
                 <hr/>
-                <Menu mode="inline" defaultOpenKeys={["sub1","sub2","sub3"]} >
+                <Menu mode="inline" defaultOpenKeys={["sub1","sub2","sub3","sub4"]} >
                     <SubMenu 
                     key="sub1" 
                    //icon={<DollarOutlined />} 
@@ -150,9 +178,9 @@ const Shop = () => {
                     />
                     </SubMenu>
                     <SubMenu 
-                        key="sub3" 
+                        key="sub2" 
                         title={<span className='h6'>
-                            <StarOutlined/>
+                            <DownSquareOutlined/>
                             Category
                         </span>}
                         >
@@ -161,7 +189,7 @@ const Shop = () => {
                         </div>
                     </SubMenu>
                     <SubMenu 
-                        key="sub2" 
+                        key="sub3" 
                         title={<span className='h6'>
                             <StarOutlined/>
                             Rating
@@ -169,6 +197,17 @@ const Shop = () => {
                         >
                         <div>
                             {showStars()}
+                        </div>
+                    </SubMenu>
+                    <SubMenu 
+                        key="sub4" 
+                        title={<span className='h6'>
+                            <DownSquareOutlined/>
+                            SubCategory
+                        </span>}
+                        >
+                        <div>
+                            {showSubs()}
                         </div>
                     </SubMenu>
                 </Menu>

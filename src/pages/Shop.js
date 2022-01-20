@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import {getProductByCount, getProductByFilter} from '../common/product';
 import {getCategories} from '../common/category';
 import ProductCard from '../Component/Cards/ProductCard';
-import { Checkbox } from 'antd';
+import { Checkbox,Radio,Slider } from 'antd';
 import Star from '../Component/Form/Star'
 import { Menu } from 'antd';
-import { Slider, Switch } from 'antd';
 import { DollarOutlined,DownSquareOutlined,StarOutlined} from '@ant-design/icons';
 import { getSubCategories } from '../common/subCategory';
 const { SubMenu } = Menu;
@@ -21,12 +20,19 @@ const Shop = () => {
     const[subs,setSubs]=useState([])
     const[sub,setSub]=useState('')
     const[star,setStar]=useState('')
+    const[brands,setBrands]=useState(["Google","Apple","Samsung","Microsoft","Lenovo","Asus"])
+    const[brand,setBrand]=useState('')
+    
+    const[colors,setColors]=useState(["Black","Brown","Silver","White","Blue"])
+    const[color,setColor]=useState('') 
+    
+    const[shipping,setShipping]=useState("")
     const{search}=useSelector((state)=>({...state}))
     const{text}=search;
     
     const dispatch=useDispatch();
 
-//..Load All Product First..    
+//...Load All Product First...    
     useEffect(()=>{
         loadAllProduct()
         getCategories()
@@ -38,7 +44,6 @@ const Shop = () => {
         setLoading(true)
         getProductByCount(10)
         .then((res)=>{
-            console.log(res.data);
             setProduct(res.data)
             setLoading(false)
         });
@@ -69,7 +74,9 @@ const Shop = () => {
             payload:{text:""},
          });
          setCategoryIds([]);
-         setStar('')    
+         setStar('')
+         setBrand('')
+         setShipping('')    
          setPrice(value)
          setTimeout(()=>{
            setOk(!ok)
@@ -83,10 +90,13 @@ const Shop = () => {
      }) 
      setPrice([0,0]); 
      setStar('')
+     setColor('')
+     setBrand('')
+     setShipping('')
     let chekedId=e.target.value;
     let existId=[...categoryIds];
 
-    let foundIds=existId.indexOf(chekedId)
+   let foundIds=existId.indexOf(chekedId)
    if(foundIds === -1){
        existId.push(chekedId);
    }else{
@@ -109,7 +119,7 @@ const Shop = () => {
             </Checkbox>
         </div>
         ))    
- //...Load Product By rating
+ //...Load Product By rating...
  const handleStar=(num)=>{
     dispatch({
         type: "SEARCH_QUERY",
@@ -117,6 +127,8 @@ const Shop = () => {
      });
      setCategoryIds([]);
      setPrice([0,0]);
+     setColor('')
+     setShipping('')
      setStar(num);
 
      fetchProducts({star:num})
@@ -129,7 +141,7 @@ const Shop = () => {
      <Star numberOfStars={2} starClick={handleStar}/>
      <Star numberOfStars={1} starClick={handleStar}/>
    </div>
- 
+ //--load product by subs
  const handleSub=(sub)=>{
     dispatch({
         type: "SEARCH_QUERY",
@@ -138,6 +150,9 @@ const Shop = () => {
      setCategoryIds([]);
      setPrice([0,0]);
      setStar('')
+     setColor('')
+     setBrand('')
+     setShipping('')
      setSub(sub);
 
      fetchProducts({sub})
@@ -153,13 +168,100 @@ const Shop = () => {
           {p.name}
          </div>
      ))
+ //..Load Product by brand..
+ const handleBrand=(e)=>{
+    dispatch({
+        type: "SEARCH_QUERY",
+        payload:{text:""},
+     });
+     setCategoryIds([]);
+     setPrice([0,0]);
+     setStar('')
+     setSub('');
+     setColor('')
+     setShipping('')
+     setBrand(e.target.value)
+
+     fetchProducts({brand:e.target.value})
+ }
+ const showBrand=()=>
+    brands.map((p)=>(
+        <div
+           key={p}
+           className='pl-4 pr-4'>
+          <Radio name={p} checked={p===brand} onChange={handleBrand} value={p}>
+              {p}
+          </Radio>
+        </div>
+    ))
+ //..Load Product By Color..
+ const handleColor=(e)=>{
+    dispatch({
+        type: "SEARCH_QUERY",
+        payload:{text:""},
+     });
+     setCategoryIds([]);
+     setPrice([0,0]);
+     setStar('')
+     setSub('');
+     setBrand('')
+     setShipping('')
+     setColor(e.target.value)
+
+     fetchProducts({color:e.target.value})
+ }
+ const showColor=()=>
+ colors.map((p)=>(
+    <div
+       key={p}
+       className='pl-4 pr-4'>
+      <Radio name={p} checked={p===color} onChange={handleColor} value={p}>
+          {p}
+      </Radio>
+    </div>
+))
+//..Load Products By Shipping..
+const handleShipping=(e)=>{
+    dispatch({
+        type: "SEARCH_QUERY",
+        payload:{text:""},
+     });
+     setCategoryIds([]);
+     setPrice([0,0]);
+     setStar('')
+     setSub('');
+     setBrand('')
+     setShipping(e.target.value)
+
+     fetchProducts({shipping:e.target.value})
+}
+const showShipping=()=>
+    <>
+    <Checkbox
+     className='pl-4 pr-4 pb-2'
+     value="Yes" 
+     onChange={handleShipping}
+     checked={shipping==="Yes"}
+     >
+       Yes
+   </Checkbox>
+   <Checkbox
+     className='pl-4 pr-4 pb-2'
+     value="No" 
+     onChange={handleShipping}
+     checked={shipping==="No"}
+     >
+       No
+   </Checkbox>
+   </>
+
     return (
         <div className='container-fluid'>
             <div className='row'>
               <div className='col-md-3'>
                 <h4 className=' pt-2 font-wight-bold'>Search/Filters</h4>
                 <hr/>
-                <Menu mode="inline" defaultOpenKeys={["sub1","sub2","sub3","sub4"]} >
+                <Menu mode="inline" defaultOpenKeys={["sub1","sub2","sub3","sub4","sub5","sub6","sub7"]}>
                     <SubMenu 
                     key="sub1" 
                    //icon={<DollarOutlined />} 
@@ -208,6 +310,39 @@ const Shop = () => {
                         >
                         <div>
                             {showSubs()}
+                        </div>
+                    </SubMenu>
+                    <SubMenu 
+                        key="sub5" 
+                        title={<span className='h6'>
+                            <DownSquareOutlined/>
+                            Brands
+                        </span>}
+                        >
+                        <div>
+                            {showBrand()}
+                        </div>
+                    </SubMenu>
+                    <SubMenu 
+                        key="sub6" 
+                        title={<span className='h6'>
+                            <DownSquareOutlined/>
+                            Colors
+                        </span>}
+                        >
+                        <div>
+                            {showColor()}
+                        </div>
+                    </SubMenu>
+                    <SubMenu 
+                        key="sub7" 
+                        title={<span className='h6'>
+                            <DownSquareOutlined/>
+                            Shipping
+                        </span>}
+                        >
+                        <div>
+                            {showShipping()}
                         </div>
                     </SubMenu>
                 </Menu>

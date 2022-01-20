@@ -1,6 +1,8 @@
 import React from 'react';
-
+import ModalImage from "react-modal-image";
+import laptop from '../../image/laptop.jpg'
 const CartItem = ({cart}) => {
+    console.log(cart);
     return (
         <table className='table table-bordered'>
             <thead className='thead-light'>
@@ -19,7 +21,20 @@ const CartItem = ({cart}) => {
                {
                  cart.map((p)=>(
                     <tr className="table-light"  key={p._id}>
-                    <td>image</td>
+                    <td>
+                        <div style={{width:"100px",height:"auto"}}>
+                         {
+                             p.images.length?  <ModalImage
+                             small={p.images[0].url}
+                             large={p.images.length>1?p.images[1].url:p.images[0].url}
+                             />:
+                             <ModalImage
+                             small={laptop}
+                             large={laptop}
+                             />
+                         }
+                       </div>
+                    </td>
                     <td>{p.title}</td>
                     <td>{p.price}</td>
                     <td>{p.brand}</td>

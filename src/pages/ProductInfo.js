@@ -40,8 +40,6 @@ const ProductInfo = ({match}) => {
              loadProduct()
         });
     }
-    console.log(product);
-    console.log(related);
     return (
            <div className='container-fluid'>
                <div className='row pt-5'>
@@ -62,5 +60,4 @@ const ProductInfo = ({match}) => {
           </div>
       );
  };
-
 export default ProductInfo;

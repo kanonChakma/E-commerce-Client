@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { LoginOutlined, ShopOutlined,UserOutlined,HomeOutlined,DashboardOutlined } from '@ant-design/icons';
-import { Menu } from 'antd';
+import { LoginOutlined,ShoppingCartOutlined,ShopOutlined,UserOutlined,HomeOutlined,DashboardOutlined } from '@ant-design/icons';
+import { Menu,Badge } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
 import Search from '../Form/Search';
@@ -10,7 +10,7 @@ const Header = () => {
     const [currentState,setCurrentState]=useState('home');
     const dispatch =useDispatch();
     const history = useHistory();
-    const {user}=useSelector((state) =>({...state}));
+    const {user,cart}=useSelector((state) =>({...state}));
      
     const handleClick=(e)=>{
        setCurrentState(e.key);
@@ -32,6 +32,14 @@ const Header = () => {
             <Link to="/shop">Shop</Link>
           </Item>
 
+          <Item key="cart" icon={<ShoppingCartOutlined />}>
+            <Link to="/cart">
+              <Badge count={cart.length} offset={[9,0]}>
+                  Cart
+              </Badge>
+            </Link>
+          </Item>
+
         {!user && <Item key="register" icon={<HomeOutlined />}  className="float-right">
             <Link to="/register">Register</Link>
         </Item>}
@@ -42,10 +50,10 @@ const Header = () => {
 
         {user && (
         <SubMenu 
-        key="username" 
-        icon={<UserOutlined />} 
-        title={user && user.email.split('@')[0]} 
-        className="float-right">
+          key="username" 
+          icon={<UserOutlined />} 
+          title={user && user.email.split('@')[0]} 
+          className="float-right">
           
         {user && user.role==='subscriber' &&  <Item icon={<DashboardOutlined />}><Link to="/user/history">Dahboard</Link></Item>}
         {user && user.role==='admin' &&   <Item icon={<DashboardOutlined />}><Link to="/admin/dashboard">Dashboard</Link></Item>}

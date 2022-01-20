@@ -29,6 +29,7 @@ import ProductInfo from './pages/ProductInfo';
 import AllCategory from './pages/category/AllCategory';
 import AllSubsCategory from './pages/subCategory/AllSubsCategory'
 import Shop from './pages/Shop';
+import Cart from '../src/Component/Cart/Cart';
 const App=()=> {
    const dispatch=useDispatch();
 
@@ -84,6 +85,7 @@ const App=()=> {
 
       <Route exact path="/sub/:slug" component={AllSubsCategory}/>
       <Route exact path="/shop" component={Shop}/>
+      <Route exact path="/cart" component={Cart}/>
      </Switch>
    </>
   );

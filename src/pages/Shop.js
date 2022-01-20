@@ -194,7 +194,7 @@ const Shop = () => {
           </Radio>
         </div>
     ))
- //..Load Product By Color..
+ //...Load Product By Color...
  const handleColor=(e)=>{
     dispatch({
         type: "SEARCH_QUERY",
@@ -220,7 +220,7 @@ const Shop = () => {
       </Radio>
     </div>
 ))
-//..Load Products By Shipping..
+//...Load Products By Shipping...
 const handleShipping=(e)=>{
     dispatch({
         type: "SEARCH_QUERY",

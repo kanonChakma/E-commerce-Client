@@ -30,6 +30,7 @@ import AllCategory from './pages/category/AllCategory';
 import AllSubsCategory from './pages/subCategory/AllSubsCategory'
 import Shop from './pages/Shop';
 import Cart from '../src/Component/Cart/Cart';
+
 const App=()=> {
    const dispatch=useDispatch();
 
@@ -70,7 +71,7 @@ const App=()=> {
       <UserRoute exact path="/user/wishlist"     component={WishList}/>
       <AdminRoute exact path="/admin/dashboard"  component={AdminDashboard}/>
      
-      <AdminRoute exact path="/admin/category"        component={CreateProduct}/>
+      <AdminRoute exact path="/admin/category"         component={CreateProduct}/>
       <AdminRoute exact path="/admin/category/:slug"   component={UpdateProduct}/>
      
       <AdminRoute exact path="/admin/sub"        component={SubCreate}/>

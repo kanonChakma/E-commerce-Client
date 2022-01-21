@@ -1,32 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ModalImage from "react-modal-image";
+import { useDispatch } from 'react-redux';
 import laptop from '../../image/laptop.jpg'
-const CartItem = ({cart}) => {
-    console.log(cart);
+
+const CartItem = ({product}) => {  
+    let colors=["Black","Brown","Silver","White","Blue"];
+    const dispatch=useDispatch();
+
+    const handleSelect=(e)=>{
+    
+        let cart=[];
+
+        if(typeof window !== "undefined"){
+          if(localStorage.getItem("cart")){
+             cart=JSON.parse(localStorage.getItem("cart"))
+           }
+        cart.map((p,i)=>{
+          if(p._id===product._id){
+               cart[i].color=e.target.value;
+            }
+          })
+          localStorage.setItem("cart",JSON.stringify(cart));
+          dispatch({
+              type:"ADD_TO_CART",
+              payload:cart
+           })
+         }
+    }
     return (
-        <table className='table table-bordered'>
-            <thead className='thead-light'>
-                <tr>
-                <th scope="col">Image</th>
-                <th scope="col">Title</th>
-                <th scope="col">Price</th>
-                <th scope="col">Brand</th>
-                <th scope="col">Color</th>
-                <th scope="col">Count</th>
-                <th scope="col">Shipping</th>
-                <th scope="col">Remove</th>
-                </tr>
-            </thead>
             <tbody>
-               {
-                 cart.map((p)=>(
-                    <tr className="table-light"  key={p._id}>
+                 <tr className="table-light">
                     <td>
                         <div style={{width:"100px",height:"auto"}}>
                          {
-                             p.images.length?  <ModalImage
-                             small={p.images[0].url}
-                             large={p.images.length>1?p.images[1].url:p.images[0].url}
+                             product.images.length?  <ModalImage
+                             small={product.images[0].url}
+                             large={product.images.length>1?product.images[1].url:product.images[0].url}
                              />:
                              <ModalImage
                              small={laptop}
@@ -35,18 +44,29 @@ const CartItem = ({cart}) => {
                          }
                        </div>
                     </td>
-                    <td>{p.title}</td>
-                    <td>{p.price}</td>
-                    <td>{p.brand}</td>
-                    <td>{p.color}</td>
-                    <td>{p.count}</td>
-                    <td>{p.shipping}</td>
-                    <td>remove</td>
+                    <td>{product.title}</td>
+                    <td>{product.price}</td>
+                    <td>{product.brand}</td>
+                    <td>
+                        <select 
+                        className='form-control'
+                        name='color'
+                        onChange={handleSelect}>
+                            {
+                             product.color?<option>{product.color}</option>:<option>select</option>
+                            }
+                            {
+                               colors.filter((c)=>c!==product.color).map((p)=>(
+                                 <option  value={p} key={p._id}>{p}</option>
+                              ))
+                            }
+                        </select>
+                     </td>
+                     <td>{product.count}</td>
+                     <td>{product.shipping}</td>
+                     <td>remove</td>
                 </tr>
-                 ))  
-               }
              </tbody>
-        </table>
    
     );
 };

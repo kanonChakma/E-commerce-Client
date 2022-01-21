@@ -4,6 +4,7 @@ import CartItem from './CartItem';
 
 const Cart = () => {
   const {user,cart}=useSelector((state)=>({...state}))
+  
   const getTotal=()=>{
       return cart.reduce((f,s)=>{
          return f+s.count*s.price;

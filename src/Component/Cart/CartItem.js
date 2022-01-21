@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ModalImage from "react-modal-image";
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import laptop from '../../image/laptop.jpg'
 
 const CartItem = ({product}) => {  
@@ -26,6 +27,32 @@ const CartItem = ({product}) => {
               payload:cart
            })
          }
+    }
+    console.log(product.quantity);
+    
+    const handleChangeCount=(e)=>{
+
+        let count=e.target.value<1?1:e.target.value;
+        if(count>product.quantity){
+            toast.error("Product Quantity exist")
+            return;
+        }
+        let cart=[];
+        if(typeof window !== "undefined"){
+            if(localStorage.getItem("cart")){
+                cart=JSON.parse(localStorage.getItem("cart"))
+            }
+            cart.map((p,i)=>{
+                if(p._id === product._id){
+                 cart[i].count=count;
+                }
+            })
+            localStorage.setItem("cart",JSON.stringify(cart));
+            dispatch({
+                type:"ADD_TO_CART",
+                payload:cart
+            })
+        }
     }
     return (
             <tbody>
@@ -62,12 +89,18 @@ const CartItem = ({product}) => {
                             }
                         </select>
                      </td>
-                     <td>{product.count}</td>
+                     <td className='text-center'>
+                          <input 
+                             type='number' 
+                             className='form-control' 
+                             value={product.count}
+                             onChange={handleChangeCount}
+                          />
+                         </td>
                      <td>{product.shipping}</td>
                      <td>remove</td>
                 </tr>
              </tbody>
-   
     );
 };
 

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import {Switch,Router, Route} from 'react-router-dom';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SideDrawer from './Component/Drawer/SideDrawer';
 import Header from './Component/nav/Header';
 import CompleteRegistration from './pages/auth/CompleteRegistration';
 import Login from './pages/auth/Login';
@@ -31,6 +32,7 @@ import AllSubsCategory from './pages/subCategory/AllSubsCategory'
 import Shop from './pages/Shop';
 import Cart from '../src/Component/Cart/Cart';
 
+
 const App=()=> {
    const dispatch=useDispatch();
 
@@ -59,6 +61,7 @@ const App=()=> {
   return (
   <>
    <Header/>
+   <SideDrawer/>
    <ToastContainer/>
    <Switch>
       <Route exact path="/" component={Home}/>
@@ -87,6 +90,7 @@ const App=()=> {
       <Route exact path="/sub/:slug" component={AllSubsCategory}/>
       <Route exact path="/shop" component={Shop}/>
       <Route exact path="/cart" component={Cart}/>
+     
      </Switch>
    </>
   );

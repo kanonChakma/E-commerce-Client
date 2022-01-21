@@ -3,6 +3,7 @@ import ModalImage from "react-modal-image";
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import laptop from '../../image/laptop.jpg'
+import { CheckCircleOutlined,CloseCircleOutlined ,CloseOutlined} from '@ant-design/icons';
 
 const CartItem = ({product}) => {  
     let colors=["Black","Brown","Silver","White","Blue"];
@@ -19,7 +20,7 @@ const CartItem = ({product}) => {
         cart.map((p,i)=>{
           if(p._id===product._id){
                cart[i].color=e.target.value;
-            }
+              }
           })
           localStorage.setItem("cart",JSON.stringify(cart));
           dispatch({
@@ -28,8 +29,7 @@ const CartItem = ({product}) => {
            })
          }
     }
-    console.log(product.quantity);
-    
+
     const handleChangeCount=(e)=>{
 
         let count=e.target.value<1?1:e.target.value;
@@ -54,6 +54,24 @@ const CartItem = ({product}) => {
             })
         }
     }
+   const handleRemove=()=>{
+    let cart=[];
+    if(typeof window !== "undefined"){
+        if(localStorage.getItem("cart")){
+            cart=JSON.parse(localStorage.getItem("cart"))
+        }
+        cart.map((p,i)=>{
+            if(p._id === product._id){
+             cart.splice(i,1);
+            }
+        })
+        localStorage.setItem("cart",JSON.stringify(cart));
+        dispatch({
+            type:"ADD_TO_CART",
+            payload:cart
+        })
+      }
+   } 
     return (
             <tbody>
                  <tr className="table-light">
@@ -92,13 +110,20 @@ const CartItem = ({product}) => {
                      <td className='text-center'>
                           <input 
                              type='number' 
-                             className='form-control' 
+                             className='form-control text-center Width' 
                              value={product.count}
                              onChange={handleChangeCount}
                           />
                          </td>
-                     <td>{product.shipping}</td>
-                     <td>remove</td>
+                     <td className='text-center'>{
+                         product.shipping=== "Yes"?
+                         <CheckCircleOutlined className='text-success Pointer' />:
+                         <CloseCircleOutlined className='text-danger Pointer'/>
+                        }
+                     </td>
+                     <td className='text-center'>
+                         <CloseOutlined className='text-danger Pointer' onClick={handleRemove}/>
+                     </td>
                 </tr>
              </tbody>
     );

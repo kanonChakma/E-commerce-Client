@@ -2,7 +2,12 @@
   height: 450px;
   object-fit: cover;
 }
-
+.Width{
+  width: 100px;
+}
+.Pointer{
+  cursor: pointer;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

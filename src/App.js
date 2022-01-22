@@ -31,6 +31,7 @@ import AllCategory from './pages/category/AllCategory';
 import AllSubsCategory from './pages/subCategory/AllSubsCategory'
 import Shop from './pages/Shop';
 import Cart from '../src/Component/Cart/Cart';
+import Checkout from './Component/Cart/Checkout';
 
 
 const App=()=> {
@@ -90,7 +91,8 @@ const App=()=> {
       <Route exact path="/sub/:slug" component={AllSubsCategory}/>
       <Route exact path="/shop" component={Shop}/>
       <Route exact path="/cart" component={Cart}/>
-     
+      
+      <UserRoute exact path="/checkout"  component={Checkout}/>
      </Switch>
    </>
   );

@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { getCart, removeCart } from '../../common/cart';
+import { getCart, removeCart, saveAddress } from '../../common/cart';
 import OrderSummary from './OrderSummary';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const Checkout = () => {
     const{user}=useSelector((state)=>({...state}))
     const[cart,setCart]=useState([]);
     const dispatch=useDispatch();
+    const [address, setAdress] = useState('');
+    const[saveAdd,setSaveAdd]=useState(false);
+
 
     useEffect(()=>{
        getCart(user.token)
@@ -15,8 +20,15 @@ const Checkout = () => {
        .catch((err)=>console.log(err));
     },[])
     const handleSaveAdress=()=>{
-
+      saveAddress(user.token,address)
+      .then((res)=>{
+          if(res.data.ok) toast.success("address saved")
+          setAdress('') 
+          setSaveAdd(true)
+         })
+      .catch((err)=>toast.error("error are exis"));
     }
+    
     const handleEmpty=()=>{
         if(typeof window!== "undefined"){
            localStorage.removeItem("cart") 
@@ -27,7 +39,6 @@ const Checkout = () => {
         })
         removeCart(user.token)
         .then((res)=>{
-          console.log(res.data);
           setCart([])
           toast.success("Cart is deleted.Continue Shopping...")
         })
@@ -37,7 +48,8 @@ const Checkout = () => {
             <div className='row'>
                 <div className='col-md-6'>
                     <h4>Delivary Adress</h4>   
-                     <button className='btn btn-primary mt-2' onClick={handleSaveAdress}>
+                     <ReactQuill theme="snow" value={address} onChange={setAdress}/>
+                     <button disabled={address.length==0} className='btn btn-primary mt-2' onClick={handleSaveAdress}>
                          Save
                      </button> 
                 </div>
@@ -47,7 +59,7 @@ const Checkout = () => {
                    
                   <div className='row'>
                      <div className='col-md-6'>
-                     <button className='btn btn-primary'>
+                     <button disabled={!saveAdd || !cart.length} className='btn btn-primary'>
                         PLACE ORDER
                      </button>
                      </div>

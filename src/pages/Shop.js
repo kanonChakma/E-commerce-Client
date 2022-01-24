@@ -54,6 +54,9 @@ const Shop = () => {
       const delayed=setTimeout(()=>{
         setCategoryIds([])
         fetchProducts({query:text})
+        if(!text){
+            loadAllProduct()
+        }
       },300)
       return ()=>clearTimeout(delayed) 
     },[text])
@@ -109,8 +112,8 @@ const Shop = () => {
         category.map((p)=>(
         <div key={p._id}>
             <Checkbox
-               checked={categoryIds.includes(p._id)}
-               name='category' 
+                checked={categoryIds.includes(p._id)}
+                name='category' 
                 className='pl-4 pr-4 pb-2'
                 value={p._id} 
                 onChange={handleCategory}

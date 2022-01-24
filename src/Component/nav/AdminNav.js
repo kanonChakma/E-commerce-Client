@@ -5,6 +5,7 @@ const AdminNav=()=>{
     return (
         <nav>
             <ul className="nav  flex-column">   
+            
                 <li className="nav-item">
                   <Link to="/admin/dashboard" className="nav-link">Dashboard</Link>
                 </li>
@@ -16,6 +17,7 @@ const AdminNav=()=>{
                 <li className="nav-item">
                   <Link to="/admin/products" className="nav-link">Products</Link>
                 </li>
+
                 <li className="nav-item">
                   <Link to="/admin/category" className="nav-link">Category</Link>
                 </li>
@@ -31,6 +33,7 @@ const AdminNav=()=>{
                 <li className="nav-item">
                   <Link to="/user/password" className="nav-link">Password</Link>
                 </li>
+
             </ul>
         </nav>
     )

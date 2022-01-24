@@ -32,6 +32,7 @@ import AllSubsCategory from './pages/subCategory/AllSubsCategory'
 import Shop from './pages/Shop';
 import Cart from '../src/Component/Cart/Cart';
 import Checkout from './Component/Cart/Checkout';
+import CreateCoupon from './Component/Admin/Coupon/CreateCoupon';
 
 
 const App=()=> {
@@ -84,6 +85,8 @@ const App=()=> {
       <AdminRoute exact path="/admin/product"  component={ProductCreate}/>
       <AdminRoute exact path="/admin/products" component={AllProducts}/>
       <AdminRoute exact path="/admin/product/:slug" component={ProductUpdate}/>
+    
+      <AdminRoute exact path="/admin/coupon"  component={CreateCoupon}/>
 
       <Route exact path="/product/:slug"  component={ProductInfo}/>
       <Route exact path="/category/:slug" component={AllCategory}/>

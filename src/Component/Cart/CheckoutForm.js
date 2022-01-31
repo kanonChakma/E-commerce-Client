@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import {loadStripe} from '@stripe/stripe-js';
 import {CreatePaymentIntents} from "../../common/stripe";
+import laptop from "../../image/laptop.jpg"
 import {
   CardElement,
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js';
+import { Card, Avatar } from 'antd';
+import { DollarOutlined,CheckOutlined } from '@ant-design/icons'
 import {Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 const CheckoutForm = () => {
   
   const dispatch=useDispatch();
-  const{user}=useSelector((state)=>({...state}));
+  const{user,coupon}=useSelector((state)=>({...state}));
 
   const[succeeded,setSucceeded]=useState(false);
   const[error,setError]=useState(null);
@@ -20,13 +23,19 @@ const CheckoutForm = () => {
   const[disabled,setDisabled]=useState(true);
   const[clientSecret,setClientSecret]=useState("");
 
+  const[cartTotal,setCartTotal]=useState(0);
+  const[totalAfterDiscount,setTotalAfterDiscount]=useState(0);
+  const[totalPayable,setTotalPayable]=useState(0);
+
   const stripe = useStripe();
   const elements = useElements();
  
   useEffect(()=>{
-    CreatePaymentIntents(user.token)
+    CreatePaymentIntents(user.token,coupon)
     .then((res)=>{
-        console.log(res.data.clientSecret);
+        setCartTotal(res.data.cartTotal);
+        setTotalAfterDiscount(res.data.totalAfterDiscount);
+        setTotalPayable(res.data.paymentTotal);
         setClientSecret(res.data.clientSecret);
     })
   },[]) 
@@ -47,7 +56,6 @@ const CheckoutForm = () => {
       setError(`payment failed ${payload.error}`)
       setProcessing(false);
     }else{
-      console.log(payload)
       setProcessing(false);
       setSucceeded(true);
       setError(null);
@@ -76,12 +84,38 @@ const CheckoutForm = () => {
   }
   return (
     <>
-    <p className={succeeded?"result-message":"result-message hidden"}>
-       Payment Successful.{" "}
-       <Link to="user/history">
-         See it in your purchase
-       </Link>
-    </p>
+     {!succeeded && <div>
+        {coupon && totalAfterDiscount !== undefined?(
+         <p className='alert alert-success'>{`Total after discount ${totalAfterDiscount}`}</p>
+        ):(
+        <p className='alert alert-danger'>No coupon applied</p>
+        )}
+      </div>}
+      <Card
+      cover={
+        <img
+          src={laptop}
+          style={{
+            height:"200px",
+            objectFit:"cover",
+            marginBottom:"-50px"
+          }}
+        />
+      }
+      actions={[
+        <>
+         <DollarOutlined className='text-info'/><br/>
+         Total: ${cartTotal}
+        </>,
+        <>
+         <CheckOutlined className='text-info'/>
+         <br/>
+        Total Payable: $
+         {(totalPayable/100).toFixed(2)} 
+        </>,
+      ]}
+    >
+    </Card>
     <form className='stripe-form' id='payment-form' onSubmit={handleSubmit}>
       <CardElement 
       id='card-element'
@@ -94,6 +128,12 @@ const CheckoutForm = () => {
          </span>
       </button>
       {error?<div className='card-error' role="alert">{error}</div>:""}
+      <p className={succeeded?"result-message":"result-message hidden"}>
+       Payment Successful.{" "}
+       <Link to="user/history">
+         See it in your purchase
+       </Link>
+      </p>
      </form>
     </>
   );

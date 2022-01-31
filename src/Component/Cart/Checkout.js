@@ -7,13 +7,15 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { applyCoupon } from '../../common/coupon';
 
-const Checkout = () => {
+const Checkout = ({history}) => {
     const{user}=useSelector((state)=>({...state}))
     const[cart,setCart]=useState([]);
     const dispatch=useDispatch();
     const [address, setAdress] = useState('');
     const[saveAdd,setSaveAdd]=useState(false);
-    const[coupon,setcoupon]=useState('');
+    const[coupon,setCoupon]=useState('');
+    const[totalPrice,setTotalPrice]=useState(0);
+    const[error,setError]=useState("");
 
     useEffect(()=>{
        getCart(user.token)
@@ -41,13 +43,28 @@ const Checkout = () => {
         removeCart(user.token)
         .then((res)=>{
           setCart([])
+          setTotalPrice(0)
           toast.success("Cart is deleted.Continue Shopping...")
         })
     }
     const handleApply=()=>{
        applyCoupon(coupon,user.token)
        .then((res)=>{
-           console.log(res.data);
+          if(res.data){
+            setTotalPrice(res.data);
+            setCoupon("")
+            dispatch({
+                type:"APPLY_COUPON",
+                payload:true
+            })
+          }
+          if(res.data.err){
+              setError(res.data.err)
+              dispatch({
+                type:"APPLY_COUPON",
+                payload:false
+            })
+          }
        })
        .catch((err)=>{
            console.log(err);
@@ -65,22 +82,26 @@ const Checkout = () => {
                      <div>
                          <h4>Aplly Coupon</h4> 
                          <input 
-                            onChange={(e) => setcoupon(e.target.value)} 
+                            onChange={(e) => {
+                                setCoupon(e.target.value)
+                                setError("")
+                              }} 
                             className="form-control"
                             value={coupon}            
                          />
                          <button onClick={handleApply} className='btn btn-primary'>Apply</button>
+                         {error && <p className='bg-danger p-2 display-5'>{error}</p>}
                      </div>
                 </div>
                 <div className='col-md-6'>
                     <h4>Order Summary</h4>
                     <OrderSummary cart={cart}/>
-                   
-                  <div className='row'>
+                      {totalPrice>0 && <h4 className='bg-success p-2'>Total After Discount ${totalPrice}</h4>}
+                   <div className='row'>
                      <div className='col-md-6'>
-                     <button disabled={!saveAdd || !cart.length} className='btn btn-primary'>
-                        PLACE ORDER
-                     </button>
+                        <button onClick={()=>history.push("/payment")} disabled={!saveAdd || !cart.length} className='btn btn-primary'>
+                            PLACE ORDER
+                        </button>
                      </div>
                      <div className='col-md-6'>
                         <button disabled={!cart.length}  onClick={handleEmpty} className='btn btn-primary'>

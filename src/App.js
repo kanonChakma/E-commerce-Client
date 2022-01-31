@@ -33,6 +33,7 @@ import Shop from './pages/Shop';
 import Cart from '../src/Component/Cart/Cart';
 import Checkout from './Component/Cart/Checkout';
 import CreateCoupon from './Component/Admin/Coupon/CreateCoupon';
+import Payment from './Component/Cart/Payment';
 
 
 const App=()=> {
@@ -96,6 +97,7 @@ const App=()=> {
       <Route exact path="/cart" component={Cart}/>
       
       <UserRoute exact path="/checkout"  component={Checkout}/>
+      <UserRoute exact path="/payment"  component={Payment}/>
      </Switch>
    </>
   );

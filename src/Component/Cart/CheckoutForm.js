@@ -11,6 +11,7 @@ import { Card, Avatar } from 'antd';
 import { DollarOutlined,CheckOutlined } from '@ant-design/icons'
 import {Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { createOrder, removeCart } from '../../common/cart';
 
 const CheckoutForm = () => {
   
@@ -51,11 +52,28 @@ const CheckoutForm = () => {
         },
       },
     });
-   
+    console.log(payload);
     if(payload.error){
       setError(`payment failed ${payload.error}`)
       setProcessing(false);
     }else{
+      createOrder(payload.paymentIntent,user.token)
+      .then((res)=>{
+        if(res.data.status){
+           if(typeof window !== undefined){
+             localStorage.removeItem("cart")
+           }
+           dispatch({
+             type:"ADD_TO_CART",
+             payload:[]
+           })  
+           dispatch({
+             type:"APPLY_COUPON",
+             payload:false
+           })
+          removeCart(user.token)
+         }
+      })
       setProcessing(false);
       setSucceeded(true);
       setError(null);

@@ -43,3 +43,15 @@ export const CreateCart=async(cart,authtoken)=>{
          }
       )
   }
+  
+  export const createOrder=async(paymentIntent,authtoken)=>{
+    return await axios.post(
+        `${process.env.REACT_APP_API}/user/order`,
+        {paymentIntent},
+        {
+          headers:{
+              authtoken
+            }
+         }
+      )
+  }

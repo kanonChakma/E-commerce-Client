@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getOrder } from '../../common/cart';
 import UserNav from '../nav/UserNav';
 
 const History=() => {
+  const[order,setOrder]=useState([])
+  const{user,cart}=useSelector((state)=>({...state}))
+  useEffect(()=>{
+    userOrderProduct()
+  },[])
+  const userOrderProduct=()=>{
+    getOrder(user.token)
+    .then((res)=>{
+      console.log(res.data);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
   return(
     <div className="container-fluid">
     <div className="row">

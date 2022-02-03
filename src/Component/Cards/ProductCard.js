@@ -60,9 +60,10 @@ const ProductCard = ({product}) => {
             <Link to={`/product/${slug}`}>
                  <EyeOutlined key="edit" /> <br/> View Product 
             </Link>,
-            <Tooltip title={toolTip}>
-              <a onClick={handleAddToCart}>
-                  <ShoppingCartOutlined/> <br/> Add to Cart
+            <Tooltip title={product.quantity<1?"":toolTip}>
+              <a onClick={handleAddToCart} disabled={product.quantity<1}>
+                  <ShoppingCartOutlined/> <br/> 
+                  {product.quantity<1?"Stock Out" :"Add to Cart"}
               </a>
             </Tooltip>,
         ]}

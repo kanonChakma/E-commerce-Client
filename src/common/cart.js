@@ -11,6 +11,7 @@ export const CreateCart=async(cart,authtoken)=>{
          }
       )
   }
+  
   export const getCart=async(authtoken)=>{
     return await axios.get(
         `${process.env.REACT_APP_API}/user/cart`,
@@ -21,6 +22,7 @@ export const CreateCart=async(cart,authtoken)=>{
          }
       )
   }
+
   export const removeCart=async(authtoken)=>{
     return await axios.delete(
         `${process.env.REACT_APP_API}/user/cart`,
@@ -48,6 +50,16 @@ export const CreateCart=async(cart,authtoken)=>{
     return await axios.post(
         `${process.env.REACT_APP_API}/user/order`,
         {paymentIntent},
+        {
+          headers:{
+              authtoken
+            }
+         }
+      )
+  }
+  export const getOrder=async(authtoken)=>{
+    return await axios.get(
+        `${process.env.REACT_APP_API}/user/order`,
         {
           headers:{
               authtoken

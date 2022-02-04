@@ -31,7 +31,7 @@ const AdminNav=()=>{
                 </li>  
                 
                 <li className="nav-item">
-                  <Link to="/user/password" className="nav-link">Password</Link>
+                  <Link to="/admin/password" className="nav-link">Password</Link>
                 </li>
 
             </ul>

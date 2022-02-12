@@ -76,4 +76,5 @@ const CompleteRegistration = ({history}) => {
         </div>
     );
 };
+
 export default CompleteRegistration;

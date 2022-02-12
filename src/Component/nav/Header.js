@@ -1,13 +1,38 @@
-import React, { useState } from 'react';
-import { LoginOutlined,ShoppingCartOutlined,ShopOutlined,UserOutlined,HomeOutlined,DashboardOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import {HeartOutlined,SettingOutlined,LoginOutlined,ShoppingCartOutlined,ShopOutlined,UserOutlined,HomeOutlined,DashboardOutlined } from '@ant-design/icons';
 import { Menu,Badge } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
+import { getCategories } from '../../common/category';
+import { getSubCategories } from '../../common/subCategory';
+import "../../css/header.css";
+
 import Search from '../Form/Search';
-const  { SubMenu,Item } = Menu;
+const  { SubMenu,Item,ItemGroup } = Menu;
 
 const Header = () => {
     const [currentState,setCurrentState]=useState('home');
+    const[category,setCategory]=useState([]);
+    const[subs,setSubs]=useState([]);
+    
+    useEffect(()=>{
+      AllCategory()
+      allSubs()
+  },[])
+
+  const AllCategory=()=>{
+    getCategories()
+    .then((res)=>{
+        setCategory(res.data)
+    })
+  }
+
+  const allSubs=()=>{
+    getSubCategories()
+    .then((res)=>{
+        setSubs(res.data)
+    })
+  }
     const dispatch =useDispatch();
     const history = useHistory();
     const {user,cart}=useSelector((state) =>({...state}));
@@ -23,7 +48,7 @@ const Header = () => {
       history.push("/login"); 
     }
     return (
-        <Menu onClick={handleClick} selectedKeys={[currentState]} mode="horizontal">
+        <Menu style={{fontSize:'16px',height:'80px'}} onClick={handleClick} selectedKeys={[currentState]} mode="horizontal">
           <Item key="home" icon={<HomeOutlined />}>
             <Link to="/">Home</Link>
           </Item>
@@ -35,11 +60,27 @@ const Header = () => {
           <Item key="cart" icon={<ShoppingCartOutlined />}>
             <Link to="/cart">
               <Badge count={cart.length} offset={[9,0]}>
+                
                   Cart
               </Badge>
             </Link>
           </Item>
-
+           <SubMenu icon={<SettingOutlined />} title="Category">
+              <ItemGroup>
+                {
+                category.map((c)=>(
+                    <Item key="category">
+                      <Link to={`/category/${c.slug}`}>
+                          {c.name}
+                      </Link>
+                     </Item>
+                     ))
+                  }
+              </ItemGroup>
+           </SubMenu>
+           <Item key="whislist" icon={<HeartOutlined />}>
+            <Link to="/user/wishlist">whislist</Link>
+          </Item>
         {!user && <Item key="register" icon={<HomeOutlined />}  className="float-right">
             <Link to="/register">Register</Link>
         </Item>}

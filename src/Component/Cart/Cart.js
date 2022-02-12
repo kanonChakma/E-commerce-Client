@@ -1,16 +1,19 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { CreateCart } from '../../common/cart';
+import { CreateCart } from '../../common/user';
 import CartItem from './CartItem';
 import OrderSummary from './OrderSummary';
 
 const Cart = ({history}) => {
   const {user,cart}=useSelector((state)=>({...state}))
+  const dispatch=useDispatch()
+
   const getTotal=()=>{
     return cart.reduce((f,s)=>{
        return f+s.count*s.price;
     },0)
    }
+
   const handleDb=()=>{
     CreateCart(cart,user.token)
     .then((res)=>{
@@ -21,6 +24,7 @@ const Cart = ({history}) => {
      })
      .catch((err)=>console.log(err))
   }
+
     return (
         <div className='container-fluid'>
            <div className='row pt-3'>
@@ -88,12 +92,13 @@ const Cart = ({history}) => {
                 
                   <hr/>
                   {
-                     user?<button 
-                     disabled={!cart.length}
-                     onClick={handleDb} 
-                     className='btn btn-sm btn-primary mt-2'>
-                         Proceed to checkout
-                     </button>:<button btn btn-sm btn-primary mt-2>
+                     user?
+                       <button 
+                        disabled={!cart.length}
+                        onClick={handleDb} 
+                        className='btn offset-md-5 text-center btn-sm btn-primary mt-2'>
+                            Proceed to checkout
+                     </button>:<button className="btn offset-md-5 btn-sm btn-primary mt-2">
                         <Link to={{
                             pathname:"/login",
                             state:{from:"cart"},

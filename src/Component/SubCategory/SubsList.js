@@ -12,10 +12,11 @@ const CategoryList = () => {
         getSubCategories()
       .then((res)=>{
           setSubs(res.data)
+          console.log(res.data)
           setLoading(false)
       })
     },[])
-
+console.log(subs);
 
     return (
         <div className='container'>

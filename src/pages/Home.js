@@ -2,9 +2,9 @@ import React from 'react';
 import TypeEffect from '../Component/Cards/TypeEffect';
 import CategoryList from '../Component/Category/CategoryList';
 import BestSellers from '../Component/Home/BestSellers';
+import Carousele from '../Component/Home/Carousele';
 import NewArrivals from '../Component/Home/NewArrivals';
 import SubsList from '../Component/SubCategory/SubsList'
-
 const Home = () => {
     return (
         <div>
@@ -12,6 +12,9 @@ const Home = () => {
                <TypeEffect
                  text={["Latest Product","New Arrivals","Best sellers"]}
                />
+             </div>
+             <div>
+                <Carousele/>
              </div>
               <h4 className='text-center jumbotron mt-3 mb-3 p-3 display-3 font-weight-bold'>
                  New Arrivals
@@ -30,7 +33,6 @@ const Home = () => {
                 SubsCategory
               </h4>
               <SubsList/>
-
         </div>
     );
 };

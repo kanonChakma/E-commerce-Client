@@ -37,7 +37,7 @@ export const CreateCart=async(cart,authtoken)=>{
   export const saveAddress=async(authtoken,address)=>{
     return await axios.post(
         `${process.env.REACT_APP_API}/user/address`,
-        {address},
+          address,
         {
           headers:{
               authtoken
@@ -46,10 +46,10 @@ export const CreateCart=async(cart,authtoken)=>{
       )
   }
   
-  export const createOrder=async(paymentIntent,authtoken)=>{
+  export const createOrder=async(address,paymentIntent,authtoken)=>{
     return await axios.post(
         `${process.env.REACT_APP_API}/user/order`,
-        {paymentIntent},
+        {address,paymentIntent},
         {
           headers:{
               authtoken
@@ -57,6 +57,7 @@ export const CreateCart=async(cart,authtoken)=>{
          }
       )
   }
+  
   export const getOrder=async(authtoken)=>{
     return await axios.get(
         `${process.env.REACT_APP_API}/user/order`,
@@ -67,3 +68,48 @@ export const CreateCart=async(cart,authtoken)=>{
          }
       )
   }
+
+  export const getUserWishList=async(authtoken)=>{
+    return await axios.get(
+        `${process.env.REACT_APP_API}/user/wishList`,
+        {
+          headers:{
+              authtoken
+            }
+         }
+      )
+  }
+  export const createUserWishList=async(productId,authtoken)=>{
+    return await axios.post(
+        `${process.env.REACT_APP_API}/user/wishList`,
+        {productId},
+        {
+          headers:{
+              authtoken
+            }
+         }
+      )
+  }
+
+  export const updateUserWishList=async(productId,authtoken)=>{
+    return await axios.put(
+        `${process.env.REACT_APP_API}/user/whisList/${productId}`,
+        {},
+        {
+          headers:{
+              authtoken
+            }
+         }
+      )
+}
+export const createCashPayment=async(cashOn,address,authtoken)=>{
+  return await axios.post(
+      `${process.env.REACT_APP_API}/user/cash-payment`,
+      {cashOn,address},
+      {
+        headers:{
+            authtoken
+          }
+       }
+    )
+}

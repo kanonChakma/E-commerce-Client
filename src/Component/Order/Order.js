@@ -3,6 +3,7 @@ import ShowPaymentInfo from '../Cards/ShowPaymentInfo';
 import { CheckCircleOutlined,CloseCircleOutlined} from '@ant-design/icons';
 
 const Order = ({orders,handleStatus}) => {
+  console.log(orders);
     const showOrderTable=(order)=>(
         <table className='table table-bordered'>
         <thead className='thead-dark'>

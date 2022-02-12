@@ -31,6 +31,7 @@ const NewArrivals = () => {
         setLoading(true)
         getProducts('createdAt','desc',currentPage)
         .then((res)=>{
+            console.log(res.data);
             setProducts(res.data)
             setLoading(false);
         })
@@ -39,7 +40,7 @@ const NewArrivals = () => {
         })
     }
     return (
-            <div className='container'>
+            <div className='container-fluid'>
                 {loading? <LoadingCard count={products.length}/>: 
                 <div className='row'>
                    {
@@ -53,7 +54,7 @@ const NewArrivals = () => {
                    }
                  </div>
                 }
-                 <div className='row text-center offset-md-4 pt-5 p-3'>
+                 <div className='row text-center offset-md-5 pt-5 p-3'>
                     <Pagination
                         current={currentPage}
                         total={(productCount/3)*10}

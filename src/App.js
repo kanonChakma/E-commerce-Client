@@ -34,6 +34,8 @@ import Cart from '../src/Component/Cart/Cart';
 import Checkout from './Component/Cart/Checkout';
 import CreateCoupon from './Component/Admin/Coupon/CreateCoupon';
 import Payment from './Component/Cart/Payment';
+import SelectPaymentMethod from './Component/Cart/SelectPaymentMethod';
+import CashPayment from './Component/Cart/CashPayment';
 
 
 const App=()=> {
@@ -98,6 +100,8 @@ const App=()=> {
       
       <UserRoute exact path="/checkout"  component={Checkout}/>
       <UserRoute exact path="/payment"  component={Payment}/>
+      <UserRoute exact path="/select-payment"  component={SelectPaymentMethod}/>
+      <UserRoute exact path="/cash-payment"  component={CashPayment}/>
      </Switch>
    </>
   );

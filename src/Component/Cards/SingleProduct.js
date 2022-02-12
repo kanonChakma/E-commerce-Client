@@ -4,7 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { ShoppingCartOutlined, HeartOutlined, StarOutlined } from '@ant-design/icons';
 import laptop from '../../image/laptop.jpg';
 import StarRatings from 'react-star-ratings';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Card,Tooltip } from 'antd';
 import ProductListItems from './ProductListItems';
 import {avarageRatting} from '../../common/ratting'
@@ -12,6 +12,8 @@ import { Tabs } from 'antd';
 import RattingModal from '../Modal/RattingModal';
 import { useDispatch, useSelector } from 'react-redux'
 import _ from 'lodash'
+import { createUserWishList } from '../../common/user';
+import { toast } from 'react-toastify';
 
 
 const { TabPane } = Tabs;
@@ -22,6 +24,7 @@ const SingleProduct = ({product,productRating,star}) => {
     //Redux
     const{user,cart}=useSelector((state)=>({...state}))
     const dispatch=useDispatch();
+    const history=useHistory()
 
     const handleAddToCart=()=>{
       let cart=[];
@@ -41,6 +44,16 @@ const SingleProduct = ({product,productRating,star}) => {
             payload:unique
           })
        } 
+    }
+    const hanleWhisList=(e)=>{
+       e.preventDefault()
+       createUserWishList(product._id,user.token)
+       .then((res)=>{
+          if(res.data.ok){
+             toast.success("added wishlist")
+             history.push("/user/wishlist")
+            }
+       })
     }
     return (
         <>
@@ -83,17 +96,17 @@ const SingleProduct = ({product,productRating,star}) => {
                 actions={[
                  <>
                      <Tooltip title={toolTip}>
-                     <a onClick={handleAddToCart}>
-                           <ShoppingCartOutlined className='text-success'/> <br/> Add to Cart
-                     </a>
+                        <a onClick={handleAddToCart}>
+                              <ShoppingCartOutlined className='text-success'/> <br/> Add to Cart
+                        </a>
                      </Tooltip>
                  </>,
-                 <>
+                 <a onClick={hanleWhisList}>
                     <HeartOutlined  className='text-info' /> <br/>
                     <Link>
                        Add To Whislist
                     </Link>
-                 </>,
+                 </a>,
                  <>
                     <RattingModal>
                      <StarRatings

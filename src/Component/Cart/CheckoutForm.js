@@ -11,12 +11,12 @@ import { Card, Avatar } from 'antd';
 import { DollarOutlined,CheckOutlined } from '@ant-design/icons'
 import {Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createOrder, removeCart } from '../../common/cart';
+import {createCashPayment, createOrder, removeCart } from '../../common/user';
 
 const CheckoutForm = () => {
   
   const dispatch=useDispatch();
-  const{user,coupon}=useSelector((state)=>({...state}));
+  const{user,coupon,address}=useSelector((state)=>({...state}));
 
   const[succeeded,setSucceeded]=useState(false);
   const[error,setError]=useState(null);
@@ -27,6 +27,7 @@ const CheckoutForm = () => {
   const[cartTotal,setCartTotal]=useState(0);
   const[totalAfterDiscount,setTotalAfterDiscount]=useState(0);
   const[totalPayable,setTotalPayable]=useState(0);
+  const[cashOn,setCashOn]=useState(false);
 
   const stripe = useStripe();
   const elements = useElements();
@@ -57,7 +58,7 @@ const CheckoutForm = () => {
       setError(`payment failed ${payload.error}`)
       setProcessing(false);
     }else{
-      createOrder(payload.paymentIntent,user.token)
+      createOrder(address,payload.paymentIntent,user.token)
       .then((res)=>{
         if(res.data.status){
            if(typeof window !== undefined){
@@ -100,6 +101,7 @@ const CheckoutForm = () => {
         } 
       }
   }
+  //------------CASH PAYMENT------------
   return (
     <>
      {!succeeded && <div>
@@ -133,7 +135,7 @@ const CheckoutForm = () => {
         </>,
       ]}
     >
-    </Card>
+      </Card>
     <form className='stripe-form' id='payment-form' onSubmit={handleSubmit}>
       <CardElement 
       id='card-element'

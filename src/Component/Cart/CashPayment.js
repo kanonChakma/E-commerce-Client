@@ -25,10 +25,11 @@ const CashPayment = () => {
         e.preventDefault()
     
         setCashOn(true)
-        createCashPayment(cashOn,address,user.token)
+        createCashPayment(coupon,cashOn,address,user.token)
         .then((res)=>{
-           console.log(res.data);
-          if(res.data.status){
+           console.log(res);
+          if(res.status === 200){
+            setSucceeded(true);
             if(typeof window !== undefined){
               localStorage.removeItem("cart")
             }

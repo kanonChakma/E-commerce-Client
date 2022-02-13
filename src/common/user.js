@@ -102,10 +102,10 @@ export const CreateCart=async(cart,authtoken)=>{
          }
       )
 }
-export const createCashPayment=async(cashOn,address,authtoken)=>{
+export const createCashPayment=async(coupon,cashOn,address,authtoken)=>{
   return await axios.post(
       `${process.env.REACT_APP_API}/user/cash-payment`,
-      {cashOn,address},
+      {coupon,cashOn,address},
       {
         headers:{
             authtoken

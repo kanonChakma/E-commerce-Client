@@ -31,7 +31,7 @@ const AdminDashboard= () =>{
                   <AdminNav/>
                </div>
                   <div className="col-md-8">
-                     <h4>Admin Dashboard</h4>
+                     <h4 className='text-center'>Admin Dashboard</h4>
                      <Order orders={orders} handleStatus={handleStatus}/>
                  </div>
             </div>

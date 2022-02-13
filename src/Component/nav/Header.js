@@ -53,18 +53,6 @@ const Header = () => {
             <Link to="/">Home</Link>
           </Item>
 
-          <Item key="shop" icon={<ShopOutlined />}>
-            <Link to="/shop">Shop</Link>
-          </Item>
-
-          <Item key="cart" icon={<ShoppingCartOutlined />}>
-            <Link to="/cart">
-              <Badge count={cart.length} offset={[9,0]}>
-                
-                  Cart
-              </Badge>
-            </Link>
-          </Item>
            <SubMenu icon={<SettingOutlined />} title="Category">
               <ItemGroup>
                 {
@@ -78,8 +66,20 @@ const Header = () => {
                   }
               </ItemGroup>
            </SubMenu>
+           
+          <Item key="shop" icon={<ShopOutlined />}>
+            <Link to="/shop">Shop</Link>
+          </Item>
+            
+          <Item key="cart" icon={<ShoppingCartOutlined />}>
+            <Link to="/cart">
+              <Badge count={cart.length} offset={[9,0]}>
+                  <p  style={{fontSize:'16px',color:'white'}}>Cart</p>
+              </Badge>
+            </Link>
+          </Item>
            <Item key="whislist" icon={<HeartOutlined />}>
-            <Link to="/user/wishlist">whislist</Link>
+            <Link to="/user/wishlist">wishlist</Link>
           </Item>
         {!user && <Item key="register" icon={<HomeOutlined />}  className="float-right">
             <Link to="/register">Register</Link>

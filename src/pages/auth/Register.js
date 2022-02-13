@@ -15,6 +15,7 @@ const Register = () => {
         .then(() => {
             toast.success(`Email is sent to ${email}. Click the link complete your registration`);
             window.localStorage.setItem('emailForRegistration', email);
+            setEmail("")
         })
         .catch((error) => {
           var errorCode = error.code;
@@ -26,6 +27,7 @@ const Register = () => {
     const registerForm = () =>
         <form onSubmit={handleSubmit}>
             <input 
+            value={email}
              type="email" 
              className="form-control" 
              onChange={e=>setEmail(e.target.value)}

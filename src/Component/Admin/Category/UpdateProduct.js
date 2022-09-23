@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getCategory,updateCategory } from '../../../common/category';
 import CreateProductForm from '../../Form/CreateProductForm';
-import AdminNav from '../../nav/AdminNav';
+import AdminNav from '../../Nav/AdminNav';
 
 
 const UpdateProduct=({history,match}) =>{

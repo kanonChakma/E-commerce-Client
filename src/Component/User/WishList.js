@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getUserWishList, updateUserWishList } from '../../common/user';
-import UserNav from '../nav/UserNav';
+import UserNav from '../Nav/UserNav';
 import { Card, Avatar } from 'antd';
 import { EyeOutlined,DeleteOutlined} from '@ant-design/icons';
 import laptop from "../../image/laptop.jpg"

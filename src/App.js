@@ -47,7 +47,7 @@ import Footer from './Component/Footer/Footer';
 
 const NotFoundPages=lazy(()=>import('./pages/NotFoundPages'));
 const SideDrawer=lazy(()=>import('./Component/Drawer/SideDrawer'))
-const Header=lazy(()=>import('./Component/nav/Header'))
+const Header=lazy(()=>import('./Component/Nav/Header'))
 const CompleteRegistration=lazy(()=>import('./pages/auth/CompleteRegistration'))
 const Login=lazy(()=>import('./pages/auth/Login'))
 const Register=lazy(()=>import('./pages/auth/Register'))

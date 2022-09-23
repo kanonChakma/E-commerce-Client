@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AdminProductCard from '../../Cards/AdminProductCard';
-import AdminNav from '../../nav/AdminNav';
+import AdminNav from '../../Nav/AdminNav';
 import { getProductByCount, removeProduct } from '../../../common/product';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';

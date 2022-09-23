@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getOrders,updateOderStatus} from '../../common/admin';
-import AdminNav from '../nav/AdminNav';
+import AdminNav from '../Nav/AdminNav';
 import { useSelector } from 'react-redux';
 import Order from '../Order/Order';
 import { toast } from 'react-toastify';

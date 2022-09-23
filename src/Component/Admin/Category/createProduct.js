@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createCategory,getCategories,deleteCategory } from '../../../common/category';
-import AdminNav from '../../nav/AdminNav';
+import AdminNav from '../../Nav/AdminNav';
 import {EditOutlined,DeleteOutlined} from '@ant-design/icons';
 import CreateProductForm from '../../Form/CreateProductForm';
 import SearchProductForm from '../../Form/SearchProductForm';

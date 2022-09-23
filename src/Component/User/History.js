@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getOrder } from '../../common/user';
-import UserNav from '../nav/UserNav';
+import UserNav from '../Nav/UserNav';
 import { CheckCircleOutlined,CloseCircleOutlined} from '@ant-design/icons';
 import ShowPaymentInfo from '../Cards/ShowPaymentInfo';
 import { PDFDownloadLink } from '@react-pdf/renderer';

@@ -5,7 +5,7 @@ import { getCategories, getCategorieSubs } from '../../../common/category';
 import { CreateProduct } from '../../../common/product';
 import FileUpload from '../../Form/FileUpload';
 import ProductForm from '../../Form/ProductForm';
-import AdminNav from '../../nav/AdminNav';
+import AdminNav from '../../Nav/AdminNav';
 import {LoadingOutlined} from '@ant-design/icons';
 
 const initialState={

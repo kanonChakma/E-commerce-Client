@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from 'react';
-import AdminNav from '../../nav/AdminNav';
+import AdminNav from '../../Nav/AdminNav';
 import CreateProductForm from '../../Form/CreateProductForm'
 import {useSelector} from 'react-redux';
 import {getCategories} from '../../../common/category'
@@ -46,7 +46,7 @@ const handleRemove=(slug)=>{
 }
 //search product
 const Search=(keyword)=>(c)=>c.name.toLowerCase().includes(keyword);
-
+console.log(parent);
 //submit form
 const handleSubmit=(e)=>{
        e.preventDefault();

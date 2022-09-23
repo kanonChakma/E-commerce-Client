@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import AdminNav from '../../nav/AdminNav';
+import AdminNav from '../../Nav/AdminNav';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"
 import { createCoupon, getCoupons,deleteCoupon } from '../../../common/coupon';

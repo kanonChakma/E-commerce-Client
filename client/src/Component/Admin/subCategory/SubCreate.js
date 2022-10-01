@@ -34,8 +34,8 @@ const SubCreate=()=>{
     .catch(err=>toast.error(err))    
   } 
 //remove product
-const handleRemove=(slug)=>{
-  if(window.confirm("confirm delete")){
+const handleRemove=(slug) => {
+  if(window.confirm("confirm delete")) {
     deleteSubCatgory(slug,user.token)
   .then((res)=>{
      loadSubCategories();

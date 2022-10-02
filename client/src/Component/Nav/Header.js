@@ -1,13 +1,13 @@
+import { DashboardOutlined, HeartOutlined, HomeOutlined, LoginOutlined, SettingOutlined, ShopOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
+import { Badge, Menu } from 'antd';
 import React, { useEffect, useState } from 'react';
-import {HeartOutlined,SettingOutlined,LoginOutlined,ShoppingCartOutlined,ShopOutlined,UserOutlined,HomeOutlined,DashboardOutlined } from '@ant-design/icons';
-import { Menu,Badge } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { useDispatch,useSelector } from 'react-redux';
 import { getCategories } from '../../common/category';
 import { getSubCategories } from '../../common/subCategory';
 import "../../css/header.css";
-
 import Search from '../Form/Search';
+
 const  { SubMenu,Item,ItemGroup } = Menu;
 
 const Header = () => {
@@ -36,7 +36,6 @@ const Header = () => {
     const dispatch =useDispatch();
     const history = useHistory();
     const {user,cart}=useSelector((state) =>({...state}));
-     
     const handleClick=(e)=>{
        setCurrentState(e.key);
     }
@@ -48,12 +47,12 @@ const Header = () => {
       history.push("/login"); 
     }
     return (
-        <Menu style={{fontSize:'16px',height:'80px'}} onClick={handleClick} selectedKeys={[currentState]} mode="horizontal">
-          <Item key="home" icon={<HomeOutlined />}>
+        <Menu style={{fontSize:'17px', padding:"7px 15px"}} onClick={handleClick} selectedKeys={[currentState]} mode="horizontal">
+          <Item key="home" icon={<HomeOutlined style={{ fontSize: '14px' }}/>}>
             <Link to="/">Home</Link>
           </Item>
 
-           <SubMenu icon={<SettingOutlined />} title="Category">
+           <SubMenu icon={<SettingOutlined style={{ fontSize: '14px' }}/>} title="Category">
               <ItemGroup>
                 {
                 category.map((c)=>(
@@ -67,25 +66,25 @@ const Header = () => {
               </ItemGroup>
            </SubMenu>
            
-          <Item key="shop" icon={<ShopOutlined />}>
+          <Item key="shop" icon={<ShopOutlined style={{ fontSize: '14px' }}/>}>
             <Link to="/shop">Shop</Link>
           </Item>
             
-          <Item key="cart" icon={<ShoppingCartOutlined />}>
+          <Item key="cart" icon={<ShoppingCartOutlined style={{ fontSize: '14px' }}/>}>
             <Link to="/cart">
-              <Badge count={cart.length} offset={[9,0]}>
-                  <p  style={{fontSize:'16px',color:'white'}}>Cart</p>
+               Cart
+              <Badge count={cart.length} offset={[0,-10]}>
               </Badge>
             </Link>
           </Item>
-           <Item key="whislist" icon={<HeartOutlined />}>
+           <Item key="whislist" icon={<HeartOutlined style={{ fontSize: '14px' }}/>}>
             <Link to="/user/wishlist">wishlist</Link>
           </Item>
         {!user && <Item key="register" icon={<HomeOutlined />}  className="float-right">
             <Link to="/register">Register</Link>
         </Item>}
 
-        {!user && <Item key="login" icon={<HomeOutlined />} className="float-right">
+        {!user && <Item key="login" icon={<LoginOutlined />} className="float-right">
              <Link to="/login">Login</Link>
          </Item>}
 

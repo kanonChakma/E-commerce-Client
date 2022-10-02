@@ -41,10 +41,10 @@ const NewArrivals = () => {
     return (
             <Container maxWidth="lg">
                 {loading? <LoadingCard count={products.length}/>: 
-                <Grid container>
+                <Grid container sx={{ justifyContent: "space-between" }}>
                 {
                    products.map((product)=>(
-                     <Grid item xs={12} sm={6} md={3} p={1} key={product._id}  justifyContent="space-around">
+                     <Grid item xs={12} sm={6} md={3} p={1} key={product._id} >
                          <ProductCard
                           product={product}
                          />
@@ -65,7 +65,7 @@ const NewArrivals = () => {
                     <Grid item xs={3}>
                         <Pagination
                         current={currentPage}
-                        total={(productCount/3)*10}
+                        total={(productCount/4)*10}
                         onChange={(value)=>setCurrentPage(value)}
                         />
                     </Grid>   

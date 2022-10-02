@@ -1,3 +1,4 @@
+import { Container, Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getProduct, getRelated, starProduct } from '../common/product';
@@ -7,16 +8,16 @@ import SingleProduct from '../Component/Cards/SingleProduct';
 const ProductInfo = ({match}) => {
     const[product,setProduct]=useState({});
     const[related,setRelated]=useState([]);
-    const{slug}=match.params;
+    const{slug} = match.params;
     const[star,setStar]=useState(0)
-    const {user}=useSelector((state)=>({...state}))
+    const {user} = useSelector((state)=>({...state}))
 
     useEffect(()=>{
         loadProduct();
     },[slug])
     
     useEffect(()=>{
-        if(product.ratings && user){
+        if(product.ratings && user) {
           const matchRatting=product.ratings.find((r)=>(
                 r.postedBy.toString() === user._id.toString()
            ))  
@@ -34,6 +35,7 @@ const ProductInfo = ({match}) => {
     }
     //---------------
     const productRating=(newRating, name)=>{
+      console.log({newRating}, {name})
         setStar(newRating);
         starProduct(name,newRating,user.token)
         .then((res)=>{
@@ -41,23 +43,23 @@ const ProductInfo = ({match}) => {
         });
     }
     return (
-           <div className='container-fluid'>
-               <div className='row pt-5'>
-                 <SingleProduct product={product} productRating={productRating} star={star}/>
-               </div>
+           <Container maxWidth="lg">
+               <Grid>
+                  <SingleProduct product={product} productRating={productRating} star={star}/>
+               </Grid>
                <div className='row'>
-                 <h1  className='text-center col mt-3 mb-3 p-3 bg-info'>Related Product</h1>
+                 <h2  className=' col mt-5 mb-3 p-3 bg-info'>Related Product</h2>
                </div> 
-               <div className='row'>
+               <Grid container>
                  {
                    related.length?related.map((r)=>(
-                        <div className='col-md-4'>
+                        <Grid item xs={12} sm={6} md={3} p={1}>
                            <ProductCard key={r._id} product={r}/>
-                        </div>
+                        </Grid>
                       )):<div className='col text-center h4 font-wight-bold'>No Such Product </div>
                  }
-               </div> 
-          </div>
+               </Grid> 
+          </Container>
       );
  };
 export default ProductInfo;

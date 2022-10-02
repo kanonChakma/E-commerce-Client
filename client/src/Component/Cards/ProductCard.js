@@ -8,6 +8,15 @@ import { avarageRatting } from '../../common/ratting';
 import img from '../../image/first.jpg';
 const { Meta } = Card;
 
+const  card = {
+  cursior:"pointer",
+  transition: "0.3s",
+  boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
+  "&:hover": {
+    boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
+  }
+}
+
 const ProductCard = ({product}) => {
     const{title,description,images,slug}=product;
     const[toolTip,setToolTip]=useState("click to Add")
@@ -41,20 +50,19 @@ const ProductCard = ({product}) => {
     return (
       <>
           {product && product.ratings&& product.ratings.length>0?
-            avarageRatting(product): <div className='text-center'>No Rating Yet</div>
+            avarageRatting(product): <div className='text-center pb-3'>No Rating Yet</div>
             }
         <Card
+        style={card}
         cover={
-          <div style={{overflow:"hidden",height:"250px"}}>
               <img
-               style={{height:"100%",
+               style={{height:"170px",
                 width:"100%",
-                objectFit:"cover" }}
+                objectFit:"contain" }}
                 alt="img"
                src={images&&images.length?images[0].url:img}
               />
-          </div>
-        }
+         }
         actions={[
             <Link to={`/product/${slug}`}>
                  <EyeOutlined key="edit" /> <br/> View Product 
@@ -68,6 +76,7 @@ const ProductCard = ({product}) => {
         ]}
       >
         <Meta
+          style={{height: "60px"}}
           title={title}
           description={`${description && description.substring(0,30)}......`}
         />
@@ -77,3 +86,9 @@ const ProductCard = ({product}) => {
 };
 
 export default ProductCard;
+
+ 
+
+
+
+

@@ -1,19 +1,20 @@
+import { HeartOutlined, ShoppingCartOutlined } from '@ant-design/icons';
+import { Grid } from '@mui/material';
+import { Card, Tabs, Tooltip } from 'antd';
+import _ from 'lodash';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Carousel } from 'react-responsive-carousel';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { ShoppingCartOutlined, HeartOutlined, StarOutlined } from '@ant-design/icons';
-import laptop from '../../image/laptop.jpg';
-import StarRatings from 'react-star-ratings';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Link, useHistory } from 'react-router-dom';
-import { Card,Tooltip } from 'antd';
-import ProductListItems from './ProductListItems';
-import {avarageRatting} from '../../common/ratting'
-import { Tabs } from 'antd';
-import RattingModal from '../Modal/RattingModal';
-import { useDispatch, useSelector } from 'react-redux'
-import _ from 'lodash'
-import { createUserWishList } from '../../common/user';
+import StarRatings from 'react-star-ratings';
 import { toast } from 'react-toastify';
+import { avarageRatting } from '../../common/ratting';
+import { createUserWishList } from '../../common/user';
+import "../../css/overrudes.css";
+import laptop from '../../image/laptop.jpg';
+import RattingModal from '../Modal/RattingModal';
+import ProductListItems from './ProductListItems';
 
 
 const { TabPane } = Tabs;
@@ -43,6 +44,11 @@ const SingleProduct = ({product,productRating,star}) => {
             type:"ADD_TO_CART",
             payload:unique
           })
+          
+          dispatch({
+            type:"SET_VISIBLE",
+            payload:true
+          })
        } 
     }
     const hanleWhisList=(e)=>{
@@ -56,12 +62,15 @@ const SingleProduct = ({product,productRating,star}) => {
        })
     }
     return (
-        <>
-           <div className='col-md-7'>
+        <Grid 
+        container
+        spacing={3}
+      >
+           <Grid item xs={12} sm={12} md={6} lg={5}>
                  {images &&images.length?
                     <Carousel showArrows={true} autoPlay infiniteLoop>
                       {
-                       images && images.map((im)=> <img src={im.url} key={im.public_id} />)
+                       images && images.map((im)=> <img alt='img'  src={im.url} key={im.public_id} />)
                       }
                   </Carousel>:
                  <Card
@@ -77,7 +86,7 @@ const SingleProduct = ({product,productRating,star}) => {
                 }
                <div>
                <Tabs type="card">
-                  <TabPane tab="Description" key="1">
+                  <TabPane tab="Description" key="1" style={{textAlign:"justify"}}>
                     {description && description}
                   </TabPane>
                   <TabPane tab="More" key="2">
@@ -85,9 +94,10 @@ const SingleProduct = ({product,productRating,star}) => {
                   </TabPane>
                </Tabs>
                </div> 
-            </div>
-           <div className='col-md-5'>
-              <h1 className='text-center bg-info p-3'>{title}</h1>
+            </Grid>
+            <Grid xs={12} sm={12} md={1} lg={2}></Grid>
+            <Grid item xs={12} sm={12} md={5} lg={5}>
+              <h2 className='text-center bg-info p-3'>{title}</h2>
               {product && product.ratings&& product.ratings.length>0?
                  avarageRatting(product): <div className='text-center'>No Rating Yet</div>
               }
@@ -97,7 +107,7 @@ const SingleProduct = ({product,productRating,star}) => {
                  <>
                      <Tooltip title={toolTip}>
                         <a onClick={handleAddToCart}>
-                              <ShoppingCartOutlined className='text-success'/> <br/> Add to Cart
+                            <ShoppingCartOutlined className='text-success'/> <br/> Add to Cart
                         </a>
                      </Tooltip>
                  </>,
@@ -123,8 +133,8 @@ const SingleProduct = ({product,productRating,star}) => {
                 >
                   <ProductListItems product={product}/>
                </Card>,
-             </div>
-        </>    
+             </Grid>
+        </Grid>    
     );
 };
 

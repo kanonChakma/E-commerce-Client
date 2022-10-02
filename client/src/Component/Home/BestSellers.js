@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import { getProducts,totalProduct } from '../../common/product';
+import { Container, Grid } from '@mui/material';
+import { Pagination } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { getProducts, totalProduct } from '../../common/product';
 import LoadingCard from '../Cards/LoadingCard';
 import ProductCard from '../Cards/ProductCard';
-import { Pagination } from 'antd';
 
 
 const BestSellers = () => {
@@ -39,28 +39,38 @@ const BestSellers = () => {
         })
     }
     return (
-            <div className='container-fluid'>
+        <Container maxWidth="lg">
                 {loading? <LoadingCard count={products.length}/>: 
-                <div className='row'>
+                <Grid container sx={{ justifyContent: "space-between" }}>
                     {
                       products.map((product)=>(
-                          <div className='col-md-4' key={product._id}>
+                        <Grid item xs={12} sm={6} md={3} p={1} key={product._id} >
                                <ProductCard
                                 product={product}
                                />
-                          </div>
+                               </Grid>
                       ))  
                     }
-                 </div>
+                </Grid>
                 }
-             <div className='row text-center offset-md-5 pt-5 p-3'>
+                <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+                my={5}
+                >
+                <Grid item xs={3}>
                     <Pagination
-                        current={currentPage}
-                        total={(productCount/3)*10}
-                        onChange={(value)=>setCurrentPage(value)}
-                        />
-                </div>   
-        </div>
+                    current={currentPage}
+                    total={(productCount/4)*10}
+                    onChange={(value)=>setCurrentPage(value)}
+                    />
+                </Grid>   
+                
+                </Grid>  
+        </Container>
     );
 };
 export default BestSellers;

@@ -1,9 +1,12 @@
+import { Grid } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
-const FooterColumn=(props)=>{
-    
+
+const FooterColumn=(props)=>{    
     return(
-        <div className="col-md-3">
+        <Grid
+         sx={{marginBottom:{xs:"10px",sm:"1px"}}}
+         item xs={6}  sm={3} md={2} >
             <p className="text-primary">{props.menuTitle?props.menuTitle:""}</p>
             <ul className="list-unstyled">
                 {
@@ -15,7 +18,7 @@ const FooterColumn=(props)=>{
                 }
             </ul>
             {props.children && props.children}
-        </div>
+        </Grid>
     );
 };
 export default FooterColumn;

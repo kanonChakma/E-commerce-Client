@@ -1,12 +1,13 @@
-import React from "react"
-import StarRatings from "react-star-ratings"
+import React from "react";
+import StarRatings from "react-star-ratings";
 
 export const avarageRatting=(product)=>{
+  console.log(product);
      if(product && product.ratings){
          let rattingArray=product && product.ratings;
          let total=[];
          let length=rattingArray.length;
-
+         console.log(rattingArray);
         rattingArray.map((r)=>total.push(r.star));
         let sumRatting=total.reduce((p,n)=>p+n,0);
         let highest=length*5;

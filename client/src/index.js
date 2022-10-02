@@ -1,11 +1,11 @@
+import 'antd/dist/antd.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter} from 'react-router-dom'
-import 'antd/dist/antd.css';
-import {Provider} from 'react-redux';
 import Store from './Store/store';
 
 ReactDOM.render(  

@@ -1,13 +1,15 @@
-import React, { lazy,ExoticComponent,Suspense, useEffect } from 'react';
-import {Switch,Router, Route} from 'react-router-dom';
-import { ToastContainer} from 'react-toastify';
+import { LoadingOutlined } from '@ant-design/icons';
+import { ThemeProvider } from '@mui/material';
+import React, { lazy, Suspense, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-import {useDispatch} from 'react-redux';
-import { auth } from './firebase';
 import { currentUser } from './common/authData';
-import { LoadingOutlined } from '@ant-design/icons'; 
 import Footer from './Component/Footer/Footer';
+import { appTheme } from './css/theme';
+import { auth } from './firebase';
+
 
 
 // import SideDrawer from './Component/Drawer/SideDrawer';
@@ -104,53 +106,55 @@ const App=()=> {
       });
   },[])
   return (
-  <Suspense fallback={
-    <div className='col text-center p-5 mt-5'>
-       React-Redux _<LoadingOutlined />_Ecommerce
-    </div>
-  }>
-   <Header/>
-   <SideDrawer/>
-   <ToastContainer/>
-   <Switch>
-      <Route exact path="/" component={Home}/>
-      <Route exact path="/login"    component={Login} />
-      <Route exact path="/register" component={Register} />
-      <Route exact path="/register/complete" component={CompleteRegistration}/>
-      <Route exact path="/forgot/password"   component={ForgotPassword}/>
-
-      <UserRoute exact path="/user/history"   component={History}/>
-      <UserRoute exact path="/user/password"  component={Password}/>
-      <UserRoute exact path="/user/wishlist"     component={WishList}/>
-      <AdminRoute exact path="/admin/dashboard"  component={AdminDashboard}/>
-     
-      <AdminRoute exact path="/admin/category"         component={CreateProduct}/>
-      <AdminRoute exact path="/admin/category/:slug"   component={UpdateProduct}/>
-     
-      <AdminRoute exact path="/admin/sub"        component={SubCreate}/>
-      <AdminRoute exact path="/admin/sub/:slug"  component={SubUpdate}/>
-
-      <AdminRoute exact path="/admin/product"  component={ProductCreate}/>
-      <AdminRoute exact path="/admin/products" component={AllProducts}/>
-      <AdminRoute exact path="/admin/product/:slug" component={ProductUpdate}/>
-    
-      <AdminRoute exact path="/admin/coupon"  component={CreateCoupon}/>
-
-      <Route exact path="/product/:slug"  component={ProductInfo}/>
-      <Route exact path="/category/:slug" component={AllCategory}/>
-
-      <Route exact path="/sub/:slug" component={AllSubsCategory}/>
-      <Route exact path="/shop" component={Shop}/>
-      <Route exact path="/cart" component={Cart}/>
+    <ThemeProvider theme={appTheme}>
+    <Suspense fallback={
+      <div className='col text-center p-5 mt-5'>
+         React-Redux _<LoadingOutlined />_Ecommerce
+      </div>
+    }>
+     <Header/>
+     <SideDrawer/>
+     <ToastContainer/>
+     <Switch>
+        <Route exact path="/" component={Home}/>
+        <Route exact path="/login"    component={Login} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/register/complete" component={CompleteRegistration}/>
+        <Route exact path="/forgot/password"   component={ForgotPassword}/>
+  
+        <UserRoute exact path="/user/history"   component={History}/>
+        <UserRoute exact path="/user/password"  component={Password}/>
+        <UserRoute exact path="/user/wishlist"     component={WishList}/>
+        <AdminRoute exact path="/admin/dashboard"  component={AdminDashboard}/>
+       
+        <AdminRoute exact path="/admin/category"         component={CreateProduct}/>
+        <AdminRoute exact path="/admin/category/:slug"   component={UpdateProduct}/>
+       
+        <AdminRoute exact path="/admin/sub"        component={SubCreate}/>
+        <AdminRoute exact path="/admin/sub/:slug"  component={SubUpdate}/>
+  
+        <AdminRoute exact path="/admin/product"  component={ProductCreate}/>
+        <AdminRoute exact path="/admin/products" component={AllProducts}/>
+        <AdminRoute exact path="/admin/product/:slug" component={ProductUpdate}/>
       
-      <UserRoute exact path="/checkout"  component={Checkout}/>
-      <UserRoute exact path="/payment"  component={Payment}/>
-      <UserRoute exact path="/select-payment"  component={SelectPaymentMethod}/>
-      <UserRoute exact path="/cash-payment"  component={CashPayment}/>
-      <Route exact path="*" component={NotFoundPages} />
-     </Switch>
-     <Footer/>
-   </Suspense>
+        <AdminRoute exact path="/admin/coupon"  component={CreateCoupon}/>
+  
+        <Route exact path="/product/:slug"  component={ProductInfo}/>
+        <Route exact path="/category/:slug" component={AllCategory}/>
+  
+        <Route exact path="/sub/:slug" component={AllSubsCategory}/>
+        <Route exact path="/shop" component={Shop}/>
+        <Route exact path="/cart" component={Cart}/>
+        
+        <UserRoute exact path="/checkout"  component={Checkout}/>
+        <UserRoute exact path="/payment"  component={Payment}/>
+        <UserRoute exact path="/select-payment"  component={SelectPaymentMethod}/>
+        <UserRoute exact path="/cash-payment"  component={CashPayment}/>
+        <Route exact path="*" component={NotFoundPages} />
+       </Switch>
+       <Footer/>
+     </Suspense>
+    </ThemeProvider>
   )
 }
 export default App;

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { CheckCircleOutlined, CloseCircleOutlined, CloseOutlined } from '@ant-design/icons';
+import React from 'react';
 import ModalImage from "react-modal-image";
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import laptop from '../../image/laptop.jpg'
-import { CheckCircleOutlined,CloseCircleOutlined ,CloseOutlined} from '@ant-design/icons';
+import laptop from '../../image/laptop.jpg';
 
 const CartItem = ({product}) => {  
     let colors=["Black","Brown","Silver","White","Blue"];
@@ -13,12 +13,12 @@ const CartItem = ({product}) => {
     
         let cart=[];
 
-        if(typeof window !== "undefined"){
-          if(localStorage.getItem("cart")){
+        if(typeof window !== "undefined") {
+          if(localStorage.getItem("cart")) {
              cart=JSON.parse(localStorage.getItem("cart"))
            }
-        cart.map((p,i)=>{
-          if(p._id===product._id){
+        cart.map((p,i) => {
+          if(p._id===product._id) {
                cart[i].color=e.target.value;
               }
           })
@@ -42,7 +42,7 @@ const CartItem = ({product}) => {
             if(localStorage.getItem("cart")){
                 cart=JSON.parse(localStorage.getItem("cart"))
             }
-            cart.map((p,i)=>{
+            cart.map((p,i)=> {
                 if(p._id === product._id){
                  cart[i].count=count;
                 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Address from './Address';
 import ApplyCoupon from './ApplyCoupon';
 import OrderSummary from './OrderSummary';
@@ -19,7 +19,7 @@ const Checkout = () => {
       const handleChange=(e)=>{
         setData({...data,[e.target.name]:e.target.value})
      }
-
+       console.log(data);
       //----Proceed to next step
       const nextStep = () => {
         setStep(step+1)

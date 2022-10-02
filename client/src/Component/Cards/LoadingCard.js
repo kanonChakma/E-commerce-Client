@@ -1,9 +1,9 @@
-import React from 'react';
 import { Card, Skeleton } from 'antd';
+import React from 'react';
 
 const LoadingCard = ({count}) => {
     let totalCards=[];
-
+    console.log({count})
     const cards=()=>{
         for (let i = 0; i < count; i++) {
            totalCards.push(
@@ -15,7 +15,7 @@ const LoadingCard = ({count}) => {
         return totalCards; 
     } 
     return (
-        <div className='row pb-5'>
+        <div className='row pb-5 my-3' >
             {
               cards() 
             }

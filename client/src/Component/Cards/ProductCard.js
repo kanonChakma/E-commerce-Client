@@ -1,12 +1,11 @@
-import React from 'react';
-import { Card, Avatar,Tooltip } from 'antd';
 import { EyeOutlined, ShoppingCartOutlined } from '@ant-design/icons';
-import img from '../../image/first.jpg'
+import { Card, Tooltip } from 'antd';
+import _ from 'lodash';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { avarageRatting } from '../../common/ratting';
-import _ from 'lodash'
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
+import img from '../../image/first.jpg';
 const { Meta } = Card;
 
 const ProductCard = ({product}) => {
@@ -50,8 +49,8 @@ const ProductCard = ({product}) => {
               <img
                style={{height:"100%",
                 width:"100%",
-                objectFit:"cover"}
-                }
+                objectFit:"cover" }}
+                alt="img"
                src={images&&images.length?images[0].url:img}
               />
           </div>

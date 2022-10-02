@@ -1,7 +1,7 @@
-import React from 'react';
 import { Card } from 'antd';
-import stripe from "../../image/stripe.png"
-import cash1 from "../../image/cash1.jpg"
+import React from 'react';
+import cash1 from "../../image/cash1.jpg";
+import stripe from "../../image/stripe.png";
 const { Meta } = Card;
 const SelectPaymentMethod = ({history}) => {
     return (
@@ -16,6 +16,7 @@ const SelectPaymentMethod = ({history}) => {
                  cover={
                   <div style={{overflow:"hidden",height:"100px"}}>
                     <img
+                    alt='img'
                     style={{height:"100%",
                         width:"100%",
                         objectFit:"cover"}
@@ -36,6 +37,7 @@ const SelectPaymentMethod = ({history}) => {
                  cover={
                   <div style={{overflow:"hidden",height:"100px"}}>
                     <img
+                    alt='img'
                     style={{height:"100%",
                         width:"100%",
                         objectFit:"cover"}

@@ -3,7 +3,7 @@ import { Avatar, Button, CssBaseline, Grid, TextareaAutosize, TextField, Typogra
 import Container from '@mui/material/Container';
 import { makeStyles } from '@mui/styles';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
 
@@ -33,7 +33,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Address = ({data,nextStep,handleChange}) => {
-  const{address}=useSelector((state)=>({...state}))
   const dispatch=useDispatch();
   const { firstName, lastName, email, phone, address1, address2,information } = data;
   const classes = useStyles();

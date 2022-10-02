@@ -1,6 +1,8 @@
+import { Grid } from '@mui/material';
+import Container from '@mui/material/Container';
 import React, { useEffect, useState } from 'react';
 import { getCategory } from '../../common/category';
-import ProductCard from '../../Component/Cards/ProductCard'
+import ProductCard from '../../Component/Cards/ProductCard';
 const AllCategory = ({match}) => {
     const[category,setCategory]=useState({})
     const[product,setProduct]=useState([])
@@ -18,25 +20,30 @@ const AllCategory = ({match}) => {
        })
   },[slug])
     return (
-        <div className='container'>
-          <div className='row'>
-             {
-               loading?<h4 className='col text-center jumbotron display-4 m-3 p-3'>Loading....</h4>:
-               <h4 className='col text-center jumbotron display-4 mt-3 mb-3 p-3'>
-                   All {category.name} related products
-               </h4>
-            }
-          </div>
-          <div className='row'>
-              {
-                  product.map((p)=>(
-                    <div className='col-md-4' key={p._id}>
-                          <ProductCard product={p}/>           
-                     </div>
-                  ))
-              }
-          </div>
+        <Container maxWidth="lg">
+          <Grid   sx={{marginTop:"50px", height: {sx:"auto", md:"65vh"}}}>
+            <div className='row'>
+            {
+              loading?<h4 className='col text-center jumbotron display-4  p-3'>Loading....</h4>:
+              <h4 className='col text-center jumbotron display-4  p-3'>
+                {category.name}
+              </h4>
+          }
         </div>
+        <Grid container>
+            { product.length<1?(<>
+                <p>There is no such {category.name} related products</p>
+              </>):(
+              product.map((p)=>(
+                <Grid item xs={12} sm={6} md={3} p={1} key={p._id}>
+                      <ProductCard product={p}/>           
+                  </Grid>
+              ))
+            )
+            }
+        </Grid>
+          </Grid>
+        </Container>
     );
 };
 export default AllCategory;

@@ -16,16 +16,16 @@ const CategoryList = () => {
       })
     },[])
 
-    let ShowCategory=()=>{
-      category.map((c)=>(
-      <div 
-      key={c._id} 
-      className='btn btn-outlined-primary btn m-3'>
-          {c.name}
-        </div>
-        )
-       )
-    }
+    // let ShowCategory=()=>{
+    //   category.map((c)=>(
+    //   <div 
+    //   key={c._id} 
+    //   className='btn btn-outlined-primary btn m-3'>
+    //       {c.name}
+    //     </div>
+    //     )
+    //    )
+    // }
     return (
         <div className='container'>
           <div className='row'>

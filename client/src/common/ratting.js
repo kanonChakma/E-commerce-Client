@@ -14,9 +14,9 @@ export const avarageRatting=(product)=>{
         let result=(sumRatting*5)/highest;
 
     return(
-        <div className="text-center pt-1 pb-3">
+        <div className="text-center mb-2">
           <StarRatings
-           starDimension="20px"
+           starDimension="21px"
            starSpacing="2px"
            editing={false}
            starRatedColor="red"

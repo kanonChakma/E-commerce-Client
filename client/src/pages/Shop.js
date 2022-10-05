@@ -1,13 +1,14 @@
+import { DollarOutlined, DownSquareOutlined, StarOutlined } from '@ant-design/icons';
+import { Container, Grid, useMediaQuery, useTheme } from '@mui/material';
+import { Checkbox, Menu, Radio, Slider } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {getProductByCount, getProductByFilter} from '../common/product';
-import {getCategories} from '../common/category';
-import ProductCard from '../Component/Cards/ProductCard';
-import { Checkbox,Radio,Slider } from 'antd';
-import Star from '../Component/Form/Star'
-import { Menu } from 'antd';
-import { DollarOutlined,DownSquareOutlined,StarOutlined} from '@ant-design/icons';
+import { getCategories } from '../common/category';
+import { getProductByCount, getProductByFilter } from '../common/product';
 import { getSubCategories } from '../common/subCategory';
+import ShopCard from '../Component/Cards/ShopCard';
+import Star from '../Component/Form/Star';
+import ShopDrawer from './ShopDrawer';
 const { SubMenu } = Menu;
 
 const Shop = () => {
@@ -31,8 +32,11 @@ const Shop = () => {
     const{text}=search;
     
     const dispatch=useDispatch();
+    //side drawer
+    const theme = useTheme();
+    const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
-//...Load All Product First...    
+    //...Load All Product First...    
     useEffect(()=>{
         loadAllProduct()
         getCategories()
@@ -71,7 +75,10 @@ const Shop = () => {
     useEffect(()=>{
         fetchProducts({price})
     },[ok])  
+
+
     const handleSlide=(value)=>{
+        console.log(value);
          dispatch({
             type: "SEARCH_QUERY",
             payload:{text:""},
@@ -85,6 +92,9 @@ const Shop = () => {
            setOk(!ok)
          },300)
       }
+
+
+
   //...Load Product By Category....
   const handleCategory=(e)=>{
     dispatch({
@@ -96,6 +106,7 @@ const Shop = () => {
      setColor('')
      setBrand('')
      setShipping('')
+
     let chekedId=e.target.value;
     let existId=[...categoryIds];
 
@@ -108,6 +119,7 @@ const Shop = () => {
    setCategoryIds(existId);
    fetchProducts({category:existId})
 } 
+
   const showCategories=()=>
         category.map((p)=>(
         <div key={p._id}>
@@ -259,120 +271,145 @@ const showShipping=()=>
    </>
 
     return (
-        <div className='container-fluid'>
-            <div className='row'>
-              <div className='col-md-3'>
-                <h4 className=' pt-2 font-wight-bold'>Search/Filters</h4>
-                <hr/>
-                <Menu mode="inline" defaultOpenKeys={["sub1","sub2","sub3","sub4","sub5","sub6","sub7"]}>
-                    <SubMenu 
-                    key="sub1" 
-                   //icon={<DollarOutlined />} 
-                    title={<span className='h6'>
-                        <DollarOutlined/>
-                        Price
-                    </span>}
-                    >
-                    <Slider 
-                        className='ml-4 mr-4'
-                        range
-                        value={price}
-                        tipFormatter={(v)=>`$${v}`}
-                        onChange={handleSlide} 
-                        max="5000"
-                    />
-                    </SubMenu>
-                    <SubMenu 
-                        key="sub2" 
+         <Container maxWidth="lg">
+            <Grid container>
+                <Grid xs={12} md={4} lg={3}>
+                {isMatch?(<div></div>):(<>
+                    <h4 className=' pt-2 font-wight-bold text-center'>Search/Filters</h4> 
+                    <hr/>
+                    </>)}
+                
+                  {
+                   isMatch? (
+                     <>
+                       <ShopDrawer fetchProducts={fetchProducts} 
+                       showStars={showStars} 
+                       showCategories={showCategories}
+                       showSubs={showSubs}
+                       showBrand={showBrand}
+                       showColor={showColor}
+                       showShipping={showShipping}
+                       handleSlide={handleSlide}
+                       price={price}
+                       />
+                     </>
+                   ):(
+                    <Menu style={{
+                        boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+                        padding:"5px", 
+                        backgroundColor:"white",
+                    }} 
+                        mode="inline" 
+                        defaultOpenKeys={["sub1","sub2","sub3","sub4","sub5","sub6","sub7"]}>
+                        <SubMenu 
+                        key="sub1" 
+                        //icon={<DollarOutlined />} 
                         title={<span className='h6'>
-                            <DownSquareOutlined/>
-                            Category
+                            <DollarOutlined/>
+                            Price
                         </span>}
                         >
-                        <div>
-                            {showCategories()}
-                        </div>
-                    </SubMenu>
-                    <SubMenu 
-                        key="sub3" 
-                        title={<span className='h6'>
-                            <StarOutlined/>
-                            Rating
-                        </span>}
-                        >
-                        <div>
-                            {showStars()}
-                        </div>
-                    </SubMenu>
-                    <SubMenu 
-                        key="sub4" 
-                        title={<span className='h6'>
-                            <DownSquareOutlined/>
-                            SubCategory
-                        </span>}
-                        >
-                        <div>
-                            {showSubs()}
-                        </div>
-                    </SubMenu>
-                    <SubMenu 
-                        key="sub5" 
-                        title={<span className='h6'>
-                            <DownSquareOutlined/>
-                            Brands
-                        </span>}
-                        >
-                        <div>
-                            {showBrand()}
-                        </div>
-                    </SubMenu>
-                    <SubMenu 
-                        key="sub6" 
-                        title={<span className='h6'>
-                            <DownSquareOutlined/>
-                            Colors
-                        </span>}
-                        >
-                        <div>
-                            {showColor()}
-                        </div>
-                    </SubMenu>
-                    <SubMenu 
-                        key="sub7" 
-                        title={<span className='h6'>
-                            <DownSquareOutlined/>
-                            Shipping
-                        </span>}
-                        >
-                        <div>
-                            {showShipping()}
-                        </div>
-                    </SubMenu>
-                </Menu>
-              </div>
-              <div className='col-md-9'>
-                 <div className='row'>
-                   {
-                      loading?(
-                          <h4 className='text-danger'>loading...</h4>
-                      ):(
-                          <h4 className=' pt-3 font-wight-bold'>Product List</h4>
-                      )
-                   }
-                 </div>
-                  {product.length<1 && <p>No prodouct found</p>}
-                 <div className='row'>
-                   {
-                      product.map((p)=>(
-                          <div key={p._id} className='col-md-4'>
-                              <ProductCard product={p}/>
-                          </div>
-                      ))
-                    }
-                 </div>
-              </div>
-            </div>
-        </div>
+                        <Slider 
+                            className='ml-4 mr-4'
+                            range
+                            value={price}
+                            tipFormatter={(v)=>`$${v}`}
+                            onChange={handleSlide} 
+                            max="5000"
+                        />
+                        </SubMenu>
+                        <SubMenu 
+                            key="sub2" 
+                            title={<span className='h6'>
+                                <DownSquareOutlined/>
+                                Category
+                            </span>}
+                            >
+                            <div>
+                                {showCategories()}
+                            </div>
+                        </SubMenu>
+                        <SubMenu 
+                            key="sub3" 
+                            title={<span className='h6'>
+                                <StarOutlined/>
+                                Rating
+                            </span>}
+                            >
+                            <div>
+                                {showStars()}
+                            </div>
+                        </SubMenu>
+                        <SubMenu 
+                            key="sub4" 
+                            title={<span className='h6'>
+                                <DownSquareOutlined/>
+                                SubCategory
+                            </span>}
+                            >
+                            <div>
+                                {showSubs()}
+                            </div>
+                        </SubMenu>
+                        <SubMenu 
+                            key="sub5" 
+                            title={<span className='h6'>
+                                <DownSquareOutlined/>
+                                Brands
+                            </span>}
+                            >
+                            <div>
+                                {showBrand()}
+                            </div>
+                        </SubMenu>
+                        <SubMenu 
+                            key="sub6" 
+                            title={<span className='h6'>
+                                <DownSquareOutlined/>
+                                Colors
+                            </span>}
+                            >
+                            <div>
+                                {showColor()}
+                            </div>
+                        </SubMenu>
+                        <SubMenu 
+                            key="sub7" 
+                            title={<span className='h6'>
+                                <DownSquareOutlined/>
+                                Shipping
+                            </span>}
+                            >
+                            <div>
+                                {showShipping()}
+                            </div>
+                        </SubMenu>
+                    </Menu> 
+                   ) 
+                }
+                </Grid>
+                <Grid xs={12} md={1} lg={1}></Grid>
+                <Grid xs={12} md={7} lg={8}>
+                {
+                    loading?(
+                        <h4 className='text-danger'>loading...</h4>
+                    ):(
+                        <h4 className='text-center pt-3 font-wight-bold'>All Product Lists</h4>
+                    )
+                }
+            {product.length<1 && <p>No prodouct found</p>}
+            <Grid container>
+                {
+                    product.map((p)=>(
+                        <Grid key={p._id} pl={1} mb={2} xs={12} sm={3} md={4} lg={3}>
+                            <ShopCard product={p}/>
+                        </Grid>
+                    ))
+                }
+            </Grid>
+            </Grid>
+           </Grid>
+         </Container>
     );
 };
 

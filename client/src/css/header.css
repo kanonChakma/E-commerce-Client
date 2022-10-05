@@ -1,15 +1,15 @@
 .ant-menu,
 .ant-menu-sub,
 .ant-menu-inline {
-  color: white;
-  background-color: #6d6968 !important;
+  color: black;
+  background-color: #ffffff !important;
 }
 
 .ant-menu-submenu > .ant-menu {
-  background-color: #6d6968 !important;
+  background-color: #ffffff !important;
 }
 .ant-menu-submenu-title {
-  color: white !important;
+  color: rgb(0, 0, 0) !important;
 }
 
 .ant-menu-inline {
@@ -20,11 +20,11 @@
   color: white !important;
 }
 .ant-menu-item a:hover {
-  color: #40b63c !important;
-  background-color: #6d6968;
+  color: #6c996b !important;
+  background-color: #6d6968 !important;
 }
 Drop down arrow style .ant-menu-submenu-arrow {
-  color: #6d6968;
+  color: #6d6968 !important;
 }
 
 /* // .ant-menu-submenu-active {
@@ -48,4 +48,11 @@ Drop down arrow style .ant-menu-submenu-arrow {
   outline: none;
   font-size: 10px;
   width: 170px;
+}
+
+.edit_hover_class {
+  visibility: hidden;
+}
+.showicon:hover .edit_hover_class {
+  visibility: visible;
 }

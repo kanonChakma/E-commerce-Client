@@ -6,8 +6,9 @@ import { CreateCart } from '../../common/user';
 import CartItem from './CartItem';
 
 const Cart = ({history}) => {
+
   const {user,cart}=useSelector((state)=>({...state}))
-  const dispatch=useDispatch()
+  const dispatch=useDispatch();
 
   const getTotal=()=>{
     return cart.reduce((f,s)=>{
@@ -61,8 +62,8 @@ const Cart = ({history}) => {
             </>
          )}
         </Grid>
-        <Grid item xs={12} md={1}></Grid>
-       <Grid item xs={12} md={3}>
+         <Grid item xs={12} md={1}></Grid>
+         <Grid item xs={12} md={3}>
              <h4>Order Summary</h4>
              <table class="table">
                  <thead className='thead-light'>
@@ -115,10 +116,14 @@ const Cart = ({history}) => {
                  </Link>
               </button> 
              }
-      </Grid>
           </Grid>
+         </Grid>
       </Container>
     );
 };
 
 export default Cart;
+
+
+
+

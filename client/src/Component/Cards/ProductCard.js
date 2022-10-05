@@ -1,4 +1,5 @@
 import { EyeOutlined, ShoppingCartOutlined } from '@ant-design/icons';
+import { Typography } from '@mui/material';
 import { Card, Tooltip } from 'antd';
 import _ from 'lodash';
 import React, { useState } from 'react';
@@ -26,7 +27,7 @@ const ProductCard = ({product}) => {
   
     const handleAddToCart=()=>{
       let cart=[];
-     if(typeof window !== "undefined"){
+     if(typeof window !== "undefined") {
           if(localStorage.getItem("cart")){
               cart=JSON.parse(localStorage.getItem("cart"));
              }
@@ -50,7 +51,7 @@ const ProductCard = ({product}) => {
     return (
       <>
           {product && product.ratings&& product.ratings.length>0?
-            avarageRatting(product): <div className='text-center pb-3'>No Rating Yet</div>
+            avarageRatting(product): <Typography textAlign="center" marginBottom={2} variant="body2" gutterBottom>No Rating Yet</Typography> 
             }
         <Card
         style={card}

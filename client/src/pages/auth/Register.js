@@ -7,6 +7,11 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(!email){
+            toast.error("Email is Empty!!");
+            return;
+        }
+       
         const config ={
             url:"http://localhost:3000/register/complete",
             handleCodeInApp:true,
@@ -18,9 +23,8 @@ const Register = () => {
             setEmail("")
         })
         .catch((error) => {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          console.log(errorMessage, errorCode);
+          //var errorCode = error.code;
+         // var errorMessage = error.message;
           toast.error(error.message);
         });
     }
@@ -34,14 +38,14 @@ const Register = () => {
              placeholder="Enter Your Email"
              autoFocus
             />
-            <button type="submit" className="btn btn-raised">Register</button>
+            <button type="submit" className="btn btn-raised mt-3">send</button>
         </form>
 
     return (
-        <div className="container p-5">
-            <div className="row">
+        <div className="container p-5 mb-3">
+            <div className="row mb-3">
                 <div className="col-md-6 offset-md-3">
-                    <h4>Register</h4>
+                    <h4 className='text-center mb-3'>Register</h4>
                     {registerForm()}
                 </div>
             </div>

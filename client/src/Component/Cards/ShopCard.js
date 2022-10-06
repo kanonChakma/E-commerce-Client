@@ -36,7 +36,7 @@ const ShopCard = ({product}) => {
     const classes = useStyles();
     const history = useHistory();
     
-    const{title,description,images,slug,price}=product;
+    const{title,images,slug,price}=product;
     return (
         <Card className={`${classes.card} showicon`} onClick={() => history.push(`/product/${slug}`)}>
         <CardMedia

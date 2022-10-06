@@ -1,4 +1,4 @@
-.ant-menu,
+/* .ant-menu,
 .ant-menu-sub,
 .ant-menu-inline {
   color: black;
@@ -21,18 +21,18 @@
 }
 .ant-menu-item a:hover {
   color: #6c996b !important;
-  background-color: #6d6968 !important;
-}
+  /* background-color: #6d6968 !important; */
+/* }
 Drop down arrow style .ant-menu-submenu-arrow {
   color: #6d6968 !important;
-}
+} */
 
 /* // .ant-menu-submenu-active {
 //   background-color: #fff !important;
 //   color: #044d50 !important;
 // } */
 
-.ant-menu-item-selected {
+/* .ant-menu-item-selected {
   background-color: #6d6968 !important;
   color: white !important;
 }
@@ -48,7 +48,7 @@ Drop down arrow style .ant-menu-submenu-arrow {
   outline: none;
   font-size: 10px;
   width: 170px;
-}
+}  */
 
 .edit_hover_class {
   visibility: hidden;

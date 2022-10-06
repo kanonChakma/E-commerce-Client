@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import {loadStripe} from '@stripe/stripe-js';
-import {CreatePaymentIntents} from "../../common/stripe";
-import laptop from "../../image/laptop.jpg"
+import { CheckOutlined, DollarOutlined } from '@ant-design/icons';
 import {
-  CardElement,
-  useStripe,
-  useElements,
+  CardElement, useElements, useStripe
 } from '@stripe/react-stripe-js';
-import { Card, Avatar } from 'antd';
-import { DollarOutlined,CheckOutlined } from '@ant-design/icons'
-import {Link} from 'react-router-dom';
+import { Card } from 'antd';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {createCashPayment, createOrder, removeCart } from '../../common/user';
+import { Link } from 'react-router-dom';
+import { CreatePaymentIntents } from "../../common/stripe";
+import { createOrder, removeCart } from '../../common/user';
+import laptop from "../../image/laptop.jpg";
 
 const CheckoutForm = () => {
   
@@ -114,6 +111,7 @@ const CheckoutForm = () => {
       <Card
       cover={
         <img
+        alt='img'
           src={laptop}
           style={{
             height:"200px",

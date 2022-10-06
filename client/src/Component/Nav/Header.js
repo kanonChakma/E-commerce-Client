@@ -95,7 +95,7 @@ const Header = () => {
           title={user && user.email.split('@')[0]} 
           className="float-right">
           
-        {user && user.role==='subscriber' &&  <Item icon={<DashboardOutlined />}><Link to="/user/history">Dahboard</Link></Item>}
+        {user && user.role==='subscriber' &&  <Item icon={<DashboardOutlined />}><Link to="/user/history">Dashboard</Link></Item>}
         {user && user.role==='admin' &&   <Item icon={<DashboardOutlined />}><Link to="/admin/dashboard">Dashboard</Link></Item>}
         <Item icon={<LoginOutlined />} onClick={logout}>Log Out</Item>
          

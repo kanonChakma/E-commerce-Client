@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { createOrUpdate } from '../../common/authData';
 import { auth, googleAuthProvider } from '../../firebase';
+
 const useStyles = makeStyles(theme => ({
   "@global": {
     body: {

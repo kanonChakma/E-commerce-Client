@@ -54,7 +54,7 @@ const Header = () => {
     return (
       <>
       {
-        isMatch?(<HeaderDrawer user={user} cart={cart} logout={logout} />):(
+        isMatch?(<HeaderDrawer user={user} category={category} cart={cart} logout={logout} />):(
           <Menu style={{fontSize:'17px', padding:"7px 15px"}} onClick={handleClick} selectedKeys={[currentState]} mode="horizontal">
           <Item key="home" icon={<HomeOutlined style={{ fontSize: '14px' }}/>}>
             <Link to="/">Home</Link>

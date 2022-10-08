@@ -1,6 +1,6 @@
 import { DollarOutlined, DownSquareOutlined, StarOutlined } from '@ant-design/icons';
 import FilterListIcon from '@mui/icons-material/FilterList';
-import { Drawer, IconButton } from "@mui/material";
+import { Box, Drawer, IconButton } from "@mui/material";
 import { Menu, Slider } from 'antd';
 import React, { useState } from 'react';
 const { SubMenu } = Menu;
@@ -16,8 +16,8 @@ const ShopDrawer = ({price,handleSlide,showCategories,showStars,showSubs,showBra
         elevation: 8,
         sx: {
           marginTop:15,
-          width: 240,
-          height: 500,
+          width: 270,
+          height: 520,
           color: 'black',
           backgroundColor: "white"
         }
@@ -118,12 +118,23 @@ const ShopDrawer = ({price,handleSlide,showCategories,showStars,showSubs,showBra
           </SubMenu>
       </Menu> 
       </Drawer>
-      <IconButton
-        sx={{ color: "black", marginLeft: "auto" }}
-        onClick={() => setOpenDrawer(!openDrawer)}
+      <Box 
+      style={{
+          display:"flex",
+          justifyContent:"space-between"
+      }}
       >
-        <FilterListIcon />
-      </IconButton>
+       <Box>
+       </Box>
+       <Box>
+            <IconButton
+            sx={{ color: "black" }}
+            onClick={() => setOpenDrawer(!openDrawer)}
+            >
+            <FilterListIcon />
+            </IconButton>
+       </Box>
+      </Box>
     </>
   );
 };

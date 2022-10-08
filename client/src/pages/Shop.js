@@ -74,7 +74,7 @@ const Shop = () => {
  //...Load Product By Product Price... 
     useEffect(()=>{
         fetchProducts({price})
-    },[ok])  
+    },[ok, price])  
 
 
     const handleSlide=(value)=>{

@@ -1,8 +1,9 @@
-import React from 'react';
-import { useState } from 'react';
+import { Container, Grid } from '@mui/material';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import { auth } from '../../firebase';
 import UserNav from '../Nav/UserNav';
-import { toast } from 'react-toastify';
+
 
 const Password=() => {
     const [password,setPassword]=useState('');
@@ -26,35 +27,49 @@ const Password=() => {
     const updatePassword=() =>(
         <form onSubmit={handleSubmit}>
            <div className="form-group">
-               <label className="my-3">Enter Your Password</label>
+               <label className="my-3"></label>
                <input 
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 className="form-control"
-                placeholder="password"
+                placeholder="password length should be greater than or eqal six"
                />
                <button  
-               className="btn btn-dark"
-               disabled={loading || password.length<6 || !password}
+               className="btn btn-raised mt-3"
+               disabled={loading || password.length>=6 || !password}
                >Submit</button>
            </div> 
         </form>
     )
   return(
-    <div className="container-fluid">
-    <div className="row">
-        <div className="col-md-2">
+    <Container maxWidth="lg">
+       <Grid 
+       sx={{marginTop:"50px", height: {sx:"auto", md:"60vh"}}}
+         container 
+       >
+        <Grid 
+        style={{
+            boxShadow: "rgba(0, 0, 0, 0.05) 0px 0px 0px 1px",
+            padding:"10px 20px",
+        }}
+        item xs={12} sm={2}>
               <UserNav/>
-        </div>
-        <div className="col">
-           <div className="w-50">
-                {loading?<h4 className="text-danger">Loading...</h4>:<h4 className="text-secondary text-center">Update Password</h4>}
+        </Grid>
+        <Grid item xs={12} sm={3}>
+        </Grid>
+        
+        <Grid
+        style={{
+            boxShadow: "rgba(0, 0, 0, 0.05) 0px 0px 0px 1px",
+            padding:"10px 20px"}}
+            item  xs={12} sm={5}
+         >
+         {loading?<h4 className="text-danger">Loading...</h4>:<h4 className="text-secondary text-center">Update Password</h4>}
                 {updatePassword()}
-           </div>
-        </div>
-    </div>
-  </div> 
+        </Grid>
+    </Grid>
+  </Container> 
   )
 }
 export default Password;

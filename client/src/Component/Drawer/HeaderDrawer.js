@@ -65,10 +65,10 @@ const HeaderDrawer = ({user,logout, cart, category}) => {
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
       >
-       <Box   sx={{height:'100vh',width:'250px'}}>
         <Box sx={{p:"10px"}}>
           <Search/>
         </Box>
+       <Box   sx={{height:'100vh',width:'300px'}}>
        <List>
             <Link style={{ color: '#616161' }} to={`/user/wishlist`}>
             <ListItemButton onClick={() => setOpenDrawer(false)}>

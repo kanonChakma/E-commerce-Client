@@ -142,20 +142,6 @@ const Address = ({data,nextStep,handleChange}) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              variant="outlined"
-              size="small"
-              required
-              fullWidth
-              name="password"
-              label="password"
-              type="password"
-              id="password"
-              onChange={handleChange}
-              autoComplete="current-password"
-            />
-          </Grid>
-          <Grid item xs={12}>
            <TextareaAutosize
               variant="outlined"
               minRows={3}

@@ -1,14 +1,21 @@
+import { Container, Grid } from '@mui/material';
 import { Card } from 'antd';
 import React from 'react';
 import cash1 from "../../image/cash1.jpg";
 import stripe from "../../image/stripe.png";
 const { Meta } = Card;
+
 const SelectPaymentMethod = ({history}) => {
     return (
-        <div className='container'>
-              <h4 className='mt-3 mb-3'>Select Payment Methods</h4>
-            <div className='row'>
-                 <div className='col-md-3'>
+        <Container>
+              <h4 className='mt-5 mb-3 text-center'>Select Payment Methods</h4>
+            <Grid 
+              spacing={0}
+              alignItems="center"
+              justifyContent="center"
+              style={{ minHeight: '50vh' }}
+              container>
+                 <Grid item xs={12} sm={3} mt={3}>
                  <Card
                    onClick={()=>history.push("/payment")} 
                   hoverable
@@ -28,8 +35,9 @@ const SelectPaymentMethod = ({history}) => {
                >
                    <Meta title="Stripe Payment" />
                 </Card>
-                </div>
-                <div className='col-md-3'>
+                </Grid>
+                <Grid item xs={12} sm={1} mt={3}></Grid>
+                <Grid item xs={12} sm={3} mt={3}>
                 <Card
                  hoverable
                  onClick={()=>history.push("/cash-payment")} 
@@ -49,9 +57,9 @@ const SelectPaymentMethod = ({history}) => {
                >
                    <Meta title="Cash On Delivery" />
                 </Card>
-                </div>
-            </div>
-        </div>
+                </Grid>
+            </Grid>
+        </Container>
     );
 };
 

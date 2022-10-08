@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { applyCoupon } from '../../common/coupon';
 import { toast } from 'react-toastify';
+import { applyCoupon } from '../../common/coupon';
 
 const ApplyCoupon = ({prevStep,nextStep,setTotalPrice}) => {
     const[coupon,setCoupon]=useState('');
@@ -42,7 +42,11 @@ const ApplyCoupon = ({prevStep,nextStep,setTotalPrice}) => {
         })
      }
     return (
-      <div className='container'>
+      <div 
+      style={{
+         minHeight:"55vh"
+      }}
+      className='container'>
       <div className='row'>
           <div className='col-md-7 offset-md-3 mt-5 pt-5'>
           <h4 className='text-center p-3 mb-5'>Aplly Coupon</h4> 
@@ -55,14 +59,17 @@ const ApplyCoupon = ({prevStep,nextStep,setTotalPrice}) => {
            className="form-control mt-3"
            value={coupon}            
         />
-         <div className='row mt-3'>
-            <div className='col-md-4'>
+         <div className='row mt-3' style={{
+            display:"flex",
+            justifyContent:"space-evenly"
+         }}>
+            <div className='col-xs-4'>
                <button   onClick={back}   class="btn btn-outline-success">Prev</button>
             </div>
-            <div className='col-md-4'>
+            <div className='col-xs-4'>
                <button   onClick={next} class="btn btn-outline-info">Skip</button>
             </div>
-            <div className='col-md-4'>
+            <div className='col-xs-4'>
                <button  onClick={handleApply} class="btn btn-outline-warning">Apply</button>
             </div>
          </div> 

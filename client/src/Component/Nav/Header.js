@@ -1,4 +1,5 @@
 import { DashboardOutlined, HeartOutlined, HomeOutlined, LoginOutlined, SettingOutlined, ShopOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
+import { useMediaQuery, useTheme } from '@mui/material';
 import { Badge, Menu } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,6 +7,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { getCategories } from '../../common/category';
 import { getSubCategories } from '../../common/subCategory';
 import "../../css/header.css";
+import HeaderDrawer from '../Drawer/HeaderDrawer';
 import Search from '../Form/Search';
 
 const  { SubMenu,Item,ItemGroup } = Menu;
@@ -14,6 +16,9 @@ const Header = () => {
     const [currentState,setCurrentState]=useState('home');
     const[category,setCategory]=useState([]);
     const[subs,setSubs]=useState([]);
+
+    const theme = useTheme();
+    const isMatch = useMediaQuery(theme.breakpoints.down("md"));
     
     useEffect(()=>{
       AllCategory()
@@ -47,7 +52,10 @@ const Header = () => {
       history.push("/login"); 
     }
     return (
-        <Menu style={{fontSize:'17px', padding:"7px 15px"}} onClick={handleClick} selectedKeys={[currentState]} mode="horizontal">
+      <>
+      {
+        isMatch?(<HeaderDrawer user={user} cart={cart} logout={logout} />):(
+          <Menu style={{fontSize:'17px', padding:"7px 15px"}} onClick={handleClick} selectedKeys={[currentState]} mode="horizontal">
           <Item key="home" icon={<HomeOutlined style={{ fontSize: '14px' }}/>}>
             <Link to="/">Home</Link>
           </Item>
@@ -103,8 +111,11 @@ const Header = () => {
          )}
         <span className='float-right p-1'>
             <Search/>
-        </span>
-      </Menu>
+           </span>
+        </Menu>
+        )
+      }
+      </>
     );
 };
 

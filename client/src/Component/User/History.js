@@ -1,19 +1,21 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { Container, Grid, Typography } from '@mui/material';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getOrder } from '../../common/user';
 import UserNav from '../Nav/UserNav';
-import { CheckCircleOutlined,CloseCircleOutlined} from '@ant-design/icons';
-import ShowPaymentInfo from '../Cards/ShowPaymentInfo';
-import { PDFDownloadLink } from '@react-pdf/renderer';
 import MyDocument from '../Order/MyDocument';
 
 
 const History=() => {
   const[orders,setOrders]=useState([])
   const{user,cart}=useSelector((state)=>({...state}))
+
   useEffect(()=>{
     userOrderProduct()
   },[])
+
   const userOrderProduct=()=>{
     getOrder(user.token)
     .then((res)=>{
@@ -24,49 +26,51 @@ const History=() => {
       console.log(err);
     })
   }
+
   const   showPaymentInfo=(order,status)=>(
-    <div className='row mb-3'>
-    <div className='col-md-6 col-sm-6 col-sm-5 d-flex flex-column flex-start'>
-    <table className='table table-border table-dark'>
+    <Grid container>
+      <Grid item xs={12} sm={6}>
+       <table className='table table-border table-dark'>
      <tbody>
         <tr>
-            <td scope='col'>Order Id:</td>
-            <td scope='col'>{order.paymentIntent.id}</td>
+            <th scope='col'>Order Id:</th>
+            <th scope='col'>{order.paymentIntent.id}</th>
         </tr>
         <tr>
-            <td scope='col'>Ordered On:</td>
-            <td scope='col'>{new Date(order.paymentIntent.created*1000).toLocaleString()}</td>
+            <th scope='col'>Ordered On:</th>
+            <th scope='col'>{new Date(order.paymentIntent.created*1000).toLocaleString()}</th>
         </tr>
         {status && <tr className='text-bold text-primary'>
-            <td  scope='col'>Status:</td>
-            <td scope='col'>{order.orderStatus}</td>
+            <th  scope='col'>Status:</th>
+            <th scope='col'>{order.orderStatus}</th>
         </tr>}
       </tbody>
-    </table>
-    </div>
-    <div className='col-md-6 col-sm-6 d-flex flex-column'>
+       </table>
+      </Grid>
+       <Grid item xs={12} sm={6}>
         <table className='table table-border table-dark'>
         <tbody>
             <tr>
-                <td scope='col'>Amount:</td>
-                <td scope='col'>{(order.paymentIntent.amount /= 100).toLocaleString("en-US",{
+                <th scope='col'>Amount:</th>
+                <th scope='col'>{(order.paymentIntent.amount /= 100).toLocaleString("en-US",{
           style:"currency",
           currency:"USD",
-      })}</td>
+      })}</th>
             </tr>
             <tr>
-                <td scope='col'>Currency::</td>
-                <td scope='col'>{order.paymentIntent.currency.toUpperCase()}</td>
+                <th scope='col'>Currency::</th>
+                <th scope='col'>{order.paymentIntent.currency.toUpperCase()}</th>
             </tr>
             <tr>
-                <td scope='col'>Method:</td>
-                <td scope='col'>{order.paymentIntent.payment_method[0]}</td>
+                <th scope='col'>Method:</th>
+                <th scope='col'>{order.paymentIntent.payment_method[0]}</th>
             </tr>
         </tbody>
         </table>
-      </div>
-   </div>
+      </Grid>
+   </Grid>
   )
+
   const showOrderTable=(order)=>(
     <table className='table table-bordered'>
        <thead className='thead-dark'>
@@ -99,37 +103,62 @@ const History=() => {
 
  const showOrders=()=>(
    orders.reverse().map((order,i)=>(
-     <div key={i} className='m-5 p-3 card'>
+     <Grid py={3} container key={i}>
       {  showPaymentInfo (order,true)}
         {showOrderTable(order)}
-        <div className='row'>
-            <div className='col'>
+        <div className='row mb-3'>
+            <div className='col text-center'>
             <PDFDownloadLink
               document={
                 <MyDocument order={order}/>
                 }
               fileName='invoice.pdf'
-              className='btn btn-sm btn-outline-primary'
+              className='btn btn-sm btn-outline-primary text-center'
             >
               Download Pdf
             </PDFDownloadLink>
           </div>
         </div>
-     </div>
+     </Grid>
    ))
  )
   return(
-    <div className="container-fluid">
-    <div className="row">
-        <div className="col-md-3">
+    <Container maxWidth="lg">
+      <Grid
+      sx={{marginTop:"50px", height: {sx:"auto", md:"auto"}}}
+      container
+      >
+          <Grid
+          style={{
+            padding:"10px 20px",
+            boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+            
+            }}
+           item xs={12} sm={3}  md={2}>
             <UserNav/>
-        </div>
-        <div className="col-md-8 text-center">
-            <h4>{orders.length>0?"User purchase orders":"No purchase Orders"}</h4>
-            {showOrders()}
-        </div>
-    </div>
-  </div> 
+          </Grid>
+          <Grid  item xs={12} sm={1}  md={1}>
+          </Grid>
+          <Grid  item xs={12} sm={8}  md={9}>
+             <Grid
+             style={{
+              boxShadow: "rgba(0, 0, 0, 0.05) 0px 0px 0px 1px",
+              padding:"10px 20px",
+          }}
+          container
+             >
+                 <Grid item xs={12}  mb={3}>
+                    <Typography variant="h5"  style={{ justifyContent:"center",marginBottom:"10px", textAlign:"center"}}>
+                        {orders.length>0?"User purchase orders":"No purchase Orders"}
+                      </Typography>
+                 </Grid>
+                <Grid item xs={12} mb={3}>
+                  {showOrders()}
+                </Grid>
+             </Grid>
+          </Grid>
+      </Grid>
+  </Container> 
   )
 }
 export default History;

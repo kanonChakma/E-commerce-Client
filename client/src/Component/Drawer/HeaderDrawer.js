@@ -1,4 +1,6 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CategoryIcon from '@mui/icons-material/Category';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import MenuIcon from "@mui/icons-material/Menu";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import {
@@ -20,6 +22,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Search from '../Form/Search';
 const paths=[
     {
         icon:<InboxIcon />,
@@ -43,7 +46,7 @@ const paths=[
     },
 ]
 const pages=["about","ndis","covid","service","career"];
-const HeaderDrawer = ({user,logout, cart}) => {
+const HeaderDrawer = ({user,logout, cart, category}) => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [anchorEl, setAnchorEl] =  useState(null);
   const open = Boolean(anchorEl);
@@ -62,15 +65,26 @@ const HeaderDrawer = ({user,logout, cart}) => {
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
       >
-       <Box   sx={{height:'100vh',width:{sm:'250px',xs:'190px'}}}>
+       <Box   sx={{height:'100vh',width:'250px'}}>
+        <Box sx={{p:"10px"}}>
+          <Search/>
+        </Box>
        <List>
-          {paths.map((page, index) => (
-          <Link href={`/${pages[index]}`}  key={index}>
+            <Link style={{ color: '#616161' }} to={`/user/wishlist`}>
             <ListItemButton onClick={() => setOpenDrawer(false)}>
                 <ListItemIcon>
-                    {page.icon}
+                  <FavoriteBorderIcon/>
                 </ListItemIcon>
-                <ListItemText>{page.text}</ListItemText>
+                <ListItemText>wishlist</ListItemText>
+            </ListItemButton>
+          </Link>
+          {category.map((c, index) => (
+          <Link style={{ color: '#616161' }} to={`/category/${c.slug}`}  key={index}>
+            <ListItemButton onClick={() => setOpenDrawer(false)}>
+                <ListItemIcon>
+                  <CategoryIcon/>
+                </ListItemIcon>
+                <ListItemText>{c.name}</ListItemText>
             </ListItemButton>
           </Link>
           ))}

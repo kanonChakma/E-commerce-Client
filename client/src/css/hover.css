@@ -1,0 +1,92 @@
+.column {
+  display: inline-block;
+  text-align: center;
+  height: 100%;
+}
+
+figure {
+  overflow: hidden;
+}
+
+.column img {
+  display: block;
+  width: 100%;
+  filter: blur(2px);
+}
+
+/*Zoom Out*/
+.column#zoomOut img {
+  -webkit-transform: scale(1.5);
+  transform: scale(1.5);
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+.column#zoomOut:hover img {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+/*With Simple Caption*/
+.column#caption {
+  position: relative;
+  height: 100%;
+}
+.column#caption .text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  opacity: 1;
+  transition: all 0.8s ease;
+  filter: blur(0px);
+}
+.column#caption .text h6 {
+  margin: 0;
+  color: white;
+  font-weight: bold;
+}
+.column#caption:hover .text {
+  opacity: 1;
+}
+.column#caption img {
+  -webkit-transform: scale(1.5);
+  transform: scale(1.5);
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+.column#caption:hover img {
+  -webkit-filter: sepia(10%);
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+/* Craeted refering to LittleSnippets.net Pen: https://codepen.io/littlesnippets/pen/adLELd */
+.frame {
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  perspective: 500px;
+}
+.frame img {
+  width: 300px;
+  height: 300px;
+}
+.frame .details {
+  width: 70%;
+  height: 80%;
+  padding: 5% 8%;
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateY(90deg);
+  transform-origin: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  opacity: 0;
+  transition: all 0.4s ease-in;
+}
+.frame:hover .details {
+  transform: translate(-50%, -50%) rotateY(0deg);
+  opacity: 1;
+}

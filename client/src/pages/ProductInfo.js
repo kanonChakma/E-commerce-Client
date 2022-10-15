@@ -43,7 +43,7 @@ const ProductInfo = ({match}) => {
         });
     }
     return (
-           <Container maxWidth="lg">
+           <Container maxWidth="laptop">
                <Grid>
                   <SingleProduct product={product} productRating={productRating} star={star}/>
                </Grid>

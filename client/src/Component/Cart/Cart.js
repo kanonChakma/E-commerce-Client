@@ -1,15 +1,15 @@
 import { Grid } from '@mui/material';
 import Container from '@mui/material/Container';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { CreateCart } from '../../common/user';
 import CartItem from './CartItem';
+import CartShortInfo from './CartShortInfo';
 
 const Cart = ({history}) => {
 
   const {user,cart}=useSelector((state)=>({...state}))
-  const dispatch=useDispatch();
-
+ 
   const getTotal=()=>{
     return cart.reduce((f,s)=>{
        return f+s.count*s.price;
@@ -30,17 +30,21 @@ const Cart = ({history}) => {
     return (
        <Container maxWidth="lg">
          <Grid
-         sx={{marginTop:"50px", height: {sx:"auto", md:"60vh"}}}
+         sx={{marginTop:"50px", minHeight:{xs:"auto", md:"60vh"}}}
          container 
          >
-         <Grid item xs={12} md={8}>
+         <Grid item xs={12} lg={8}>
          {!cart.length?(
            <>
              <h5>No Product in the cart</h5>
              <Link to="/shop">Continnue Shopping...</Link>
            </>
-           ):(
-            <>
+           ):(<>
+            <Grid
+            sx={{
+              display:{xs:"none",md:"block"}
+            }}
+            >
             <h4>Edit Your Choices</h4>
             <table className='table table-bordered'>
               <thead className='thead-light'>
@@ -59,11 +63,32 @@ const Cart = ({history}) => {
                  <CartItem product={p}/>
                ))}
             </table>
-            </>
-         )}
+            </Grid>
+
+            <Grid
+            sx={{
+              display:{md:"none"}
+            }}
+            >
+            <h4>Edit Your Choices</h4>
+            <table className='table table-bordered'>
+              <thead className='thead-light'>
+                  <tr>
+                      <th scope="col">Title</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Count</th>
+                      <th scope="col">Remove</th>
+                  </tr>
+              </thead>
+               {cart.map((p)=>(
+                 <CartShortInfo product={p}/>
+               ))}
+            </table>
+            </Grid>
+            </>)}
         </Grid>
-         <Grid item xs={12} md={1}></Grid>
-         <Grid item xs={12} md={3}>
+         <Grid item xs={12} lg={1}></Grid>
+         <Grid item xs={12} lg={3}>
              <h4>Order Summary</h4>
              <table class="table">
                  <thead className='thead-light'>

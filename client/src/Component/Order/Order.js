@@ -1,6 +1,5 @@
+import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import React from 'react';
-import ShowPaymentInfo from '../Cards/ShowPaymentInfo';
-import { CheckCircleOutlined,CloseCircleOutlined} from '@ant-design/icons';
 
 const Order = ({orders,handleStatus}) => {
 
@@ -81,7 +80,7 @@ const Order = ({orders,handleStatus}) => {
           <div className='col'>
                  {
                    orders.map((order,i)=>(
-                            <div key={i} className='m-5 p-3 card'>
+                            <div key={i} className='ml-4 mb-5 p-2 card'>
                                 {showPaymentInfo (order,false)}
                                  <div className='row text-primary'>
                                     <div className='col-md-4 mt-2 mb-2'>

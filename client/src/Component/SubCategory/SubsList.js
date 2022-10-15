@@ -1,4 +1,5 @@
 
+import { Container } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getSubCategories } from '../../common/subCategory';
@@ -12,14 +13,13 @@ const CategoryList = () => {
         getSubCategories()
       .then((res)=>{
           setSubs(res.data)
-          console.log(res.data)
           setLoading(false)
       })
     },[])
-console.log(subs);
+
 
     return (
-        <div className='container'>
+        <Container maxWidth="laptop">
           <div className='row'>
               {loading?(<h4 className='text-center'>Loading..</h4>):(
                 subs.map((c)=>(
@@ -31,7 +31,7 @@ console.log(subs);
                    ))
                )}
           </div>
-        </div>
+        </Container>
     );
 };
 

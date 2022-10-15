@@ -43,15 +43,16 @@ const Password=() => {
         </form>
     )
   return(
-    <Container maxWidth="lg">
+    <Container maxWidth="laptop">
        <Grid 
        sx={{marginTop:"50px", height: {sx:"auto", md:"60vh"}}}
          container 
        >
         <Grid 
-        style={{
+        sx={{
             boxShadow: "rgba(0, 0, 0, 0.05) 0px 0px 0px 1px",
             padding:"10px 20px",
+            height:{sx:"auto", sm:"350px"}
         }}
         item xs={12} sm={2}>
               <UserNav/>

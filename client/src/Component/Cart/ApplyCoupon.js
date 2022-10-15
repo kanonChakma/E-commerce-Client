@@ -49,7 +49,7 @@ const ApplyCoupon = ({prevStep,nextStep,setTotalPrice}) => {
       className='container'>
       <div className='row'>
           <div className='col-md-7 offset-md-3 mt-5 pt-5'>
-          <h4 className='text-center p-3 mb-5'>Aplly Coupon</h4> 
+          <h4 className='text-center p-3 mb-5'>Apply Coupon</h4> 
         <input 
            onChange={(e) => {
                setCoupon(e.target.value)

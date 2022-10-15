@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getUserWishList, updateUserWishList } from '../../common/user';
+import "../../css/hover.css";
 import laptop from "../../image/laptop.jpg";
 import UserNav from '../Nav/UserNav';
 
@@ -28,6 +29,7 @@ const useStyles = makeStyles(theme => ({
   },
 
 }));
+
 
 const WishList=() => {
   const{user}=useSelector((state)=>({...state}));
@@ -53,28 +55,28 @@ const WishList=() => {
     })
   }
   return(
-   <Container>
+   <Container maxWidth="laptop">
     <Grid 
     sx={{marginTop:"50px", height: {sx:"auto", md:"60vh"}}}
     container>
       <Grid
-       style={{
+       sx={{
         padding:"10px 20px",
         boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
-        height:"auto",
+        height:{sx:"auto", sm:"350px"}
        }}
         item xs={12} sm={3}  md={2}>
         <UserNav/>
       </Grid>
 
-       <Grid item xs={12} sm={1} md={1}>
+      <Grid item xs={12} sm={1} md={1}>
        </Grid>
       
-      <Grid item xs={12} sm={8} md={8}>
+      <Grid item xs={12} sm={8} md={9}>
       <Grid 
        style={{
         boxShadow: "rgba(0, 0, 0, 0.05) 0px 0px 0px 1px",
-        padding:"10px 20px",
+        padding:"10px 5px",
     }}
     container>
       {
@@ -84,7 +86,7 @@ const WishList=() => {
             <CardMedia
               component="img"
               alt="green iguana"
-              height="140"
+              height="130"
               image={p.images.length>0?p.images[0].url:laptop}
               /> 
             <CardContent style={{height: "0px", marginBottom:"27px"}}>
@@ -112,35 +114,8 @@ const WishList=() => {
       </Grid>
       </Grid>
       </Grid>
-      
    </Container>
   )
 }
 
 export default WishList;
-
-// <Card
-// cover={
-//   <div style={{overflow:"hidden",height:"200px"}}>
-//   <img
-//     style={{height:"100%",
-//     width:"100%",
-//     objectFit:"cover"}
-//     }
-//     alt="example"
-//     src={p.images.length>0?p.images[0].url:laptop}
-//   />
-//   </div>
-// }
-// actions={[
-//   <Link to={`/product/${p.slug}`}>
-//     <EyeOutlined/><br/> View Product
-//   </Link>,
-//   <Tooltip title={p.quantity<1?"":"delete Product"}>
-//     <a onClick={()=>handleRemove(p._id)}>
-//        <DeleteOutlined key="delete" /><br/>Delete Product
-//     </a>
-//   </Tooltip>,
-// ]}
-// >
-// </Card>

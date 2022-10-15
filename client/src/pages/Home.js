@@ -5,6 +5,7 @@ import BestSellers from '../Component/Home/BestSellers';
 import Carousele from '../Component/Home/Carousele';
 import NewArrivals from '../Component/Home/NewArrivals';
 import SubsList from '../Component/SubCategory/SubsList';
+
 const Home = () => {
   const showName=(name)=>(
     <div className='row'>
@@ -27,10 +28,12 @@ const Home = () => {
              </div>
                {showName("New Arrivals")}
              <NewArrivals/>
+
+               {showName("Category")}
+               <CategoryList/>
+               
                  {showName("Best Sellers")}
              <BestSellers/>
-                  {showName("Category")}
-              <CategoryList/>
                   {showName("SubsCategory")}
               <SubsList/>
         </div>

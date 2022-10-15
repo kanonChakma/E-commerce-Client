@@ -39,7 +39,7 @@ const NewArrivals = () => {
         })
     }
     return (
-            <Container maxWidth="lg">
+            <Container maxWidth="laptop">
                 {loading? <LoadingCard count={products.length}/>: 
                 <Grid container sx={{ justifyContent: "space-between" }}>
                 {

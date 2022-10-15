@@ -29,7 +29,7 @@ const History=() => {
 
   const   showPaymentInfo=(order,status)=>(
     <Grid container>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} >
        <table className='table table-border table-dark'>
      <tbody>
         <tr>
@@ -47,7 +47,7 @@ const History=() => {
       </tbody>
        </table>
       </Grid>
-       <Grid item xs={12} sm={6}>
+       <Grid item xs={12}>
         <table className='table table-border table-dark'>
         <tbody>
             <tr>
@@ -123,16 +123,16 @@ const History=() => {
    ))
  )
   return(
-    <Container maxWidth="lg">
+    <Container maxWidth="laptop">
       <Grid
       sx={{marginTop:"50px", height: {sx:"auto", md:"auto"}}}
       container
       >
           <Grid
-          style={{
+          sx={{
             padding:"10px 20px",
             boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
-            
+            height:{sx:"auto", sm:"350px"}
             }}
            item xs={12} sm={3}  md={2}>
             <UserNav/>
@@ -147,7 +147,7 @@ const History=() => {
           }}
           container
              >
-                 <Grid item xs={12}  mb={3}>
+                 <Grid item xs={12}  mb={1}>
                     <Typography variant="h5"  style={{ justifyContent:"center",marginBottom:"10px", textAlign:"center"}}>
                         {orders.length>0?"User purchase orders":"No purchase Orders"}
                       </Typography>

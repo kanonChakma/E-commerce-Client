@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { getOrders,updateOderStatus} from '../../common/admin';
-import AdminNav from '../Nav/AdminNav';
+import { Container, Grid } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import Order from '../Order/Order';
 import { toast } from 'react-toastify';
+import { getOrders, updateOderStatus } from '../../common/admin';
+import AdminNav from '../Nav/AdminNav';
+import Order from '../Order/Order';
 
 const AdminDashboard= () =>{
     const[orders,setOrders]=useState([]);
@@ -25,17 +26,25 @@ const AdminDashboard= () =>{
         })
      }
     return (
-        <div className="container-fluid">
-            <div className="row">
-               <div className="col-md-2">
-                  <AdminNav/>
-               </div>
-                  <div className="col-md-8">
-                     <h4 className='text-center'>Admin Dashboard</h4>
+        <Container maxWidth="laptop">
+        
+        <Grid  sx={{marginTop:"50px", height: {sx:"auto", md:"auto"}}}
+            container>
+                <Grid sx={{
+                    padding:"10px 20px",
+                    boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+                    height:{sx:"auto", sm:"450px"}
+                    }}
+                    item xs={12} sm={3}  md={3}>
+                    <AdminNav/>
+                </Grid>
+
+                <Grid item xs={12} sm={8} md={9}>
+                <h4 className='text-center'>Admin Dashboard</h4>
                      <Order orders={orders} handleStatus={handleStatus}/>
-                 </div>
-            </div>
-        </div>
+                 </Grid>
+            </Grid>
+        </Container>
     )
 }
 

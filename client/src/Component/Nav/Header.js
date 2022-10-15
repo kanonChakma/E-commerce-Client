@@ -1,5 +1,5 @@
 import { DashboardOutlined, HeartOutlined, HomeOutlined, LoginOutlined, SettingOutlined, ShopOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { Container, useMediaQuery, useTheme } from '@mui/material';
 import { Badge, Menu } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -52,10 +52,11 @@ const Header = () => {
       history.push("/login"); 
     }
     return (
-      <>
+      <Container maxWidth="lg">
       {
         isMatch?(<HeaderDrawer user={user} category={category} cart={cart} logout={logout} />):(
           <Menu style={{fontSize:'17px', padding:"7px 15px"}} onClick={handleClick} selectedKeys={[currentState]} mode="horizontal">
+
           <Item key="home" icon={<HomeOutlined style={{ fontSize: '14px' }}/>}>
             <Link to="/">Home</Link>
           </Item>
@@ -85,8 +86,9 @@ const Header = () => {
               </Badge>
             </Link>
           </Item>
+          
            <Item key="whislist" icon={<HeartOutlined style={{ fontSize: '14px' }}/>}>
-            <Link to="/user/wishlist">wishlist</Link>
+              <Link to="/user/wishlist">wishlist</Link>
           </Item>
         {!user && <Item key="register" icon={<HomeOutlined />}  className="float-right">
             <Link to="/register">Register</Link>
@@ -115,7 +117,7 @@ const Header = () => {
         </Menu>
         )
       }
-      </>
+      </Container>
     );
 };
 

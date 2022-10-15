@@ -1,9 +1,37 @@
 
+import { Box, Card, CardMedia, Container, Grid } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCategories } from '../../common/category';
+import "../../css/hover.css";
+import img from "../../image/first.jpg";
+
+const useStyles = makeStyles(theme => ({
+  card: {
+    display: 'flex',
+  },
+  content: {
+    flex: '1 0 auto',
+  },
+  cover: {
+    width: 151,
+  },
+  controls: {
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit,
+  },
+ media: {
+    display: 'flex',
+    height: "100%",
+    objectFit: 'contain',
+},
+}));
 
 const CategoryList = () => {
+  const classes = useStyles();
     const[category,setCategory]=useState([]);
     const[loading,setLoading]=useState(false);
 
@@ -16,31 +44,55 @@ const CategoryList = () => {
       })
     },[])
 
-    // let ShowCategory=()=>{
-    //   category.map((c)=>(
-    //   <div 
-    //   key={c._id} 
-    //   className='btn btn-outlined-primary btn m-3'>
-    //       {c.name}
-    //     </div>
-    //     )
-    //    )
-    // }
     return (
-        <div className='container'>
-          <div className='row'>
+        <Container maxWidth="laptop">
+          <Grid container>
               {loading?(<h4 className='text-center'>Loading..</h4>):(
                 category.map((c)=>(
-                    <div 
-                    key={c._id} 
-                    className='col btn btn-outlined-primary btn-lg btn-block btn-raised m-3'>
-                        <Link to={`/category/${c.slug}`}> {c.name}</Link>
-                      </div>
+                    <Grid item xs={12} sm={3} pl={1} mb={1}>
+                    <Card sx={{ maxWidth: 300, maxHeight:140, margin:"0 auto", border:"none", borderRadius:"0px"}}>
+                     <Box className='column' id='caption'>
+                       <span class = "text">
+                         <Link to={`/category/${c.slug}`}> 
+                             <h6>{c.name}</h6>
+                          </Link>
+                        </span>
+                        <figure>
+                        <CardMedia
+                        component="img"
+                        height="100%"
+                        width="100%"
+                        image={img}
+                        alt="Paella dish"
+                        objectFit="contain"
+                        />
+                        </figure>
+                        </Box>
+                     </Card>
+                     </Grid>     
                    ))
                )}
-          </div>
-        </div>
+          </Grid>
+        </Container>
     );
 };
 
 export default CategoryList;
+
+// <Box className='column' id='caption' >
+// <span class = "text">
+//   <Link to={`/category/${c.slug}`}> 
+//       <h6>{c.name}</h6>
+//   </Link>
+// </span>
+// <figure>
+//   <CardMedia
+//     component="img"
+//     height="100%"
+//     width="100%"
+//     image={img}
+//     alt="Paella dish"
+//     objectFit="contain"
+//    />
+//  </figure> 
+// </Box>  

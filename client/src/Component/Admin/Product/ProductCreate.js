@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import { LoadingOutlined } from '@ant-design/icons';
+import { Container, Grid } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { getCategories, getCategorieSubs } from '../../../common/category';
@@ -6,7 +8,6 @@ import { CreateProduct } from '../../../common/product';
 import FileUpload from '../../Form/FileUpload';
 import ProductForm from '../../Form/ProductForm';
 import AdminNav from '../../Nav/AdminNav';
-import {LoadingOutlined} from '@ant-design/icons';
 
 const initialState={
   title:"",
@@ -28,14 +29,17 @@ const ProductCreate = () => {
     const[subOption,setSubOption]=useState("");
     const[showSub,setShowSub]=useState(false);
     const[loading,setLoading]=useState(false);
+    
     useEffect(() => {
             loadCategories();
         },[])
+
    const loadCategories=()=>{
         getCategories()
        .then((res)=>setValues({...values,categories:res.data}))
        .catch(error =>console.log(error.message));
    }
+   
    const {user}=useSelector((state)=>({...state}));
 
     const handleSubmit=(e)=>{
@@ -64,14 +68,24 @@ const ProductCreate = () => {
          setShowSub(true);
       }
     return (
-        <div className="container-fluid">
-            <div className="row">
-               <div className="col-md-2">
-                 <AdminNav/>
-               </div>
+      <Container maxWidth="laptop">
+      <Grid  sx={{marginTop:"50px", minHeight: {sx:"auto", md:"60vh"}}}
+      container>
+                <Grid sx={{
+                  padding:"10px 20px",
+                  boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+                  height:{sx:"auto", sm:"450px"}
+                  }}
+                  item xs={12} sm={3}  md={3} mb={2}>
+                  <AdminNav/>
+                </Grid>
+              <Grid item xs={12} sm={1} md={1}></Grid>
+                  <Grid  style={{
+                    boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                    padding:"10px 45px",
+                }} item xs={12} sm={8} md={8}>  
 
-                  <div className="col-md-10">   
-                    {loading?<LoadingOutlined className="text-danger h1"/> :<h4>Product Create</h4>}
+                    {loading?<LoadingOutlined className="text-danger h1 text-center"/> :<h4 className="text-center"> Create Product </h4>}
                     <hr/>
                     <div className="p-3">
                       <FileUpload 
@@ -90,9 +104,9 @@ const ProductCreate = () => {
                      showSub={showSub}
                      setValues={setValues}
                    />
-               </div>
-            </div>
-        </div>
+                </Grid>
+            </Grid>
+        </Container>
     );
 };
 export default ProductCreate;

@@ -38,8 +38,13 @@ const AdminDashboard= () =>{
                     item xs={12} sm={3}  md={3}>
                     <AdminNav/>
                 </Grid>
-
-                <Grid item xs={12} sm={8} md={9}>
+                <Grid item xs={12} sm={1} md={1}></Grid>
+                <Grid
+                style={{
+                    boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                    padding:{xs:"0px", md:"10px"}
+                }}
+                item xs={12} sm={8} md={8}>
                 <h4 className='text-center'>Admin Dashboard</h4>
                      <Order orders={orders} handleStatus={handleStatus}/>
                  </Grid>

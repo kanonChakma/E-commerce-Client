@@ -123,9 +123,9 @@ const History=() => {
    ))
  )
   return(
-    <Container maxWidth="laptop">
+    <Container maxWidth="lg">
       <Grid
-      sx={{marginTop:"50px", height: {sx:"auto", md:"auto"}}}
+      sx={{marginTop:"50px", minHeight: {sx:"auto", md:"70vh"}}}
       container
       >
           <Grid
@@ -134,15 +134,15 @@ const History=() => {
             boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
             height:{sx:"auto", sm:"350px"}
             }}
-           item xs={12} sm={3}  md={2}>
+           item xs={12} sm={3}  md={3}>
             <UserNav/>
           </Grid>
           <Grid  item xs={12} sm={1}  md={1}>
           </Grid>
-          <Grid  item xs={12} sm={8}  md={9}>
+          <Grid  item xs={12} sm={8}  md={8}>
              <Grid
              style={{
-              boxShadow: "rgba(0, 0, 0, 0.05) 0px 0px 0px 1px",
+              boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",
               padding:"10px 20px",
           }}
           container

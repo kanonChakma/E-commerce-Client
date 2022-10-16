@@ -69,23 +69,23 @@ const ProductCreate = () => {
       }
     return (
       <Container maxWidth="laptop">
-      <Grid  sx={{marginTop:"50px", height: {sx:"auto", md:"auto"}}}
+      <Grid  sx={{marginTop:"50px", minHeight: {sx:"auto", md:"60vh"}}}
       container>
                 <Grid sx={{
                   padding:"10px 20px",
                   boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
                   height:{sx:"auto", sm:"450px"}
                   }}
-                  item xs={12} sm={3}  md={3}>
+                  item xs={12} sm={3}  md={3} mb={2}>
                   <AdminNav/>
-              </Grid>
+                </Grid>
               <Grid item xs={12} sm={1} md={1}></Grid>
                   <Grid  style={{
                     boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",
-                    padding:"10px 25px",
+                    padding:"10px 45px",
                 }} item xs={12} sm={8} md={8}>  
 
-                    {loading?<LoadingOutlined className="text-danger h1"/> :<h4>Product Create</h4>}
+                    {loading?<LoadingOutlined className="text-danger h1 text-center"/> :<h4 className="text-center"> Create Product </h4>}
                     <hr/>
                     <div className="p-3">
                       <FileUpload 

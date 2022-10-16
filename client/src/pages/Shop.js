@@ -407,8 +407,8 @@ const showShipping=()=>
                     ))
                 }
             </Grid>
-            </Grid>
-           </Grid>
+                </Grid>
+             </Grid>
          </Container>
     );
 };

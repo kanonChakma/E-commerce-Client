@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { Container, Grid } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { createCategory,getCategories,deleteCategory } from '../../../common/category';
-import AdminNav from '../../Nav/AdminNav';
-import {EditOutlined,DeleteOutlined} from '@ant-design/icons';
+import { createCategory, deleteCategory, getCategories } from '../../../common/category';
 import CreateProductForm from '../../Form/CreateProductForm';
 import SearchProductForm from '../../Form/SearchProductForm';
+import AdminNav from '../../Nav/AdminNav';
 
 const CreateProduct=()=>{
     const {user}=useSelector((state) =>({...state}))
@@ -63,13 +64,23 @@ const searched=(keyword)=>(c)=>c.name.toLowerCase().includes(keyword);
       })
    }
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-2">
+        <Container maxWidth="lg">
+           <Grid  sx={{marginTop:"50px", minHeight: {sx:"auto", md:"70vh"}}}
+           container>
+                <Grid sx={{
+                    padding:"10px 20px",
+                    boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+                    height:{sx:"auto", sm:"450px"}
+                    }}
+                        item xs={12} sm={3}  md={3} mb={2}>
                     <AdminNav/>
-                </div>
-                <div className="col-md">
-                    {loading?<h4 className="text-danger">Loading...</h4>:<h4 className="text-secondary">Create Product</h4>}
+                </Grid>
+                <Grid item xs={12} sm={1} md={1}></Grid>
+                <Grid  style={{
+                  boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                  padding:"10px 45px",
+                 }} item xs={12} sm={8} md={8}>  
+                    {loading?<h4 className="text-danger">Loading...</h4>:<h4 className="text-secondary text-center mt-3 mb-4">Create Product Category</h4>}
                     
                     <CreateProductForm 
                     handleSubmit={handleSubmit} 
@@ -79,7 +90,7 @@ const searched=(keyword)=>(c)=>c.name.toLowerCase().includes(keyword);
                    {/*----------step-2-----------*/}
                     <SearchProductForm keyword={keyword} setKeyword={setKeyword}/>
 
-                    <h2>{Category.length} categories Exist</h2>
+                    <h2 className='text-center my-2'>All Categories</h2>
                     {Category.filter(searched(keyword)).map((product) => (
                         <div className="alert alert-secondary" key={product._id}>
                             {product.name}
@@ -96,9 +107,9 @@ const searched=(keyword)=>(c)=>c.name.toLowerCase().includes(keyword);
                         </div>
                        )
                      )}
-                </div>
-          </div>
-      </div>
+             </Grid>
+         </Grid>
+      </Container>
    )
 }
 export default CreateProduct;

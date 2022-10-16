@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const CreateProductForm=({handleSubmit,name,setName}) =>{
     return (
@@ -7,13 +7,13 @@ const CreateProductForm=({handleSubmit,name,setName}) =>{
             <input 
             type="text"
             onChange={(e) => setName(e.target.value)} 
-            className="form-control"
-            placeholder="Enter the product name"
+            className="form-control mt-2"
+            placeholder="Enter the category name"
             value={name}
             autoFocus
             required             
             />
-            <button  className="btn btn-outline-secondary">update</button>
+            <button  className="btn btn-outline-secondary my-3">create</button>
         </div>
     </form>
     )

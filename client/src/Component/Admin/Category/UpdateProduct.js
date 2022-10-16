@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import { Container, Grid } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { getCategory,updateCategory } from '../../../common/category';
+import { getCategory, updateCategory } from '../../../common/category';
 import CreateProductForm from '../../Form/CreateProductForm';
 import AdminNav from '../../Nav/AdminNav';
 
@@ -43,17 +44,32 @@ const UpdateProduct=({history,match}) =>{
       })
    }
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-2">
-                    <AdminNav/>
-                </div>
-                <div className="col-md">
-                    {loading?<h4 className="text-danger">Loading...</h4>:<h4 className="text-secondary">Update Product</h4>}
-                    <CreateProductForm handleSubmit={handleSubmit} name={name} setName={setName}/>
-                </div>
-            </div>
-      </div>
+        <Container maxWidth="lg">
+           <Grid  sx={{marginTop:"50px", minHeight: {sx:"auto", md:"70vh"}}}
+           container>
+           <Grid sx={{
+            padding:"10px 20px",
+            boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+            height:{sx:"auto", sm:"450px"}
+            }}
+                item xs={12} sm={3}  md={3} mb={2}>
+            <AdminNav/>
+           </Grid>
+           <Grid item xs={12} sm={1} md={1}></Grid>
+           <Grid  style={{
+            boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",
+            padding:"10px 45px",
+           }} item xs={12} sm={8} md={8}>  
+                    {loading?<h4 className="text-danger">Loading...</h4>:<h4 className="text-secondary text-center mb-4 mt-3">Update Product</h4>}
+                    <CreateProductForm 
+                    place="Enter the category name"
+                    text="update"
+                    handleSubmit={handleSubmit}
+                    name={name} 
+                    setName={setName}/>
+                </Grid>
+            </Grid>
+      </Container>
    )
 }
 export default UpdateProduct;

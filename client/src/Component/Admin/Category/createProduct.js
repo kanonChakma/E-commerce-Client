@@ -83,12 +83,14 @@ const searched=(keyword)=>(c)=>c.name.toLowerCase().includes(keyword);
                     {loading?<h4 className="text-danger">Loading...</h4>:<h4 className="text-secondary text-center mt-3 mb-4">Create Product Category</h4>}
                     
                     <CreateProductForm 
+                    text="create"
+                    place="Enter the category name"
                     handleSubmit={handleSubmit} 
                     name={name} 
                     setName={setName}/>
 
                    {/*----------step-2-----------*/}
-                    <SearchProductForm keyword={keyword} setKeyword={setKeyword}/>
+                    <SearchProductForm     place="Search Category" keyword={keyword} setKeyword={setKeyword}/>
 
                     <h2 className='text-center my-2'>All Categories</h2>
                     {Category.filter(searched(keyword)).map((product) => (

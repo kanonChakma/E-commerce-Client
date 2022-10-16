@@ -9,16 +9,16 @@ import SubsList from '../Component/SubCategory/SubsList';
 const Home = () => {
   const showName=(name)=>(
     <div className='row'>
-    <div className='offset-md-1 col-md-4 mt-5 text-center'>
-       <h4 className='jumbotron mt-3 mb-3 p-2 display-5 font-weight-bold'>
+    <div className='offset-md-1 col-md-2 mt-5 text-center'>
+       <h4 className='jumbotron mt-4 ml-4 mb-3 p-3 display-5 font-weight-bold'>
           {name}
        </h4>
     </div>
  </div>
   )
     return (
-        <div>
-             <div className='jumbotron text-center h1 font-weight-bold'>
+        <>
+             <div className='jumbotron text-center h1 mt-1 font-weight-bold'>
                <TypeEffect
                  text={["Latest Product","New Arrivals","Best sellers"]}
                />
@@ -36,7 +36,7 @@ const Home = () => {
              <BestSellers/>
                   {showName("SubsCategory")}
               <SubsList/>
-        </div>
+        </>
     );
 };
 

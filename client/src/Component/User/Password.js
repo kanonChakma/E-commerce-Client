@@ -43,9 +43,9 @@ const Password=() => {
         </form>
     )
   return(
-    <Container maxWidth="laptop">
+    <Container maxWidth="lg">
        <Grid 
-       sx={{marginTop:"50px", height: {sx:"auto", md:"60vh"}}}
+       sx={{marginTop:"50px", minHeight: {sx:"auto", md:"70vh"}}}
          container 
        >
         <Grid 
@@ -54,16 +54,16 @@ const Password=() => {
             padding:"10px 20px",
             height:{sx:"auto", sm:"350px"}
         }}
-        item xs={12} sm={2}>
+        item xs={12} sm={3}>
               <UserNav/>
         </Grid>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={2}>
         </Grid>
         
         <Grid
         style={{
-            boxShadow: "rgba(0, 0, 0, 0.05) 0px 0px 0px 1px",
-            padding:"10px 20px"}}
+            boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",
+            padding:"10px 30px"}}
             item  xs={12} sm={5}
          >
          {loading?<h4 className="text-danger">Loading...</h4>:<h4 className="text-secondary text-center">Update Password</h4>}

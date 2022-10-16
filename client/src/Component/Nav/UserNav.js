@@ -1,29 +1,66 @@
-import React from 'react';
+import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
+import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
+import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
+import { Box, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 
-const UserNav=()=>{
-
-  const navStyle = {
-    padding:"10px 20px",
-    boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
-    height:"auto",
+const useStyles = makeStyles((theme) => ({
+  menuSliderContainer: {
+    width: 250,
+    height: "100%"
+  },
+  avatar: { 
+    margin: "0.5rem auto",
+    padding: "1rem",
+    width: theme.spacing(13),
+    height: theme.spacing(13)
+  },
+  listItem: {
+    color: "black"
   }
+}));
 
-    return (
-        <nav>
-            <ul className="nav  flex-column">
-                <li className="nav-item">
-                  <Link to="/user/history" className="nav-link">History</Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/user/password" className="nav-link">Password</Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/user/wishlist" className="nav-link">WishList</Link>
-                </li>
-            </ul>
-        </nav>
-    )
+const listItems = [
+  {
+    listIcon: <HistoryOutlinedIcon />,
+    listText: "History",
+    path:"/user/history"
+  },
+  {
+    listIcon: <AddShoppingCartOutlinedIcon />,
+    listText: "WishList",
+    path:"/user/wishlist"
+  },
+  {
+    listIcon: <PasswordOutlinedIcon />,
+    listText: "Password",
+    path:"/user/password" 
+  },
+];
+
+const UserNav = () => {
+  const classes = useStyles();
+  return (
+    <Box className={classes.menuSliderContainer} component="div">
+    <List>
+      {listItems.map((listItem, index) => (
+        <Link style={{ color: 'black' }} to={listItem.path}>
+        <ListItem className={classes.listItem} button key={index}>
+          <ListItemIcon className={classes.listItem}>
+            {listItem.listIcon}
+          </ListItemIcon>
+          
+            <ListItemText primary={listItem.listText} />
+        </ListItem>
+        </Link>
+      ))}
+    </List>
+  </Box>
+  )
 }
 
 export default UserNav;
+
+
+

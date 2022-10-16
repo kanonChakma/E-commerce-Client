@@ -26,7 +26,7 @@ const AdminDashboard= () =>{
         })
      }
     return (
-        <Container maxWidth="laptop">
+        <Container maxWidth="lg">
         
         <Grid  sx={{marginTop:"50px", height: {sx:"auto", md:"auto"}}}
             container>

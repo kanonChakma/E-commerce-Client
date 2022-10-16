@@ -1,13 +1,14 @@
-import React, {useEffect,useState} from 'react';
-import AdminNav from '../../Nav/AdminNav';
-import CreateProductForm from '../../Form/CreateProductForm'
-import {useSelector} from 'react-redux';
-import {getCategories} from '../../../common/category'
-import  {createSubCategory, deleteSubCatgory, getSubCategories} from '../../../common/subCategory'
-import {EditOutlined,DeleteOutlined} from '@ant-design/icons';
-import { toast } from 'react-toastify';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { Container, Grid } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { getCategories } from '../../../common/category';
+import { createSubCategory, deleteSubCatgory, getSubCategories } from '../../../common/subCategory';
+import CreateProductForm from '../../Form/CreateProductForm';
 import SearchProductForm from '../../Form/SearchProductForm';
+import AdminNav from '../../Nav/AdminNav';
 
 const SubCreate=()=>{
   const [name,setName]=useState("");
@@ -65,16 +66,26 @@ const handleSubmit=(e)=>{
        })
    }
   return (
-    <div className="container-fluid">
-         <div className="row">
-             <div className="col-md-2">
-                  <AdminNav/>   
-              </div>
-              <div className="col-md">        
-                    {loading?<h1 className="text-danger">Loading....</h1>:<h4 className="text-secondary">Create subProduct</h4>}  
+     <Container maxWidth="lg">
+        <Grid  sx={{marginTop:"50px", minHeight: {sx:"auto", md:"70vh"}}}
+          container>
+          <Grid sx={{
+            padding:"10px 20px",
+            boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+            height:{sx:"auto", sm:"450px"}
+            }}
+                item xs={12} sm={3}  md={3} mb={2}>
+            <AdminNav/>
+            </Grid>
+            <Grid item xs={12} sm={1} md={1}></Grid>
+            <Grid  style={{
+              boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",
+              padding:"10px 45px",
+             }} item xs={12} sm={8} md={8}>          
+                    {loading?<h1 className="text-danger">Loading....</h1>:<h4 className="text-secondary text-center mb-4 mt-3">Add SubCategory</h4>}  
                      {/*----------step-2-----------*/}
-                   <div className="form-group">
-                        <label>Parent Category {categories.length}</label>
+                   <div className="form-group mb-3">
+                        <h5 className='text-success'>Selet Category</h5>
                         <select name="category" className="form-control" onChange={e=>setParent(e.target.value)}>
                             {
                                categories.length>0 && categories.map((c)=>(
@@ -88,11 +99,16 @@ const handleSubmit=(e)=>{
                      handleSubmit={handleSubmit}
                      name={name}
                      setName={setName}
+                     place="Enter the subCategory name"
+                     text="create"
                    />
 
-                  <SearchProductForm keyword={keyword} setKeyword={setKeyword}/> 
+                  <SearchProductForm 
+                  place="Search subCategory"
+                  keyword={keyword} 
+                  setKeyword={setKeyword}/> 
                  
-                  <h2>{subCategory.length} subCategories Exist</h2>
+                  <h2 className='text-center mt-5 mb-3'>All subCategories</h2>
                    {
                      subCategory.filter(Search(keyword)).map((subs)=>(
                        <div className="alert alert-secondary" key={subs._id}>
@@ -111,9 +127,9 @@ const handleSubmit=(e)=>{
                         )
                       )
                     }
-               </div>  
-          </div>
-     </div> 
+            </Grid>  
+      </Grid>
+     </Container> 
    );
 }
 export default SubCreate;

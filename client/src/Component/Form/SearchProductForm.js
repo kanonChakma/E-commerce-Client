@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchProductForm=({keyword,setKeyword}) =>{
+const SearchProductForm=({keyword,setKeyword, place}) =>{
     const handleSearchChange=(e)=>{
         e.preventDefault();
         setKeyword(e.target.value.toLowerCase())
@@ -12,7 +12,7 @@ const SearchProductForm=({keyword,setKeyword}) =>{
              value={keyword}
              className="form-control mb-4"
               onChange={handleSearchChange}
-              placeholder="Search Category"
+              placeholder={place}
               />  
         </div>
     )

@@ -1,42 +1,81 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
+import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
+import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
+import LanOutlinedIcon from '@mui/icons-material/LanOutlined';
+import ProductionQuantityLimitsOutlinedIcon from '@mui/icons-material/ProductionQuantityLimitsOutlined';
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+import { Box, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { makeStyles } from '@mui/styles';
+import { Link } from 'react-router-dom';
 
-const AdminNav=()=>{
-    return (
-        <nav>
-            <ul className="nav  flex-column">   
-            
-                <li className="nav-item">
-                  <Link to="/admin/dashboard" className="nav-link">Dashboard</Link>
-                </li>
-                
-                <li className="nav-item">
-                  <Link to="/admin/product" className="nav-link">Product</Link>
-                </li>
-                
-                <li className="nav-item">
-                  <Link to="/admin/products" className="nav-link">Products</Link>
-                </li>
+const useStyles = makeStyles((theme) => ({
+  menuSliderContainer: {
+    width: 250,
+    height: "100%"
+  },
+  avatar: { 
+    margin: "0.5rem auto",
+    padding: "1rem",
+    width: theme.spacing(13),
+    height: theme.spacing(13)
+  },
+  listItem: {
+    color: "black"
+  }
+}));
 
-                <li className="nav-item">
-                  <Link to="/admin/category" className="nav-link">Category</Link>
-                </li>
-                
-                <li className="nav-item">
-                  <Link to="/admin/sub" className="nav-link">subCategory</Link>
-                </li>
-                
-                <li className="nav-item">
-                  <Link to="/admin/coupon" className="nav-link">Coupon</Link>
-                </li>  
-                
-                <li className="nav-item">
-                  <Link to="/admin/password" className="nav-link">Password</Link>
-                </li>
+const listItems = [
+  {
+    listIcon: <DashboardOutlinedIcon />,
+    listText: "Dashboard",
+    path:"/admin/dashboard"
+  },
+  {
+    listIcon: <ProductionQuantityLimitsOutlinedIcon />,
+    listText: "Product",
+    path:"/admin/product"
+  },
+  {
+    listIcon: <ShoppingBagOutlinedIcon />,
+    listText: "Products",
+    path:"/admin/products" 
+  },
+  {
+    listIcon: <CategoryOutlinedIcon />,
+    listText: "Category",
+    path:"/admin/category"
+  },
+  {
+    listIcon: <LanOutlinedIcon />,
+    listText: "SubCategory",
+    path:"/admin/sub"
+  },
+  {
+    listIcon: <Inventory2OutlinedIcon />,
+    listText: "Coupon",
+    path:"/admin/coupon"
+  }
+];
 
-            </ul>
-        </nav>
-    )
+const AdminNav = () => {
+  const classes = useStyles();
+  return (
+    <Box className={classes.menuSliderContainer} component="div">
+    <List>
+      {listItems.map((listItem, index) => (
+        <Link style={{ color: 'black' }} to={listItem.path}>
+        <ListItem className={classes.listItem} button key={index}>
+          <ListItemIcon className={classes.listItem}>
+            {listItem.listIcon}
+          </ListItemIcon>
+          
+            <ListItemText primary={listItem.listText} />
+        </ListItem>
+        </Link>
+      ))}
+    </List>
+  </Box>
+  )
 }
 
 export default AdminNav;

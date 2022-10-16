@@ -68,7 +68,7 @@ const ProductCreate = () => {
          setShowSub(true);
       }
     return (
-      <Container maxWidth="laptop">
+      <Container maxWidth="lg">
       <Grid  sx={{marginTop:"50px", minHeight: {sx:"auto", md:"60vh"}}}
       container>
                 <Grid sx={{
@@ -85,9 +85,9 @@ const ProductCreate = () => {
                     padding:"10px 45px",
                 }} item xs={12} sm={8} md={8}>  
 
-                    {loading?<LoadingOutlined className="text-danger h1 text-center"/> :<h4 className="text-center"> Create Product </h4>}
+                    {loading?<LoadingOutlined className="text-danger h1 text-center"/> :<h4 className="text-center mt-3 mb-4"> Create Product </h4>}
                     <hr/>
-                    <div className="p-3">
+                    <div className="mb-4">
                       <FileUpload 
                       values={values} 
                       setValues={setValues}

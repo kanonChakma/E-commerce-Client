@@ -12,3 +12,13 @@ Shop Page                   | Product Details
  Order Summary             | Address                   |   Whislist
 :-------------------------:|:-------------------------:|:-------------------------:
 ![](https://user-images.githubusercontent.com/50201920/198088104-9f02c618-f117-4443-9b39-938c9469d5a7.png) | ![Log In](https://user-images.githubusercontent.com/50201920/198088194-484cb616-a097-4e1c-88f9-c232e34f86d8.png) | ![](https://user-images.githubusercontent.com/50201920/198088668-0b1cc877-539d-46b4-bdf6-0d9c37dbe3b5.png)
+
+
+Admin Dashboard            | Create Product  
+:-------------------------:|:-------------------------:
+![](https://user-images.githubusercontent.com/50201920/198090025-073d96b2-ecb6-4e57-bec2-cf1d237042c3.png) | ![Log In](https://user-images.githubusercontent.com/50201920/198090702-28bbece2-10af-4bb2-aea3-ca2d4878c335.png)
+
+
+ All products              | Create Category           |   Apply Coupon
+:-------------------------:|:-------------------------:|:-------------------------:
+![](https://user-images.githubusercontent.com/50201920/198091015-699e8063-0627-4b33-86ad-b3cde6d38807.png) | ![Log In](https://user-images.githubusercontent.com/50201920/198091290-88865f26-8b2b-42d9-bc9b-459449d3e707.png) | ![](https://user-images.githubusercontent.com/50201920/198091427-fe15110c-168a-4b2e-af71-00a9fcae29a3.png)

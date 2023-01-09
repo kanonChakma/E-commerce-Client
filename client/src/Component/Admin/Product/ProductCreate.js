@@ -69,7 +69,7 @@ const ProductCreate = () => {
       }
     return (
       <Container maxWidth="lg">
-      <Grid  sx={{marginTop:"50px", minHeight: {sx:"auto", md:"60vh"}}}
+      <Grid  sx={{marginTop:"50px", minHeight: {sx:"auto", md:"100vh"}}}
       container>
                 <Grid sx={{
                   padding:"10px 20px",

@@ -1,4 +1,4 @@
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Tooltip } from '@mui/material';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { auth } from '../../firebase';
@@ -28,16 +28,18 @@ const Password=() => {
         <form onSubmit={handleSubmit}>
            <div className="form-group">
                <label className="my-3"></label>
-               <input 
+               <Tooltip title={password.length<=5?"Password should be greater than five":""}>
+                <input 
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 className="form-control"
-                placeholder="password length should be greater than or eqal six"
-               />
+                placeholder="Enter Your Password"
+                />
+               </Tooltip>
                <button  
                className="btn btn-raised mt-3"
-               disabled={loading || password.length>=6 || !password}
+               disabled={loading || password.length<=5 || !password}
                >Submit</button>
            </div> 
         </form>
@@ -62,7 +64,7 @@ const Password=() => {
         
         <Grid
         style={{
-            boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",
+            boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
             padding:"10px 30px"}}
             item  xs={12} sm={5}
          >

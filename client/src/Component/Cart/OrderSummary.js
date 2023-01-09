@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { createCashPayment, getCart, removeCart, saveAddress } from '../../common/user';
+import { createCashPayment, getCart, removeCart } from '../../common/user';
 
 const OrderSummary = ({setTotalPrice,prevStep,nextStep,totalPrice}) => {
     const{user,cashOn}=useSelector((state)=>({...state}))
@@ -113,34 +113,34 @@ const OrderSummary = ({setTotalPrice,prevStep,nextStep,totalPrice}) => {
      )
     return (
         <>
-        <div className='container'>
-      <div className='row'>
+          <div style={{minHeight:"60vh"}} className='container'>
+            <div className='row'>
           <div className='col-md-8 offset-md-2 mt-5 pt-5'>
           <h4 className='text-center bg-secondary p-3 mb-5'>Order Summary</h4> 
           {handleTable()}
           {totalPrice>0 && showTotal()}
-            <div className='row'>
+             <div className='row'>
                 <div className='col-md-4'>
                     <button   onClick={back}  type="button" class="btn btn-outline-success">Back</button>
                     </div>
-                <div className='col-md-4'>
+                 <div className='col-md-4'>
                     <button 
                         onClick={()=>history.push("/select-payment")} 
                         disabled={!saveAdd || !cart.length} 
                         className='btn btn-primary'>
                         PLACE ORDER
                     </button>
-                </div>
-                <div className='col-md-4'>
-                    <button disabled={!cart.length}  onClick={handleEmpty} className='btn btn-primary'>
+                 </div>
+                 <div className='col-md-4'>
+                     <button disabled={!cart.length}  onClick={handleEmpty} className='btn btn-primary'>
                         EMPTY CART
-                    </button>
+                     </button>
+                   </div>
+                 </div>
                 </div>
             </div>
-                </div>
-                </div>
-                </div> 
-            </>
+           </div> 
+        </>
     );
 };
 

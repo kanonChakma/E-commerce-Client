@@ -21,6 +21,7 @@ const AllSubsCategory = ({match}) => {
          setLoading(false);
        })
   },[slug])
+  
     return (
       <Container maxWidth="lg">
       <Grid   sx={{marginTop:"50px", height: {sx:"auto", md:"65vh"}}}>

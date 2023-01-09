@@ -14,7 +14,7 @@ const History=() => {
 
   useEffect(()=>{
     userOrderProduct()
-  },[])
+  },[]) // eslint-disable-line no-use-before-define
 
   const userOrderProduct=()=>{
     getOrder(user.token)
@@ -142,7 +142,6 @@ const History=() => {
           <Grid  item xs={12} sm={8}  md={8}>
              <Grid
              style={{
-              boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",
               padding:"10px 20px",
           }}
           container

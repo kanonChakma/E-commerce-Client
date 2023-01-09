@@ -43,14 +43,14 @@ const ProductInfo = ({match}) => {
         });
     }
     return (
-           <Container maxWidth="laptop">
-               <Grid>
+           <Container maxWidth="lg">
+               <Grid sx={{marginTop: {xs:"20px", md:"10px"}}}>
                   <SingleProduct product={product} productRating={productRating} star={star}/>
                </Grid>
                <div className='row'>
-                 <h2  className=' col mt-5 mb-3 p-3 bg-info'>Related Product</h2>
+                 <h2  className=' col mt-5 mb-3 p-3 '>Related Products</h2>
                </div> 
-               <Grid container>
+               <Grid container sx={{minHeight: {xs:"auto", md:"55vh"}}} >
                  {
                    related.length?related.map((r)=>(
                         <Grid item xs={12} sm={6} md={3} p={1}>

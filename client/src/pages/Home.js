@@ -9,21 +9,21 @@ import SubsList from '../Component/SubCategory/SubsList';
 const Home = () => {
   const showName=(name)=>(
     <div className='row'>
-    <div className='offset-md-1 col-md-2 mt-5 text-center'>
-       <h4 className='jumbotron mt-4 ml-4 mb-3 p-3 display-5 font-weight-bold'>
-          {name}
-       </h4>
-    </div>
- </div>
+      <div className='offset-md-1  col-md-2 mt-5 text-center'>
+        <h4 className='jumbotron mt-5 mb-4 ml-5 mb-3 p-3 display-5 font-weight-bold'>
+            {name}
+        </h4>
+      </div>
+  </div>
   )
     return (
         <>
-             <div className='jumbotron text-center h1 mt-1 font-weight-bold'>
+             <div className='jumbotron text-center h1  font-weight-bold'>
                <TypeEffect
                  text={["Latest Product","New Arrivals","Best sellers"]}
                />
              </div>
-             <div>
+             <div className='my-5'>
                 <Carousele/>
              </div>
                {showName("New Arrivals")}

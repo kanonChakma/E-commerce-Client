@@ -12,7 +12,7 @@ exports.authCheck=async (req,res,next)=>{
     }    
 };
 
-exports.adminCheck=async (req,res,next)=>{
+exports.adminCheck=async (req,res,next) => {
  const {email}=req.user;
  const adminUser=await User.findOne({email:email}).exec();
  if(adminUser.role!=='admin'){

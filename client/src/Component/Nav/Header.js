@@ -44,18 +44,34 @@ const Header = () => {
     const handleClick=(e)=>{
        setCurrentState(e.key);
     }
-    const logout=()=>{
-       dispatch({
+
+    const logout = () => {
+       
+      dispatch({
          type: 'USER_LOGGED_OUT',
          payload:null,
        })
+
       history.push("/login"); 
     }
+    
     return (
-      <Container maxWidth="lg">
+      <Container 
+      style={{
+        paddingLeft: "0px",
+        paddingRight: "0px",
+      }}
+      maxWidth ="desktop">
       {
         isMatch?(<HeaderDrawer user={user} category={category} cart={cart} logout={logout} />):(
-          <Menu style={{fontSize:'17px', padding:"7px 15px"}} onClick={handleClick} selectedKeys={[currentState]} mode="horizontal">
+          <Menu style={{
+            fontSize:'17px',
+            paddingTop: "10px", 
+            border:"none",
+            backgroundColor:"transparent"}} 
+            onClick={handleClick} 
+            selectedKeys={[currentState]} 
+            mode="horizontal">
 
           <Item key="home" icon={<HomeOutlined style={{ fontSize: '14px' }}/>}>
             <Link to="/">Home</Link>

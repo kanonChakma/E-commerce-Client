@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import {Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {createCashPayment, createOrder, getCart, removeCart } from '../../common/user';
+import { Link } from 'react-router-dom';
+import { createCashPayment, getCart, removeCart } from '../../common/user';
 
 const CashPayment = () => {
     const dispatch=useDispatch();
@@ -82,27 +82,25 @@ const CashPayment = () => {
     </table>
      )       
     return (
-        <div className='container'>
-        <div className='row'>
-            <div className='col-md-4  mt-5 pt-5'>
-                <h4 className='text-center bg-secondary p-3 mb-5'>Order Summary</h4> 
-                <button onClick={handleCash} className='stripe-button'>
-                <span id='button-text'>
-                    Pay CashOn
-                </span>
-                </button>
-                <div>
-                {error?<div className='card-error' role="alert">{error}</div>:""}
-                <p className={succeeded?"result-message":"result-message hidden"}>
-                    Payment Successful.{" "}
-                    <Link to="user/history">
-                    See it in your purchase
-                    </Link>
-                </p>
-                </div>
-            </div>
+        <div style={{minHeight: "60vh"}} className='container'>
+            <div className='row'>
              <div className='col-md-6 mt-5 pt-5'>
+             <h4 className='text-center bg-secondary p-3 mb-5'>Order Summary</h4> 
                {handleTable()}
+               <button onClick={handleCash} className='stripe-button'>
+               <span id='button-text'>
+                   Pay CashOn
+               </span>
+               </button>
+               <div>
+               {error?<div className='card-error' role="alert">{error}</div>:""}
+               <p className={succeeded?"result-message":"result-message hidden"}>
+                   Payment Successful.{" "}
+                   <Link to="user/history">
+                   See it in your purchase
+                   </Link>
+               </p>
+               </div>
              </div>
          </div>
       </div> 

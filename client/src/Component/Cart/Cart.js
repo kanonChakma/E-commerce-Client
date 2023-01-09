@@ -30,7 +30,7 @@ const Cart = ({history}) => {
     return (
        <Container maxWidth="lg">
          <Grid
-         sx={{marginTop:"50px", minHeight:{xs:"auto", md:"60vh"}}}
+         sx={{marginTop:"50px", minHeight:{xs:"auto", md:"70vh"}}}
          container 
          >
          <Grid item xs={12} lg={8}>

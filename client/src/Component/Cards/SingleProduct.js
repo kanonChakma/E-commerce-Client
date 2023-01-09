@@ -66,7 +66,7 @@ const SingleProduct = ({product,productRating,star}) => {
         container
         spacing={3}
       >
-           <Grid item xs={12} sm={12} md={6} lg={5}>
+           <Grid mt-4 item xs={12} sm={12} md={6} lg={6}>
                  {images &&images.length?
                     <Carousel showArrows={true} autoPlay infiniteLoop>
                       {
@@ -95,7 +95,7 @@ const SingleProduct = ({product,productRating,star}) => {
                </Tabs>
                </div> 
             </Grid>
-            <Grid xs={12} sm={12} md={1} lg={2}></Grid>
+            <Grid xs={12} sm={12} md={1} lg={1}></Grid>
             <Grid item xs={12} sm={12} md={5} lg={5}>
               <h2 className='text-center bg-info p-3'>{title}</h2>
               {product && product.ratings&& product.ratings.length>0?
@@ -132,7 +132,7 @@ const SingleProduct = ({product,productRating,star}) => {
                   ]}
                 >
                   <ProductListItems product={product}/>
-               </Card>,
+               </Card>
              </Grid>
         </Grid>    
     );

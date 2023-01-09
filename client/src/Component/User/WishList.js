@@ -75,7 +75,6 @@ const WishList=() => {
       <Grid item xs={12} sm={8} md={8}>
       <Grid 
        style={{
-        boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",
         padding:"10px 5px",
     }}
     container>

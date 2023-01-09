@@ -8,12 +8,12 @@ const { Meta } = Card;
 const SelectPaymentMethod = ({history}) => {
     return (
         <Container>
-              <h4 className='mt-5 mb-3 text-center'>Select Payment Methods</h4>
+              <h4 className='mt-5 mb-1 text-center'>Select Payment Methods</h4>
             <Grid 
               spacing={0}
               alignItems="center"
               justifyContent="center"
-              style={{ minHeight: '50vh' }}
+              style={{ minHeight: '60vh' }}
               container>
                  <Grid item xs={12} sm={3} mt={3}>
                  <Card

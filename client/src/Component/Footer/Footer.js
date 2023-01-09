@@ -21,14 +21,14 @@ const Footer =()=> {
     ]
     const oralHealth = [
         {name: "Brands" , link: "/checkup"},
-        {name: "Gift Certicates" , link: "/checkup"},
+        {name: "Gift Certificates" , link: "/checkup"},
         {name: "Affiliate" , link: "/checkup"},
-        {name: "Specia;s" , link: "/checkup"}
+        {name: "Specials" , link: "/checkup"}
     ]
     const services = [
         {name: "My Account" , link: "/user/account"},
         {name: "Oder history" , link: "/user/history"},
-        {name: "Wish List" , link: "/wishlist"},
+        {name: "Wish List" , link: "/user/wishlist"},
         {name: "Newsletter" , link: "/newsletter"}
     ]
     return(

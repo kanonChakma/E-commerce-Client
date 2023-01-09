@@ -14,16 +14,17 @@ const Search = () => {
     const dispatch=useDispatch()
     const history=useHistory()
 
-    const handleSubmit=(e)=>{
+    const handleSubmit=(e) => {
        e.preventDefault();
        history.push(`/shop?${text}`)
     }
-    const handleChange=(e)=>{
-         dispatch({
+    const handleChange = (e) => {
+         dispatch ({
             type: "SEARCH_QUERY",
             payload:{text:e.target.value}
          })
     }
+    
     return (
       <Paper
       component="form"

@@ -44,7 +44,7 @@ const ApplyCoupon = ({prevStep,nextStep,setTotalPrice}) => {
     return (
       <div 
       style={{
-         minHeight:"55vh"
+         minHeight:"65vh"
       }}
       className='container'>
       <div className='row'>

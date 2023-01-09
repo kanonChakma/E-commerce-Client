@@ -39,7 +39,7 @@ const BestSellers = () => {
         })
     }
     return (
-        <Container maxWidth="laptop">
+        <Container maxWidth="lg">
                 {loading? <LoadingCard count={products.length}/>: 
                 <Grid container sx={{ justifyContent: "space-between" }}>
                     {

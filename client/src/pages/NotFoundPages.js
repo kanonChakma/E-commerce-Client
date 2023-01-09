@@ -1,8 +1,7 @@
 import React from 'react';
-import '../css/NotFoundPages.css'
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import img from '../image/Not Found1.png'
+import { Link, useLocation } from 'react-router-dom';
+import '../css/NotFoundPages.css';
+import img from '../image/Not Found1.png';
 
 const NotFoundPages = () => {
     const location = useLocation();
@@ -14,10 +13,10 @@ const NotFoundPages = () => {
                     <img src={img} className="img-fluid" alt="bg" />
                 </div>
                 <div className=" col-10 mx-auto pt-3">
-                    <h4 className="mb-4">The page you are looking are not found</h4>
-                    <p className="d-flex">
-                        <span className="mr-4">This Url "{location.pathname}" are unvalid</span>
-                        <Link to="/"><span className="home-btn">back home</span></Link>
+                    <h4 className="mb-4 text-center">The page you are looking are not found</h4>
+                    <p className="d-flex ml-5">
+                        <span className="ml-4 text-center">This Url "{location.pathname}" are unvalid</span>
+                        <Link to="/"><span className="home-btn ml-4">back home</span></Link>
                     </p>
                 </div>
             </div>

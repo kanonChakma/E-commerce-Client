@@ -25,6 +25,7 @@ const AdminDashboard= () =>{
             loadOrders()
         })
      }
+     console.log(orders)
     return (
         <Container maxWidth="lg">
         
@@ -41,7 +42,6 @@ const AdminDashboard= () =>{
                 <Grid item xs={12} sm={1} md={1}></Grid>
                 <Grid
                 style={{
-                    boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",
                     padding:{xs:"0px", md:"10px"}
                 }}
                 item xs={12} sm={8} md={8}>

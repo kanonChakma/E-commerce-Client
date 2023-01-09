@@ -1,4 +1,5 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import moment from 'moment';
 import React from 'react';
 
 const Order = ({orders,handleStatus}) => {
@@ -14,8 +15,10 @@ const Order = ({orders,handleStatus}) => {
         </tr>
         <tr>
             <td scope='col'>Ordered On:</td>
-            <td scope='col'>{new Date(order.paymentIntent.created*1000).toLocaleString()}</td>
+            <td scope='col'>{moment(order.paymentIntent.created).format("DD-MM-YYYY h:mm:ss")}</td>
         </tr>
+        <tr>
+    </tr>
         {status && <tr className='text-bold text-primary'>
             <td  scope='col'>Status:</td>
             <td scope='col'>{order.orderStatus}</td>
@@ -80,7 +83,7 @@ const Order = ({orders,handleStatus}) => {
           <div className='col'>
                  {
                    orders.map((order,i)=>(
-                            <div key={i} className='ml-4 mb-5 p-2 card'>
+                            <div key={i} className='ml-4 mb-5 p-3 card'>
                                 {showPaymentInfo (order,false)}
                                  <div className='row text-primary'>
                                     <div className='col-md-4 mt-2 mb-2'>

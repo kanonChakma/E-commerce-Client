@@ -10,13 +10,13 @@ const Cart = ({history}) => {
 
   const {user,cart}=useSelector((state)=>({...state}))
  
-  const getTotal=()=>{
+  const getTotal = () => {
     return cart.reduce((f,s)=>{
        return f+s.count*s.price;
     },0)
    }
 
-  const handleDb=()=>{
+  const handleDb = () => {
     CreateCart(cart,user.token)
     .then((res)=>{
       console.log(res.data);
@@ -28,7 +28,7 @@ const Cart = ({history}) => {
   }
 
     return (
-       <Container maxWidth="lg">
+       <Container maxWidth = "lg">
          <Grid
          sx={{marginTop:"50px", minHeight:{xs:"auto", md:"70vh"}}}
          container 

@@ -1,3 +1,4 @@
+import { Box, Container } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -29,7 +30,6 @@ const ApplyCoupon = ({prevStep,nextStep,setTotalPrice}) => {
                  payload:false
              })
            }else{
-            console.log(res.data);
            setTotalPrice(res.data);
            setCoupon("")
            dispatch({
@@ -42,13 +42,13 @@ const ApplyCoupon = ({prevStep,nextStep,setTotalPrice}) => {
         })
      }
     return (
-      <div 
-      style={{
-         minHeight:"65vh"
-      }}
-      className='container'>
+      <Container maxWidth="sm">
+      <Box 
+         style={{
+          minHeight:"65vh"
+        }}>
       <div className='row'>
-          <div className='col-md-7 offset-md-3 mt-5 pt-5'>
+          <div className='col-md-12 offset-md-0 mt-5 pt-5'>
           <h4 className='text-center p-3 mb-5'>Apply Coupon</h4> 
         <input 
            onChange={(e) => {
@@ -59,7 +59,7 @@ const ApplyCoupon = ({prevStep,nextStep,setTotalPrice}) => {
            className="form-control mt-3"
            value={coupon}            
         />
-         <div className='row mt-3' style={{
+         <div className='row mt-5' style={{
             display:"flex",
             justifyContent:"space-evenly"
          }}>
@@ -78,7 +78,8 @@ const ApplyCoupon = ({prevStep,nextStep,setTotalPrice}) => {
           </div>    
           </div>
       </div>
-  </div>
+      </Box> 
+    </Container>
     );
 };
 

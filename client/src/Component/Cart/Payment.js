@@ -1,13 +1,17 @@
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import React from 'react';
-import {loadStripe} from "@stripe/stripe-js";
-import {Elements} from "@stripe/react-stripe-js";
+import "../../css/Stripe.css";
 import CheckoutForm from './CheckoutForm';
-import "../../css/Stripe.css"
 const promise=loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
 const Payment = () => {
     return (
-        <div className='container p-5 text-center'>
+        <div 
+        style={{
+          minHeight: "80vh"
+        }}
+        className='container p-5 text-center'>
            <h4>Complete Your Purchase</h4>
            <Elements stripe={promise}>
              <div className='col-md-8 offset-md-2'>

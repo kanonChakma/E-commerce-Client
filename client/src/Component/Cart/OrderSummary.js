@@ -1,3 +1,4 @@
+import { Container } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -112,35 +113,41 @@ const OrderSummary = ({setTotalPrice,prevStep,nextStep,totalPrice}) => {
     </table>
      )
     return (
-        <>
-          <div style={{minHeight:"60vh"}} className='container'>
+        <Container maxWidth="sm">
+          <div style={{minHeight:"70vh"}}>
             <div className='row'>
-          <div className='col-md-8 offset-md-2 mt-5 pt-5'>
-          <h4 className='text-center bg-secondary p-3 mb-5'>Order Summary</h4> 
-          {handleTable()}
-          {totalPrice>0 && showTotal()}
-             <div className='row'>
-                <div className='col-md-4'>
-                    <button   onClick={back}  type="button" class="btn btn-outline-success">Back</button>
+              <div className='col-md-12  mt-5 pt-3'>
+              <h4 className='text-center bg-secondary p-2 mb-5'>Order Summary</h4> 
+                {handleTable()}
+                {totalPrice>0 && showTotal()}
+                 <div 
+                className='row mt-5'
+                style={{
+                   display:"flex",
+                   justifyContent:"space-evenly"
+                }}
+                >
+                   <div className='col-xs-4'>
+                       <button   onClick={back}  type="button" class="btn btn-outline-success">Back</button>
+                       </div>
+                    <div className='col-xs-4'>
+                       <button 
+                           onClick={()=>history.push("/select-payment")} 
+                           disabled={!saveAdd || !cart.length} 
+                           className='btn btn-outline-primary'>
+                           PLACE ORDER
+                       </button>
                     </div>
-                 <div className='col-md-4'>
-                    <button 
-                        onClick={()=>history.push("/select-payment")} 
-                        disabled={!saveAdd || !cart.length} 
-                        className='btn btn-primary'>
-                        PLACE ORDER
-                    </button>
+                    <div className='col-xs-4'>
+                        <button disabled={!cart.length}  onClick={handleEmpty} className='btn btn-outline-warning'>
+                           EMPTY CART
+                        </button>
+                      </div>
                  </div>
-                 <div className='col-md-4'>
-                     <button disabled={!cart.length}  onClick={handleEmpty} className='btn btn-primary'>
-                        EMPTY CART
-                     </button>
-                   </div>
-                 </div>
-                </div>
+              </div>
             </div>
            </div> 
-        </>
+        </Container>
     );
 };
 

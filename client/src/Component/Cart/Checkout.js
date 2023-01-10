@@ -1,12 +1,18 @@
+import { Box, Container, Step, StepButton, Stepper } from '@mui/material';
 import React, { useState } from 'react';
 import Address from './Address';
 import ApplyCoupon from './ApplyCoupon';
 import OrderSummary from './OrderSummary';
 
-const Checkout = () => {
-    const [step,setStep]=useState(1);
-    const[totalPrice,setTotalPrice]=useState(0);
+const steps = ['Address', 'Coupon', 'Create an ad'];
 
+const Checkout = () => {
+    const [step,setStep]=useState(0);
+    const[totalPrice,setTotalPrice]=useState(0);
+    const [activeStep, setActiveStep] = useState(0);
+    const [completed, setCompleted] = useState({});
+  
+    console.log(activeStep)
     const[data,setData]=useState({
         firstName: '',
         lastName: '',
@@ -16,30 +22,35 @@ const Checkout = () => {
         address2:'',
         information:'',
       });
-      const handleChange=(e)=>{
+
+      const handleChange = (e) => {
         setData({...data,[e.target.name]:e.target.value})
      }
        console.log(data);
       //----Proceed to next step
       const nextStep = () => {
+        setActiveStep(step+1);
         setStep(step+1)
       };
     
       //----Go back to prev step
      const prevStep = () => {
+        setActiveStep(step-1);
         setStep(step-1)
       };
 
+     let selectState = () => {
       switch (step) {
-        case 1:
+        case 0:
           return (
             <Address
               nextStep={nextStep}
               data={data}
               handleChange={handleChange}
+              prevStep={prevStep}
             />
           );
-        case 2:
+        case 1:
           return (
             <ApplyCoupon
               nextStep={nextStep}
@@ -47,7 +58,7 @@ const Checkout = () => {
               setTotalPrice={setTotalPrice}
             />
           );
-        case 3:
+        case 2:
           return (
             <OrderSummary
               totalPrice={totalPrice}
@@ -59,94 +70,30 @@ const Checkout = () => {
         default:
           (console.log('This is a multi-step form built with React.'))
         }
+     }
+
+    return (
+      <Container maxWidth="sm">
+        <Box
+        style={{
+          marginTop: "30px"
+        }}
+        >
+          <Stepper nonLinear activeStep={activeStep}>
+          {steps.map((label, index) => (
+            <Step key={label} completed={completed[index]}>
+              <StepButton color="inherit">
+                {label}
+              </StepButton>
+            </Step>
+          ))}
+          </Stepper>
+          {selectState()}
+        </Box>
+      </Container>
+    )
 };
 
 export default Checkout;
 
-/*
-import { Container, Grid } from '@mui/material';
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
-import { applyCoupon } from '../../common/coupon';
 
-const ApplyCoupon = ({prevStep,nextStep,setTotalPrice}) => {
-    const[coupon,setCoupon]=useState('');
-    const{user}=useSelector((state)=>({...state}))
-    const[error,setError]=useState("");
-
-    const dispatch=useDispatch();
-
-    const back = e => {
-      e.preventDefault();
-       prevStep();
-    };
-    const next = e => {
-      e.preventDefault();
-      nextStep();
-    };
-  
-    const handleApply=()=>{
-        applyCoupon(coupon,user.token)
-        .then((res)=>{
-           if(res.data.err){
-               setError(res.data.err)
-               dispatch({
-                 type:"APPLY_COUPON",
-                 payload:false
-             })
-           }else{
-            console.log(res.data);
-           setTotalPrice(res.data);
-           setCoupon("")
-           dispatch({
-               type:"APPLY_COUPON",
-               payload:true
-           })
-           toast.success("Coupon Apllied");
-           nextStep()
-           }
-        })
-     }
-    return (
-      <Container maxWidth="lg">
-      <Grid 
-         container
-         alignItems="center"
-         justifyContent="center"
-         style={{ minHeight: '50vh' }}
-         >
-            <Grid>
-            <h4 className='text-center p-3 mb-5'>Aplly Coupon</h4> 
-            <input 
-            onChange={(e) => {
-               setCoupon(e.target.value)
-               setError("")
-               }} 
-            placeholder="Enter Coupon Code"
-            className="form-control mt-3"
-            value={coupon}            
-            />
-
-     
-         <Grid item xs={4}>
-            <button   onClick={back}   class="btn btn-outline-success">Prev</button>
-         </Grid>
-         <Grid item xs={4}>
-            <button   onClick={next} class="btn btn-outline-info">Skip</button>
-         </Grid>
-         <Grid item xs={4}>
-            <button  onClick={handleApply} class="btn btn-outline-warning">Apply</button>
-         </Grid>
-
-         <Grid xs={12}>
-           {error && <p className='bg-danger p-2 display-5'>{error}</p>}     
-        </Grid>    
-            </Grid>
-           </Grid>
-  </Container>
-    );
-};
-
-export default ApplyCoupon;
-*/

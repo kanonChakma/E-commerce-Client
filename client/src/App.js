@@ -55,30 +55,31 @@ const Login=lazy(()=>import('./pages/auth/Login'))
 const Register=lazy(()=>import('./pages/auth/Register'))
 const Home=lazy(()=>import('./pages/Home'))
 
-const ForgotPassword=lazy(()=>import('./pages/auth/ForgotPassword'))
-const History=lazy(()=>import('./Component/User/History'))
-const Password=lazy(()=>import('./Component/User/Password'))
-const WishList=lazy(()=>import('./Component/User/WishList'))
-const UserRoute=lazy(()=>import('./Component/PrivateRoute/UserRoute'))
-const AdminRoute=lazy(()=>import('./Component/PrivateRoute/AdminRoute'))
-const AdminDashboard=lazy(()=>import('./Component/Admin/AdminDashboard'))
-const CreateProduct=lazy(()=>import('./Component/Admin/Category/createProduct'))
-const UpdateProduct=lazy(()=>import('./Component/Admin/Category/UpdateProduct'))
-const SubCreate=lazy(()=>import('./Component/Admin/subCategory/SubCreate'))
-const SubUpdate=lazy(()=>import('./Component/Admin/subCategory/SubUpdate'))
-const ProductCreate=lazy(()=>import('./Component/Admin/Product/ProductCreate'))
-const AllProducts=lazy(()=>import('./Component/Admin/Product/AllProducts'))
-const ProductUpdate=lazy(()=>import('./Component/Admin/Product/ProductUpdate'))
-const ProductInfo=lazy(()=>import('./pages/ProductInfo'))
-const AllCategory=lazy(()=>import('./pages/category/AllCategory'))
-const AllSubsCategory=lazy(()=>import('./pages/subCategory/AllSubsCategory'))
-const Shop=lazy(()=>import('./pages/Shop'))
-const Cart=lazy(()=>import('../src/Component/Cart/Cart'))
-const Checkout=lazy(()=>import('./Component/Cart/Checkout'))
-const CreateCoupon=lazy(()=>import('./Component/Admin/Coupon/CreateCoupon'))
-const Payment=lazy(()=>import('./Component/Cart/Payment'))
-const SelectPaymentMethod=lazy(()=>import('./Component/Cart/SelectPaymentMethod'))
-const CashPayment=lazy(()=>import('./Component/Cart/CashPayment'))
+const ForgotPassword = lazy(()=>import('./pages/auth/ForgotPassword'))
+const History = lazy(()=>import('./Component/User/History'))
+const Password = lazy(()=>import('./Component/User/Password'))
+const WishList = lazy(()=>import('./Component/User/WishList'))
+const UserRoute = lazy(()=>import('./Component/PrivateRoute/UserRoute'))
+const AdminRoute = lazy(()=>import('./Component/PrivateRoute/AdminRoute'))
+const AdminDashboard = lazy(()=>import('./Component/Admin/AdminDashboard'))
+const CreateProduct = lazy(()=>import('./Component/Admin/Category/createProduct'))
+const UpdateProduct = lazy(()=>import('./Component/Admin/Category/UpdateProduct'))
+const SubCreate = lazy(()=>import('./Component/Admin/subCategory/SubCreate'))
+const SubUpdate = lazy(()=>import('./Component/Admin/subCategory/SubUpdate'))
+const ProductCreate = lazy(()=>import('./Component/Admin/Product/ProductCreate'))
+const AllProducts = lazy(()=>import('./Component/Admin/Product/AllProducts'))
+const ProductUpdate = lazy(()=>import('./Component/Admin/Product/ProductUpdate'))
+const ProductInfo = lazy(()=>import('./pages/ProductInfo'))
+const AllCategory = lazy(()=>import('./pages/category/AllCategory'))
+const AllSubsCategory = lazy(()=>import('./pages/subCategory/AllSubsCategory'))
+const Shop = lazy(()=>import('./pages/Shop'))
+const Cart = lazy(()=>import('../src/Component/Cart/Cart'))
+const Checkout = lazy(()=>import('./Component/Cart/Checkout'))
+const CreateCoupon = lazy(()=>import('./Component/Admin/Coupon/CreateCoupon'))
+const Payment = lazy(()=>import('./Component/Cart/Payment'))
+const SelectPaymentMethod = lazy(()=>import('./Component/Cart/SelectPaymentMethod'))
+const CashPayment = lazy(()=>import('./Component/Cart/CashPayment'))
+const Succesfull = lazy(() => import('./Component/Cart/Succesfull'))
 
 const App=()=> {
   const dispatch=useDispatch();
@@ -149,6 +150,7 @@ const App=()=> {
         
         <UserRoute exact path="/checkout"  component={Checkout}/>
         <UserRoute exact path="/payment"  component={Payment}/>
+        <UserRoute exact path="/payment/successfull"  component={Succesfull}/>
         <UserRoute exact path="/select-payment"  component={SelectPaymentMethod}/>
         <UserRoute exact path="/cash-payment"  component={CashPayment}/>
         <Route exact path="*" component={NotFoundPages} />

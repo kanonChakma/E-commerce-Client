@@ -1,5 +1,5 @@
 import ContactMailIcon from '@mui/icons-material/ContactMail';
-import { Avatar, Button, CssBaseline, Grid, TextareaAutosize, TextField, Typography } from '@mui/material';
+import { Avatar, CssBaseline, Grid, TextareaAutosize, TextField, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import { makeStyles } from '@mui/styles';
 import React from 'react';
@@ -24,7 +24,8 @@ const useStyles = makeStyles(theme => ({
   
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
+    alignItems: "center",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -35,11 +36,20 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Address = ({data,nextStep,handleChange}) => {
+const Address = ({data,nextStep,handleChange, prevStep}) => {
   const dispatch=useDispatch();
   const { firstName, lastName, email, phone, address1, address2,information } = data;
   const classes = useStyles();
 
+  const back = e => {
+    e.preventDefault();
+     prevStep();
+  };
+
+  const next = e => {
+    e.preventDefault();
+    nextStep();
+  };
 
     const handleSaveAdress=(e)=>{
       e.preventDefault();
@@ -52,21 +62,21 @@ const Address = ({data,nextStep,handleChange}) => {
      }
 
   return(
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="sm">
      <Grid sx={{minHeight:{xs:"auto", md:"70vh"}}}>
      <CssBaseline />
-     <div className={classes.paper}>
-       <Avatar className={classes.avatar}>
-         <ContactMailIcon />
-       </Avatar>
-       <Typography component="h1" variant="h5">
-         Enter Your Address
-       </Typography>
        <form className={classes.form} onSubmit={handleSaveAdress}>
-         <Grid container spacing={2}>
+         <div className={classes.paper}>  
+          <Avatar className={classes.avatar}>
+              <ContactMailIcon />
+           </Avatar>
+          <Typography component="h1" variant="h5">
+            Enter Your Address
+          </Typography>
+          <Grid container spacing={2}>
            <Grid item xs={12} sm={6}>
              <TextField
-               size="small"
+               size="medium"
                autoComplete="fname"
                name="firstName"
                variant="outlined"
@@ -80,7 +90,7 @@ const Address = ({data,nextStep,handleChange}) => {
            </Grid>
            <Grid item xs={12} sm={6}>
              <TextField
-             size="small"
+               size="medium"
                variant="outlined"
                fullWidth
                id="lastName"
@@ -92,7 +102,7 @@ const Address = ({data,nextStep,handleChange}) => {
            </Grid>
            <Grid item xs={12}>
              <TextField
-               size="small"
+               size="medium"
                variant="outlined"
                required
                fullWidth
@@ -105,7 +115,7 @@ const Address = ({data,nextStep,handleChange}) => {
            </Grid>
            <Grid item xs={12}>
              <TextField
-               size="small"
+               size="medium"
                variant="outlined"
                fullWidth
                id="address2"
@@ -119,7 +129,7 @@ const Address = ({data,nextStep,handleChange}) => {
            <TextField
              variant="outlined"
              required
-             size="small"
+             size="medium"
              fullWidth
              id="number"
              type="number"
@@ -131,7 +141,7 @@ const Address = ({data,nextStep,handleChange}) => {
          </Grid>
            <Grid item xs={12}>
              <TextField
-               size="small"
+               size="medium"
                variant="outlined"
                required
                fullWidth
@@ -154,19 +164,24 @@ const Address = ({data,nextStep,handleChange}) => {
              />
            </Grid>
          </Grid>
-         <Button
-           type="submit"
-           fullWidth
-           variant="contained"
-           color="primary"
-           className={classes.submit}
-         >
-           Send Address
-         </Button>
+         </div> 
+         <div className='row mt-5' style={{
+          display:"flex",
+          justifyContent:"space-evenly"
+         }}>
+          <div className='col-xs-4'>
+             <button disabled  onClick={back}   class="btn btn-outline-success">Prev</button>
+          </div>
+          <div className='col-xs-4'>
+             <button  disabled  onClick={next} class="btn btn-outline-info">Skip</button>
+          </div>
+          <div className='col-xs-4'>
+             <button  type='submit' class="btn btn-outline-warning">next</button>
+          </div>
+         </div>
        </form>
-     </div>
      </Grid>
-  </Container>
+   </Container>
   )
 }
 

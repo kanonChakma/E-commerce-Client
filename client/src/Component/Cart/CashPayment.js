@@ -16,14 +16,19 @@ const CashPayment = () => {
        .then((res)=>setCart(res.data.products))
        .catch((err)=>console.log(err));
     },[])
+
     const getTotal=()=>{
         return cart.reduce((f,s)=>{
            return f+s.count*s.price;
         },0)
        }
+       
     const handleCash=(e)=>{
         e.preventDefault()
-    
+        if(!cart.length) {
+          setError("cart is empty")
+          return
+        }
         setCashOn(true)
         createCashPayment(coupon,cashOn,address,user.token)
         .then((res)=>{
@@ -93,7 +98,18 @@ const CashPayment = () => {
                </span>
                </button>
                <div>
-               {error?<div className='card-error' role="alert">{error}</div>:""}
+               
+               {error?<div 
+                style={{
+                  alignItems:"center",
+                  textAlign:"center",
+                  justifyContent:"center",
+                  color:"red",
+                  textTransform:"uppercase",
+                  marginTop: "15px"
+                }}
+                className='card-error' role="alert">{error}</div>:""}
+
                <p className={succeeded?"result-message":"result-message hidden"}>
                    Payment Successful.{" "}
                    <Link to="user/history">

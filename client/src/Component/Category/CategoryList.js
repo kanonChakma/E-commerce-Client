@@ -51,7 +51,7 @@ const CategoryList = () => {
               {loading?(<h4 className='text-center'>Loading..</h4>):(
                 category.map((c)=>(
                     <Grid item xs={12} sm={3} pl={1} mb={2}>
-                    <Card sx={{ maxWidth: 300, maxHeight:170, margin:"0 auto", border:"none", borderRadius:"0px"}}>
+                    <Card sx={{ maxWidth: 300, maxHeight:170,color:"black", margin:"0 auto", border:"none", borderRadius:"0px"}}>
                      <Box className='column' id='caption'>
                        <span class = "text">
                          <Link to={`/category/${c.slug}`}> 

@@ -1,7 +1,7 @@
 import GoogleIcon from '@mui/icons-material/Google';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import { Avatar, Button, CssBaseline, Grid, Link, TextField, Typography } from '@mui/material';
+import { Avatar, Button, Checkbox, CssBaseline, FormControlLabel, Grid, Link, TextField, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import { makeStyles } from '@mui/styles';
 import React, { useState } from 'react';
@@ -41,7 +41,7 @@ const Login = ({history}) => {
     const [email,setEmail] =useState('');
     const [password,setPassword] =useState('');
     const [loading,setLoading] = useState(false);
-
+    const [check,setChecked] = useState(true)
     const dispatch=useDispatch();
     const classes = useStyles();
 
@@ -86,7 +86,7 @@ const Login = ({history}) => {
            })
     }
 
- const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
        try{
@@ -114,10 +114,20 @@ const Login = ({history}) => {
        }
     }
 
-
+ const handleCheck =() => {
+   setChecked(!check)
+   if(check) {
+    setEmail('trainyourmind12345@gmail.com')
+    setPassword('1234567')
+  }else{
+    setEmail('')
+    setPassword('')
+  }
+ }
   return(
     <Container component="main" maxWidth="xs">
-     <Grid sx={{border:"5px"}}>
+     <Grid 
+     sx={{marginTop:"50px",border:"5px", minHeight: {sx:"auto", md:"70vh"}}}>
      <CssBaseline />
      <div className={classes.paper}>
        <Avatar className={classes.avatar}>
@@ -138,6 +148,7 @@ const Login = ({history}) => {
                label="Email Address"
                name="email"
                autoComplete="email"
+               value={email}
                onChange={e=>setEmail(e.target.value)}
              />
            </Grid>
@@ -149,12 +160,21 @@ const Login = ({history}) => {
                name="password"
                label="Password"
                type="password"
+               value={password}
                id="password"
                onChange={e=>setPassword(e.target.value)}
                autoComplete="current-password"
              />
            </Grid>
          </Grid>
+           <FormControlLabel 
+           control={<Checkbox
+            onChange={(e) => console.log(e)}
+            onClick={handleCheck}
+            size='small' />
+          } 
+           label="sign in as admin" 
+           />
             <Button
             startIcon={<MailOutlineIcon />}
             type="submit"
@@ -164,7 +184,7 @@ const Login = ({history}) => {
             color="primary"
             className={classes.submit}
           >
-            Login with Email
+           continue
           </Button>
 
               <Button

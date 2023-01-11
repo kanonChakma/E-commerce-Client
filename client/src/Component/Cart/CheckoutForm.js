@@ -5,7 +5,7 @@ import {
 import { Card } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { CreatePaymentIntents } from "../../common/stripe";
 import { createOrder, removeCart } from '../../common/user';
 import laptop from "../../image/laptop.jpg";
@@ -14,7 +14,7 @@ const CheckoutForm = () => {
   
   const dispatch=useDispatch();
   const{user,coupon,address}=useSelector((state)=>({...state}));
-
+  const history = useHistory();
   const[succeeded,setSucceeded]=useState(false);
   const[error,setError]=useState(null);
   const[processing,setProcessing]=useState(false)
@@ -52,7 +52,7 @@ const CheckoutForm = () => {
     });
     console.log(payload);
     if(payload.error){
-      setError(`payment failed ${payload.error}`)
+      setError(`payment failed ${payload.error.type}`)
       setProcessing(false);
     }else{
       createOrder(address,payload.paymentIntent,user.token)
@@ -75,6 +75,7 @@ const CheckoutForm = () => {
       setProcessing(false);
       setSucceeded(true);
       setError(null);
+      history.push("/payment/successfull")
     }
   };
   const handleChange=async(e)=>{
@@ -98,6 +99,7 @@ const CheckoutForm = () => {
         } 
       }
   }
+
   //------------CASH PAYMENT------------
   return (
     <>
@@ -140,18 +142,12 @@ const CheckoutForm = () => {
       options={cartStyle}
       onChange={handleChange}
       />
-      <button className='stripe-button' disabled={processing || disabled || succeeded}>
+      <button className='stripe-button' disabled={processing || disabled  || cartTotal<=0||error}>
          <span id='button-text'>
             {processing ?<div className='spinner' id='spinner'></div>:"Pay"} 
          </span>
       </button>
       {error?<div className='card-error' role="alert">{error}</div>:""}
-      <p className={succeeded?"result-message":"result-message hidden"}>
-       Payment Successful.{" "}
-       <Link to="user/history">
-         See it in your purchase
-       </Link>
-      </p>
      </form>
     </>
   );

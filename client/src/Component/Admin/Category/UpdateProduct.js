@@ -1,3 +1,4 @@
+import { LoadingOutlined } from '@ant-design/icons';
 import { Container, Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -5,24 +6,25 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getCategory, updateCategory } from '../../../common/category';
 import CreateProductForm from '../../Form/CreateProductForm';
+import FileUpload from '../../Form/FileUpload';
 import AdminNav from '../../Nav/AdminNav';
-
 
 const UpdateProduct=({history,match}) =>{
     const {user}=useSelector((state) =>({...state}))
        
     const [loading,setLoading]=useState(false);
     const [name,setName]=useState("");
-    
+    const[values,setValues]=useState({images:[]});
     const {slug}=useParams();
-    console.log(slug);
-    //load all products
+    
+ 
     useEffect(() => {
        loadCategory();
     },[])
-     const loadCategory=()=>{
+
+     const loadCategory = () => {
           getCategory(match.params.slug)
-         .then((res)=>setName(res.data[0].name))
+         .then((res)=>setName(res.data.category.name))
          .catch(error =>console.log(error.message));
      }
 
@@ -30,8 +32,9 @@ const UpdateProduct=({history,match}) =>{
       e.preventDefault();
       setLoading(true)
 
-      updateCategory(match.params.slug,{name},user.token)
+      updateCategory(match.params.slug,{name, images: values.images},user.token)
      .then((res) =>{
+        console.log(res)
         setLoading(false);
         setName("");
         toast.success(`${res.data.name} are created`);
@@ -60,7 +63,17 @@ const UpdateProduct=({history,match}) =>{
             boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",
             padding:"10px 45px",
            }} item xs={12} sm={8} md={8}>  
-                    {loading?<h4 className="text-danger">Loading...</h4>:<h4 className="text-secondary text-center mb-4 mt-3">Update Product</h4>}
+                    {loading?<h4 className="text-danger">Loading...</h4>:<h4 className="text-secondary text-center mb-4 mt-3">Update Product Category</h4>}
+                    <div className="mb-4 mt-4">
+                    <FileUpload 
+                        values={values} 
+                        setValues={setValues}
+                        setLoading={setLoading}
+                    />
+                    <div>
+                        {loading?<LoadingOutlined className="text-danger h1"/> :<h4></h4>}
+                    </div>
+                    </div>
                     <CreateProductForm 
                     place="Enter the category name"
                     text="update"

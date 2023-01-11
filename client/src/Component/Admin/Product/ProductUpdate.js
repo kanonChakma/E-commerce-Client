@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { LoadingOutlined } from '@ant-design/icons';
+import { Container, Grid } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { getCategories, getCategorieSubs } from '../../../common/category';
-import { CreateProduct, getProduct, updateProduct } from '../../../common/product';
+import { getProduct, updateProduct } from '../../../common/product';
 import FileUpload from '../../Form/FileUpload';
-import ProductForm from '../../Form/ProductForm';
-import {LoadingOutlined} from '@ant-design/icons';
 import ProductUpdateForm from '../../Form/ProductUpdateForm';
 import AdminNav from '../../Nav/AdminNav';
 
@@ -24,7 +24,9 @@ const initialState={
    color:"",
    brand:"",
  }
+
 const ProductUpdate = ({match,history}) => {
+
    const {slug}=match.params
    const [values,setValues]=useState(initialState);
    const [subOption,setSubOption]=useState("");
@@ -35,12 +37,13 @@ const ProductUpdate = ({match,history}) => {
    const[loading,setLoading]=useState(false);
 
    const {user}=useSelector((state)=>({...state}));
-   useEffect(()=>{
+
+     useEffect(()=>{
        loadProduct(); 
        loadCategories();     
-   },[])
+     },[])
    
-   const loadProduct=()=>{
+    const loadProduct=()=>{
       getProduct(slug)
       .then((res)=>{
          console.log(res.data);
@@ -61,7 +64,8 @@ const ProductUpdate = ({match,history}) => {
           console.log(error);
         })
      }
-   const loadCategories=()=>{
+
+    const loadCategories=()=>{
       getCategories()
      .then((res)=>{
        setCategories(res.data);
@@ -69,10 +73,11 @@ const ProductUpdate = ({match,history}) => {
      .catch(error =>console.log(error.message));
      }
 
-     const handleChange=(e)=>{
+    const handleChange=(e)=>{
       setValues({...values,[e.target.name]:e.target.value})
-   }
- const hadleCategoryChange=(e)=>{
+    }
+
+    const hadleCategoryChange=(e)=>{
      e.preventDefault();
      setValues({...values,subs:[]});
      setSelectedCategory(e.target.value);
@@ -88,8 +93,8 @@ const ProductUpdate = ({match,history}) => {
        loadProduct();
      }
      setArrayOfSubIds([]);
-  } 
- //------------- 
+    } 
+ //------------- --------------------
   const handleSubmit=(e)=>{
       e.preventDefault();
       setLoading(true);
@@ -106,44 +111,56 @@ const ProductUpdate = ({match,history}) => {
       .catch((err)=>{
          toast.error(err.response.data.err);
         })
-     }     
+     }   
+       
     return (
-        <div className="container-fluid">
-            <div className="row">
-               <div className="col-md-2">
+        <Container maxWidth="lg">
+          <Grid  sx={{marginTop:"50px", minHeight: {sx:"auto", md:"100vh"}}}
+            container>
+            <Grid sx={{
+                  padding:"10px 20px",
+                  boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+                  height:{sx:"auto", sm:"450px"}
+                  }}
+                  item xs={12} sm={3}  md={3} mb={2}>
                   <AdminNav/>
+            </Grid>
+            <Grid item xs={12} sm={1} md={1}></Grid>
+            <Grid 
+             style={{
+              boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",
+              padding:"10px 45px",
+             }} item xs={12} sm={8} md={8}
+           >
+             {/* <p>{JSON.stringify(values)}</p> */}
+             <h3>Product Update</h3>
+             <hr/>
+             <div className="mb-4 mt-4">
+               <FileUpload 
+                 values={values} 
+                 setValues={setValues}
+                 setLoading={setLoading}
+               />
+               <div>
+                 {loading?<LoadingOutlined className="text-danger h1"/> :<h4></h4>}
                </div>
-                   <div className="col-md-10"> 
-                   {/* <p>{JSON.stringify(values)}</p> */}
-                    <h3>Product Update</h3>
-                    <hr/>
-                   <div className="p-3 flex-row">
-                      <FileUpload 
-                      values={values} 
-                      setValues={setValues}
-                      setLoading={setLoading}
-                      />
-                      <div>
-                        <h2>Hello this need to be fixed</h2>
-                           {loading?<LoadingOutlined className="text-danger h1"/> :<h4></h4>}
-                      </div>
-                    </div>
-                    <hr/>
-                     <ProductUpdateForm
-                       handleSubmit={handleSubmit}
-                       handleChange={handleChange}
-                       values={values}
-                       setValues={setValues} 
-                       hadleCategoryChange={hadleCategoryChange}
-                       categories={categories}
-                       subOption={subOption}
-                       arrayOfSubIds={arrayOfSubIds}
-                       setArrayOfSubIds={setArrayOfSubIds}
-                       selectedCategory={selectedCategory}
-                     /> 
-                 </div>
-            </div>
-        </div>
+             </div>
+
+             <ProductUpdateForm
+                handleSubmit={handleSubmit}
+                handleChange={handleChange}
+                values={values}
+                setValues={setValues} 
+                hadleCategoryChange={hadleCategoryChange}
+                categories={categories}
+                subOption={subOption}
+                arrayOfSubIds={arrayOfSubIds}
+                setArrayOfSubIds={setArrayOfSubIds}
+                selectedCategory={selectedCategory}
+              /> 
+           </Grid>
+          </Grid> 
+        </Container>
     );
 };
 

@@ -1,6 +1,8 @@
+import SendIcon from '@mui/icons-material/Send';
+import { Button, Container, Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { createCashPayment, getCart, removeCart } from '../../common/user';
 
 const CashPayment = () => {
@@ -10,7 +12,8 @@ const CashPayment = () => {
     const[error,setError]=useState(null);
     const[cashOn,setCashOn]=useState(false);
     const[cart,setCart]=useState([]);
-
+    const history = useHistory()
+    
     useEffect(()=>{
        getCart(user.token)
        .then((res)=>setCart(res.data.products))
@@ -47,6 +50,7 @@ const CashPayment = () => {
               payload:{}
             })
            removeCart(user.token)
+           history.push("/payment/successfull")
           }
            if(res.data.err){
              console.log(res.data);
@@ -63,7 +67,7 @@ const CashPayment = () => {
                 <th scope="col"></th>
                 <th scope="col"></th>
            </tr>
-     </thead>
+        </thead>
           {
              cart.map((p)=>(
                  <tbody key={p._id}> 
@@ -87,40 +91,48 @@ const CashPayment = () => {
     </table>
      )       
     return (
-        <div style={{minHeight: "60vh"}} className='container'>
-            <div className='row'>
-             <div className='col-md-6 mt-5 pt-5'>
-             <h4 className='text-center bg-secondary p-3 mb-5'>Order Summary</h4> 
-               {handleTable()}
-               <button onClick={handleCash} className='stripe-button'>
-               <span id='button-text'>
-                   Pay CashOn
-               </span>
-               </button>
-               <div>
-               
-               {error?<div 
-                style={{
-                  alignItems:"center",
-                  textAlign:"center",
-                  justifyContent:"center",
-                  color:"red",
-                  textTransform:"uppercase",
-                  marginTop: "15px"
-                }}
-                className='card-error' role="alert">{error}</div>:""}
+     <Container maxWidth="sm">
+       <Grid
+       style={{
+         minHeight: "60vh",
+         alignItems:"center",
+         justifyContent:"center",
+         marginTop: "70px"
+       }}
+       >
+        <Grid item xs={12} sm={8}>
+        <h4 className='text-center bg-secondary p-3 mb-5'>Order Summary</h4> 
+        {handleTable()}
+        <Button onClick={handleCash} variant="outlined" endIcon={<SendIcon />}>
+          Pay CashOn
+        </Button>
+        <div>
+        
+        {error?<div 
+         style={{
+           alignItems:"center",
+           textAlign:"center",
+           justifyContent:"center",
+           color:"red",
+           textTransform:"uppercase",
+           marginTop: "15px"
+         }}
+         className='card-error' role="alert">{error}</div>:""}
 
-               <p className={succeeded?"result-message":"result-message hidden"}>
-                   Payment Successful.{" "}
-                   <Link to="user/history">
-                   See it in your purchase
-                   </Link>
-               </p>
-               </div>
-             </div>
-         </div>
-      </div> 
+        </div>
+        </Grid>  
+       </Grid>
+     </Container>
     );
 };
 
 export default CashPayment;
+
+
+
+// <p className={succeeded?"result-message":"result-message hidden"}>
+// Payment Successful.{" "}
+// <Link to="user/history">
+// See it in your purchase
+// </Link>
+// </p>

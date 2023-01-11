@@ -39,6 +39,7 @@ const CategoryList = () => {
         setLoading(true)
         getCategories()
       .then((res)=>{
+         console.log(res)
           setCategory(res.data)
           setLoading(false)
       })
@@ -62,7 +63,7 @@ const CategoryList = () => {
                         component="img"
                         height="100%"
                         width="100%"
-                        image={img}
+                        image={c.images?c.images[0].url:img}
                         alt="Paella dish"
                         objectFit="contain"
                         />

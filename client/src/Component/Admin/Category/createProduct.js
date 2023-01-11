@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createCategory, deleteCategory, getCategories } from '../../../common/category';
 import CreateProductForm from '../../Form/CreateProductForm';
+import FileUpload from '../../Form/FileUpload';
 import SearchProductForm from '../../Form/SearchProductForm';
 import AdminNav from '../../Nav/AdminNav';
 
@@ -16,7 +17,10 @@ const CreateProduct=()=>{
     const [name,setName]=useState("");
     const [Category,setCategory]=useState([])
     const[keyword,setKeyword]=useState("");
+    
+    const[values,setValues]=useState({images:[]});
 
+    
  //load all products
     useEffect(() => {
        loadCategories();
@@ -48,7 +52,7 @@ const searched=(keyword)=>(c)=>c.name.toLowerCase().includes(keyword);
       e.preventDefault();
       setLoading(true)
 
-      createCategory({name},user.token)
+      createCategory({name, images: values.images},user.token)
      .then((res) =>{
          console.log(res);
         loadCategories();
@@ -82,6 +86,13 @@ const searched=(keyword)=>(c)=>c.name.toLowerCase().includes(keyword);
                  }} item xs={12} sm={8} md={8}>  
                     {loading?<h4 className="text-danger">Loading...</h4>:<h4 className="text-secondary text-center mt-3 mb-4">Create Product Category</h4>}
                     
+                    <div className="mb-4">
+                        <FileUpload 
+                        values={values} 
+                        setValues={setValues}
+                        setLoading={setLoading}
+                        />
+                  </div>
                     <CreateProductForm 
                     text="create"
                     place="Enter the category name"

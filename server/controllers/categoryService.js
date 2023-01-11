@@ -4,9 +4,9 @@ const Slugify=require('slugify');
 const Product = require('../models/product');
 
 exports.create =async(req,res) => {
-  const {name}=req.body;
+  const {name, images}=req.body;
  try{
-    const category= await new Category({name,slug:Slugify(name)}).save();
+    const category= await new Category({name,images,slug:Slugify(name)}).save();
     res.json(category);
   }catch(err){
       res.json({status:400,message:err.message});
@@ -27,10 +27,10 @@ exports.read =async(req,res)=>{
 
 exports.update =async(req,res) => {
     try{
-        const {name}=req.body;
+        const {name, images}=req.body;
         const category=await Category.findOneAndUpdate(
             {slug:req.params.slug},
-            {name,slug:Slugify(name)},
+            {name,images,slug:Slugify(name)},
             {new: true}).exec();
         res.json(category);
        }catch(err){

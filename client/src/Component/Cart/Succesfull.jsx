@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme => ({
         color:"white"
     }
   }));
+
 const Succesfull = () => {
     const classes = useStyles();
     const [isVisible, setIsVisible] = useState(false);
@@ -45,14 +46,14 @@ const Succesfull = () => {
   <Grid item xs={3}>
      <Box>
          <CheckCircleOutlineIcon className={classes.icon}/>
-        <Typography variant="h3" gutterBottom>
-          Payment Completed Succesfully
-       </Typography>
-       <Link
-         className={classes.linkColor}
-         to="user/history">
-         See it in your purchase
-       </Link>
+          <Typography variant="h3" gutterBottom>
+            Payment Completed Succesfully
+          </Typography>
+         <Link
+          className={classes.linkColor}
+          to="/user/history">
+          See it in your purchase
+         </Link>
      </Box>
      <Canvas />
   </Grid>   

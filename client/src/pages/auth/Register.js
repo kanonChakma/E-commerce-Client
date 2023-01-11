@@ -31,7 +31,7 @@ const Register = () => {
     const registerForm = () =>
         <form onSubmit={handleSubmit}>
             <input 
-            value={email}
+             value={email}
              type="email" 
              className="form-control" 
              onChange={e=>setEmail(e.target.value)}
@@ -42,7 +42,12 @@ const Register = () => {
         </form>
 
     return (
-        <div className="container p-5 mb-3">
+        <div 
+        style={{
+            minHeight: "60vh",
+            marginTop: "30px"
+        }}
+        className="container p-5 mb-3">
             <div className="row mb-3">
                 <div className="col-md-6 offset-md-3">
                     <h4 className='text-center mb-3'>Register</h4>

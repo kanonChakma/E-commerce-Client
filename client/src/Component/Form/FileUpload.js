@@ -1,8 +1,8 @@
+import { Avatar, Badge } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import Resizer from "react-image-file-resizer";
 import { useSelector } from 'react-redux';
-import { Avatar, Badge } from 'antd';
 
 
 const FileUpload = ({values,setValues,setLoading}) => {
@@ -81,7 +81,7 @@ const FileUpload = ({values,setValues,setLoading}) => {
                    ))
                }
              </div>
-        <div className="row">
+        <div className="row mt-4 ml-1">
           <label className="btn btn-primary btn-raised">
              Choose file
              <input 

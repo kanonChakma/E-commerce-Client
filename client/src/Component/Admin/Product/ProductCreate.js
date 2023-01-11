@@ -24,6 +24,7 @@ const initialState={
   color:"",
   brand:"",
 }
+
 const ProductCreate = () => {
     const[values,setValues]=useState(initialState);
     const[subOption,setSubOption]=useState("");
@@ -56,9 +57,11 @@ const ProductCreate = () => {
           toast.error(`${err.response.data.err}`)
         })
      }
+
     const handleChange=(e)=>{
          setValues({...values,[e.target.name]:e.target.value})
       }
+
       const hadleCategoryChange=(e)=>{
          e.preventDefault();
          setValues({...values,subs:[],category:e.target.value});
@@ -67,10 +70,11 @@ const ProductCreate = () => {
          .catch((err)=>console.log(err.message));
          setShowSub(true);
       }
+
     return (
       <Container maxWidth="lg">
-      <Grid  sx={{marginTop:"50px", minHeight: {sx:"auto", md:"100vh"}}}
-      container>
+           <Grid  sx={{marginTop:"50px", minHeight: {sx:"auto", md:"100vh"}}}
+            container>
                 <Grid sx={{
                   padding:"10px 20px",
                   boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
@@ -79,7 +83,7 @@ const ProductCreate = () => {
                   item xs={12} sm={3}  md={3} mb={2}>
                   <AdminNav/>
                 </Grid>
-              <Grid item xs={12} sm={1} md={1}></Grid>
+                 <Grid item xs={12} sm={1} md={1}></Grid>
                   <Grid  style={{
                     boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",
                     padding:"10px 45px",
@@ -109,4 +113,7 @@ const ProductCreate = () => {
         </Container>
     );
 };
+
 export default ProductCreate;
+
+

@@ -28,8 +28,7 @@ const AdminDashboard= () =>{
      console.log(orders)
     return (
         <Container maxWidth="lg">
-        
-        <Grid  sx={{marginTop:"50px", minHeight: {sx:"auto", md:"70vh"}}}
+          <Grid  sx={{marginTop:"50px", minHeight: {sx:"auto", md:"70vh"}}}
             container>
                 <Grid sx={{
                     padding:"10px 20px",
@@ -45,10 +44,10 @@ const AdminDashboard= () =>{
                     padding:{xs:"0px", md:"10px"}
                 }}
                 item xs={12} sm={8} md={8}>
-                <h4 className='text-center'>Admin Dashboard</h4>
+                <h4 className='text-center'>All Orders List</h4>
                      <Order orders={orders} handleStatus={handleStatus}/>
                  </Grid>
-            </Grid>
+          </Grid>
         </Container>
     )
 }

@@ -32,8 +32,8 @@ const useStyles = makeStyles(theme => ({
 
 const CategoryList = () => {
   const classes = useStyles();
-    const[category,setCategory]=useState([]);
-    const[loading,setLoading]=useState(false);
+    const[category,setCategory] = useState([]);
+    const[loading,setLoading] = useState(false);
 
     useEffect(()=>{
         setLoading(true)

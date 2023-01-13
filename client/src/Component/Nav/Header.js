@@ -1,4 +1,4 @@
-import { DashboardOutlined, HeartOutlined, HomeOutlined, LoginOutlined, SettingOutlined, ShopOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
+import { AccountBookOutlined, DashboardOutlined, HomeOutlined, LoginOutlined, SettingOutlined, ShopOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
 import { Container, useMediaQuery, useTheme } from '@mui/material';
 import { Badge, Menu } from 'antd';
 import React, { useEffect, useState } from 'react';
@@ -98,14 +98,11 @@ const Header = () => {
           <Item key="cart" icon={<ShoppingCartOutlined style={{ fontSize: '14px' }}/>}>
             <Link to="/cart">
                Cart
-              <Badge count={cart.length} offset={[0,-10]}>
+              <Badge count={cart.length} offset={[0,-10]} >
               </Badge>
             </Link>
           </Item>
           
-           <Item key="whislist" icon={<HeartOutlined style={{ fontSize: '14px' }}/>}>
-              <Link to="/user/wishlist">wishlist</Link>
-          </Item>
         {!user && <Item key="register" icon={<HomeOutlined />}  className="float-right">
             <Link to="/register">Register</Link>
         </Item>}
@@ -123,6 +120,9 @@ const Header = () => {
           
         {user && user.role==='subscriber' &&  <Item icon={<DashboardOutlined />}><Link to="/user/history">Dashboard</Link></Item>}
         {user && user.role==='admin' &&   <Item icon={<DashboardOutlined />}><Link to="/admin/dashboard">Dashboard</Link></Item>}
+         <Item icon={<AccountBookOutlined />}>
+            <Link to="/user/history">My Account</Link>
+         </Item>
         <Item icon={<LoginOutlined />} onClick={logout}>Log Out</Item>
          
          </SubMenu>
@@ -138,3 +138,9 @@ const Header = () => {
 };
 
 export default Header;
+
+
+  //  <Item key="whislist" icon={<HeartOutlined style={{ fontSize: '14px' }}/>}>
+          //     <Link to="/user/wishlist">wishlist</Link>
+          // </Item>
+

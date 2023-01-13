@@ -73,6 +73,9 @@ const WishList=() => {
        </Grid>
       
       <Grid item xs={12} sm={8} md={8}>
+         <Typography variant="h5"  style={{ justifyContent:"center",marginBottom:"10px", textAlign:"center"}}>
+              {whisList.length>0?"Your Wishlist":"wishlist are empty"}
+        </Typography>
       <Grid 
        style={{
         padding:"10px 5px",

@@ -1,4 +1,5 @@
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { Box, Grid } from '@mui/material';
 import moment from 'moment';
 import React from 'react';
 
@@ -78,6 +79,29 @@ const Order = ({orders,handleStatus}) => {
         </tbody>
      </table>
      )
+     const showOrderTableOne=(order)=>(
+      <table className='table table-bordered'>
+      <thead className='thead-dark'>
+         <tr>
+           <th scope='col'>Title</th>
+           <th scope='col'>Price</th>
+           <th scope='col'>Shipping</th>
+         </tr>
+      </thead>
+      <tbody>
+        {
+          order.products.map((p,i)=>(
+           <tr key={i}>
+           <th scope='col'>{p.product.title}</th>
+           <th scope='col'>{p.product.price}</th>
+           <th scope='col'>{p.product.shipping ==="Yes"? <CheckCircleOutlined className='text-success Pointer'/>:
+                        <CloseCircleOutlined className='text-danger Pointer'/>}</th>
+              </tr>
+          ))
+        }
+      </tbody>
+   </table>
+   )
     return (
         <div className='row'>
           <div className='col'>
@@ -89,6 +113,7 @@ const Order = ({orders,handleStatus}) => {
                                     <div className='col-md-4 mt-2 mb-2'>
                                         <p className='fw-bold fs-1'>Update Delivery Status:</p>
                                     </div>
+
                                     <div className='col-md-8 mt-2 mb-3'>
                                        <select
                                         onChange={(e)=>handleStatus(order._id,e.target.value)}
@@ -102,9 +127,24 @@ const Order = ({orders,handleStatus}) => {
                                           <option value="Cancelled">Cancelled</option>
                                           <option value="Completed">Completed</option>
                                         </select>   
-                                     </div>    
+                                    </div>    
                                  </div>
+                              <Box>
+                              <Grid item 
+                              sx={{
+                                display:{xs:"none",md:"block"}
+                              }}
+                              >
                                 {showOrderTable(order)}
+                              </Grid>
+                             <Grid
+                             sx={{
+                               display:{md:"none"}
+                             }}
+                             >
+                               {showOrderTableOne(order)}
+                              </Grid>
+                              </Box>
                             </div>
                         ))
                      } 

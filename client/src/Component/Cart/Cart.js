@@ -9,7 +9,7 @@ import CartShortInfo from './CartShortInfo';
 const Cart = ({history}) => {
 
   const {user,cart}=useSelector((state)=>({...state}))
- 
+ console.group(cart)
   const getTotal = () => {
     return cart.reduce((f,s)=>{
        return f+s.count*s.price;
@@ -137,7 +137,7 @@ const Cart = ({history}) => {
                      pathname:"/login",
                      state:{from:"cart"},
                  }}>
-                    Log in to checkout
+                    Login to checkout
                  </Link>
               </button> 
              }

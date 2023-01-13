@@ -6,7 +6,6 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import {
   AppBar,
   Avatar,
-  Badge,
   Box,
   Button,
   Drawer,
@@ -20,6 +19,7 @@ import {
   Toolbar,
   Tooltip
 } from "@mui/material";
+import { Badge } from 'antd';
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Search from '../Form/Search';
@@ -109,7 +109,7 @@ const HeaderDrawer = ({user,logout, cart, category}) => {
        <Button>
          <Link style={{ color: '#616161' }} to="/cart">
            Cart 
-          <Badge count={cart.length} offset={[0,5]}>
+          <Badge count={cart.length} offset={[0,-10]}>
          </Badge>
          </Link>
        </Button>
@@ -166,18 +166,22 @@ const HeaderDrawer = ({user,logout, cart, category}) => {
         <Avatar /> <Link to='/register'>Register Account</Link>
         </MenuItem>}
 
-      {user && user.role ==="subscriber" && <MenuItem>
-          <Avatar/> <Link to="/user/history">User Dashboard</Link>
+      {user && user.role ==="user" && <MenuItem>
+          <Avatar/> <Link to="/user/history">My Account</Link>
       </MenuItem>}
-
+      
       {user && user.role ==="admin" && <MenuItem>
-      <Avatar/> <Link to="/admin/dashboard">Admin Dashboard</Link>
+      <Avatar/> <Link to="/user/history">My Account</Link>
+       </MenuItem>}
+       
+      {user && user.role ==="admin" && <MenuItem>
+      <Avatar/> <Link to="/admin/dashboard">Dashboard</Link>
       </MenuItem>}
 
       {user && <MenuItem
         onClick={logout}
         >
-         <Avatar /> <Link>Logout Account</Link>
+         <Avatar /> <Link>Logout</Link>
       </MenuItem>}
       
       </Menu>

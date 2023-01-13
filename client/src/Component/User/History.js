@@ -100,25 +100,57 @@ const History=() => {
        </tbody>
     </table>
   )
-
+  const showOrderTableOne=(order)=>(
+    <table className='table table-bordered'>
+       <thead className='thead-dark'>
+          <tr>
+            <th scope='col'>Title</th>
+            <th scope='col'>Price</th>
+            <th scope='col'>Shipping</th>
+          </tr>
+       </thead>
+       <tbody>
+         {
+           order.products.map((p,i)=>(
+            <tr key={i}>
+            <th scope='col'>{p.product.title}</th>
+            <th scope='col'>{p.product.price}</th>
+            <th scope='col'>{p.product.shipping ==="Yes"? <CheckCircleOutlined className='text-success Pointer'/>:
+                         <CloseCircleOutlined className='text-danger Pointer'/>}</th>
+               </tr>
+           ))
+         }
+       </tbody>
+    </table>
+  )
  const showOrders=()=>(
    orders.reverse().map((order,i)=>(
-     <Grid py={3} container key={i}>
+     <Grid py={3} key={i}>
       {  showPaymentInfo (order,true)}
-        {showOrderTable(order)}
-        <div className='row mb-3'>
-            <div className='col text-center'>
-            <PDFDownloadLink
-              document={
-                <MyDocument order={order}/>
-                }
-              fileName='invoice.pdf'
-              className='btn btn-sm btn-outline-primary text-center'
-            >
-              Download Pdf
-            </PDFDownloadLink>
-          </div>
+
+       <Grid sx={{
+        display:{xs:"none",md:"block"}
+       }} item xs={12}>
+         {showOrderTable(order)} 
+      </Grid>
+      <Grid sx={{
+        display:{md:"none"}
+      }}item xs={12}>
+        {showOrderTableOne(order)} 
+     </Grid>
+      <div className='row mb-3'>
+          <div className='col text-center'>
+          <PDFDownloadLink
+            document={
+              <MyDocument order={order}/>
+              }
+            fileName='invoice.pdf'
+            className='btn btn-sm btn-outline-primary text-center'
+          >
+            Download Pdf
+          </PDFDownloadLink>
         </div>
+      </div>
      </Grid>
    ))
  )

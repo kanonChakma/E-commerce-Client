@@ -101,7 +101,7 @@ const SingleProduct = ({product,productRating,star}) => {
               {product && product.ratings&& product.ratings.length>0?
                  avarageRatting(product): <div className='text-center'>No Rating Yet</div>
               }
-             <Card
+              <Card
                 hoverable
                 actions={[
                  <>

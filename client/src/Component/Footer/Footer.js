@@ -26,7 +26,7 @@ const Footer =()=> {
         {name: "Specials" , link: "/checkup"}
     ]
     const services = [
-        {name: "My Account" , link: "/user/account"},
+        {name: "My Account" , link: "/user/history"},
         {name: "Oder history" , link: "/user/history"},
         {name: "Wish List" , link: "/user/wishlist"},
         {name: "Newsletter" , link: "/newsletter"}

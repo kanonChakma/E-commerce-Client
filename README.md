@@ -10,7 +10,7 @@
 ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
-![Postman](https://img.shields.io/badge/-Postman-black?style=flat&logo=postman&logoColor=orange)
+
 
 #Table of contents
 1. [Description](#description)
@@ -55,8 +55,6 @@ visit at [https://topchoice.netlify.app/](https://topchoice.netlify.app/)
 
 
 ## API Documentation <a name="api-documentation"></a>
-
-All the endpoints are listed below. However, to view the details of the endpoints, visit [Chronicles Api Docs](https://documenter.getpostman.com/view/25138891/2s935oL3mZ).
 
 - <ins>Users</ins>:
 

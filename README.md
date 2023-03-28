@@ -1,4 +1,3 @@
-# Chronicles
 
 # Top Choice
 
@@ -17,11 +16,10 @@
 2. [Demo](#demo)
 3. [API Documentation](#api-documentation)
 4. [ERD Visualized](#erd-vis)
-5. [Installation and Usage](#installation-usage)
-6. [Screenshots](#screenshots)
+5. [Screenshots](#screenshots)
 
 ## Description <a name="description"></a>
-full-stack e-commerce based web app, with advance searching functionlaity 
+This is a full-stack e-commerce based web app, with advance searching functionlaity 
 
 <ins>Features:</ins>
 - Responsive layout
